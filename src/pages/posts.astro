@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const publishedPosts = await getCollection('posts', ({ data }) => {
+    return data.draft !== true;
+});
+
+const sortedPosts = publishedPosts.sort(
+    (a, b) =>
+        b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf()
+);
+---
+
+<BaseLayout pageTitle="List of Posts">
+    <div class="mx-auto mt-10 max-w-7xl px-6 lg:px-8">
+        <ul>
+            {
+                sortedPosts.map((post) => (
+                    <li class="list-disc">
+                        <a href={`/post/${post.slug}`}>{post.data.title}</a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</BaseLayout>
