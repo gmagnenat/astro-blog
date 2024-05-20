@@ -1,0 +1,11 @@
+---
+import { Debug } from 'astro:components';
+import { getCollection } from 'astro:content';
+
+// Fetch collection
+const posts = await getCollection('posts');
+---
+
+<h1>Posts Collection</h1>
+
+<Debug {posts} />

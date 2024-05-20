@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+    post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+---
+
+<BaseLayout pageTitle={post.data.title}>
+    <div class="py-8 sm:py-16">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <Image
+                src={post.data.postimage!.src}
+                alt={post.data.postimage!.alt}
+                width="200"
+                height="200"
+            />
+            <span class="flex text-3xl">{post.data.title}</span>
+            <span
+                >Published: {
+                    new Date(post.data.publishedDate).toLocaleDateString(
+                        'en-US'
+                    )
+                }</span
+            >
+            <p class="my-6 text-lg leading-8">
+                {post.data.description}
+            </p>
+            <div class="mt-10">
+                <slot />
+            </div>
+        </div>
+    </div>
+</BaseLayout>
