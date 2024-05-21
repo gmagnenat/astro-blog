@@ -12,28 +12,27 @@ const { post } = Astro.props;
 ---
 
 <BaseLayout pageTitle={post.data.title}>
-    <div class="py-8 sm:py-16">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <Image
-                src={post.data.postimage!.src}
-                alt={post.data.postimage!.alt}
-                width="200"
-                height="200"
-            />
-            <span class="flex text-3xl">{post.data.title}</span>
-            <span
-                >Published: {
-                    new Date(post.data.publishedDate).toLocaleDateString(
-                        'en-US'
-                    )
-                }</span
-            >
-            <p class="my-6 text-lg leading-8">
-                {post.data.description}
-            </p>
-            <div class="mt-10">
+    <section class="relative py-20 2xl:py-40 overflow-hidden">
+        <div class="relative container px-4 mx-auto">
+          <div class="max-w-5xl mb-16 md:mb-24 mx-auto text-center">
+            <span class="text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-yellow-200 to-orange-600">#code</span>
+            <h2 class="mt-7 text-6xl 2xl:text-7xl text-white font-bold font-heading">{post.data.title}</h2>
+          </div>
+          <div class="flex flex-wrap -m-8 mb-4 md:mb-12">
+            <div class="w-full h-96 p-8">
+                <Image
+                    src={post.data.postimage!.src}
+                    alt={post.data.postimage!.alt}
+                    class="w-full h-full object-cover rounded-md"
+                />
+            </div>
+          </div>
+          <div class="max-w-4xl mx-auto text-center">
+            <p class="mb-14 text-3xl text-gray-200">{post.data.description}</p>
+            <div class="text-gray-100 text-left w-full post__content">
                 <slot />
             </div>
+          </div>
         </div>
-    </div>
+      </section>
 </BaseLayout>
