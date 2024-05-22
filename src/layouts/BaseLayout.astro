@@ -1,6 +1,8 @@
 ---
 import Header from "../components/Header.astro";
 import { SEO } from 'astro-seo';
+import '../styles/global.css';
+import Footer from "../components/Footer.astro";
 
 const { pageTitle } = Astro.props;
 console.log("yo")
@@ -39,36 +41,10 @@ console.log("yo")
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />        
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <style is:global>
-          .expressive-code {
-            @apply my-8
-          }
-
-          .post__content h2 {
-            @apply text-2xl font-semibold my-2;
-          }
-
-          .post__content h3 {
-            @apply text-xl font-semibold my-2;
-          }
-
-          .post__content p {
-            @apply my-4;
-          }
-
-          .post__content img {
-            width: min(500px, 100%);
-            margin-inline: auto;
-            @apply py-8;
-          }
-
-          .post__content ul {
-            @apply list-disc pl-4 my-4;
-          }
-        </style>
     </head>
     <body class="min-h-screen h-full flex flex-col bg-gray-900 text-white">
         <Header />
         <slot />
+        <Footer />
     </body>
 </html>

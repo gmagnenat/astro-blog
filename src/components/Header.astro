@@ -1,30 +1,8 @@
 ---
-
+import Navigation from "./Navigation.astro"
 ---
 <div class="">
-  <nav class="relative">
-    <div class="flex py-8 px-4 lg:px-8 items-center w-full">
-      <!-- logo link -->
-      <a class="text-2xl text-white font-bold" href="/">
-        gm
-      </a>
-      <div class="lg:hidden">
-        <button class="p-2 navbar-burger">
-          <svg class="w-10 h-3" width="39" height="13" viewBox="0 0 39 13" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="39" height="2" rx="1" fill="#C4C4C4"></rect><rect x="19" y="11" width="20" height="2" rx="1" fill="#C4C4C4"></rect></svg>
-        </button>
-      </div>
-      <!-- links list -->
-      <div class="nav-right flex items-center ml-auto gap-10">
-        <div class="hidden lg:block">
-          <ul class="flex items-center text-white space-x-10">
-            <li><a class="text-white font-bold text-lg" href="/about">About</a></li>
-          </ul>
-        </div>
-        <!-- button link -->
-        <div class="hidden lg:block"><a class="inline-block px-12 py-4 font-bold border border-gray-200 hover:border-white rounded-full" href="/posts">Blog</a></div>
-      </div>
-    </div>
-  </nav>
+  <Navigation />
 
   <div class="hidden navbar-menu fixed top-0 left-0 bottom-0 w-5/6 max-w-sm z-50">
     <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-80"></div>
@@ -41,7 +19,7 @@
         </ul>
       </div>
       <div class="mt-auto px-10">
-        <div class="pt-6"><a class="block mb-4 py-4 px-12 text-gray-800 text-center font-bold border border-gray-50 hover:border-gray-100 rounded-full" href="#">Sign in</a><a class="block py-4 px-12 text-white text-center font-bold bg-blue-500 hover:bg-blue-600 rounded-full transition duration-200" href="#">Sign up</a></div>
+        <div class="pt-6"><a class="block mb-4 py-4 px-12 text-gray-100 text-center font-bold border border-gray-50 hover:border-gray-100 rounded-full" href="#">Sign in</a><a class="block py-4 px-12 text-white text-center font-bold bg-blue-500 hover:bg-blue-600 rounded-full transition duration-200" href="#">Sign up</a></div>
         <p class="mt-6 mb-4 text-lg text-center">
           <span>2021 © Zospace. All rights reserved.</span>
         </p>

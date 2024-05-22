@@ -1,0 +1,33 @@
+.expressive-code {
+  @apply my-8
+}
+
+.post__content h2 {
+  @apply text-2xl font-semibold my-2 mt-4;
+}
+
+.post__content h3 {
+  @apply text-xl font-semibold my-2 mt-4;
+}
+
+.post__content p {
+  @apply my-4;
+}
+
+.post__content ol {
+  @apply list-decimal pl-4 my-4;
+}
+
+.post__content ol li {
+  @apply my-2;
+}
+
+.post__content img {
+  width: min(500px, 100%);
+  margin-inline: auto;
+  @apply py-8;
+}
+
+.post__content ul {
+  @apply list-disc pl-4 my-4;
+}
