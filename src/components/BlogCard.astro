@@ -1,8 +1,8 @@
 ---
 import Image from "astro/components/Image.astro"
 const { post } = Astro.props;
+const slug = post.slug;
 ---
-<>
   <li class="focus-within:border-purple-500 relative mb-6 bg-gray-900 border border-gray-500 rounded-lg hover:-translate-y-0.5">
     <div class="image-wrapper">
       <Image
@@ -14,7 +14,6 @@ const { post } = Astro.props;
       />
     </div>
       <div class="px-8 lg:px-14 pb-10 content-wrapper">
-        <a class="focus:outline-none after:absolute after:inset-0 z-[1] inline-block pt-4 text-lg text-white hover:text-gray-100 font-bold border-t border-gray-400" href={`/post/${post.slug}`}>{post.data.title}</a>
+        <a class="focus:outline-none after:absolute after:inset-0 z-[1] inline-block pt-4 text-lg text-white hover:text-gray-100 font-bold border-t border-gray-400" href={`/post/${slug}`}>{post.data.title}</a>
       </div>
   </li>
-</>

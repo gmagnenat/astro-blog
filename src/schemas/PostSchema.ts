@@ -9,6 +9,7 @@ export const imageSchema = ({ image }: SchemaContext) =>
 export const postSchema = ({ image }: { image: any }) => z.object({
     title: z.string(),
     description: z.string().optional(),
+    tags: z.array(z.string()),
     publishedDate: z.string().or(z.date()).transform((str) => new Date(str)),
     featured: z.boolean().default(false),
     draft: z.boolean().default(true),

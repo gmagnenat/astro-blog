@@ -5,7 +5,6 @@ import '../styles/global.css';
 import Footer from "../components/Footer.astro";
 
 const { pageTitle } = Astro.props;
-console.log("yo")
 ---
 
 <html lang="en">
@@ -44,7 +43,9 @@ console.log("yo")
     </head>
     <body class="min-h-screen h-full flex flex-col bg-gray-900 text-white">
         <Header />
-        <slot />
+        <main class="flex flex-col flex-grow px-8">
+          <slot />
+        </main>
         <Footer />
         <script>
           import "../scripts/menu.js";
