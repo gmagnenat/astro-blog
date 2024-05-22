@@ -26,6 +26,9 @@ dependencies:
   astro-robots-txt:
     specifier: ^1.0.0
     version: 1.0.0
+  astro-seo:
+    specifier: ^0.8.3
+    version: 0.8.3(typescript@5.4.5)
   sharp:
     specifier: ^0.33.4
     version: 0.33.4
@@ -49,6 +52,23 @@ packages:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
+    dev: false
+
+  /@astrojs/check@0.5.10(typescript@5.4.5):
+    resolution: {integrity: sha512-vliHXM9cu/viGeKiksUM4mXfO816ohWtawTl2ADPgTsd4nUMjFiyAl7xFZhF34yy4hq4qf7jvK1F2PlR3b5I5w==}
+    hasBin: true
+    peerDependencies:
+      typescript: ^5.0.0
+    dependencies:
+      '@astrojs/language-server': 2.10.0(typescript@5.4.5)
+      chokidar: 3.6.0
+      fast-glob: 3.3.2
+      kleur: 4.1.5
+      typescript: 5.4.5
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - prettier
+      - prettier-plugin-astro
     dev: false
 
   /@astrojs/check@0.7.0(typescript@5.4.5):
@@ -1556,6 +1576,16 @@ packages:
     dependencies:
       valid-filename: 4.0.0
       zod: 3.23.8
+    dev: false
+
+  /astro-seo@0.8.3(typescript@5.4.5):
+    resolution: {integrity: sha512-gQeEh0U2yyVM0iyU8DTORK6hXMy5WH2wufrkUuNOKjI3LnYLniqgDxm1LZPQDuD6b4OHabVOi/5L88A9POCcCQ==}
+    dependencies:
+      '@astrojs/check': 0.5.10(typescript@5.4.5)
+    transitivePeerDependencies:
+      - prettier
+      - prettier-plugin-astro
+      - typescript
     dev: false
 
   /astro@4.8.6(typescript@5.4.5):

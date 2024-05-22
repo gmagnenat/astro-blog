@@ -85,4 +85,48 @@ context.stroke();
 And if everything went correctly you will have a circle inside the square
 ![A square and a circle](../../assets/firstpost/contextCircle.jpg)
 
+## fundamentals - for loop
+A for loop will allow us to iterate and draw multiple shape in our canvas.
+Let's try to do something with the shape we already know.
+
+```javascript
+// Define the dimensions of each square
+const width = 60;
+const height = 60;
+
+// Define the spacing between squares
+const gap = 20;
+
+// Variables to store the positions of each square (updated within the loop)
+let x, y;
+
+// Loop to draw a 5x5 grid of squares
+for (let i = 0; i < 5; i++) {
+  for (let j = 0; j < 5; j++) {
+    // Calculate the x and y coordinates for the current square
+    x = 100 + (width + gap) * i;
+    y = 100 + (height + gap) * j;
+
+    // Begin a new path for drawing the square
+    context.beginPath();
+
+    // Define the rectangle for the square at the calculated position
+    context.rect(x, y, width, height);
+
+    // Draw the outline of the square
+    context.stroke();
+
+    // Add a chance to draw a smaller square inside the current square
+    if (Math.random() > 0.5) {
+      context.beginPath();
+      context.rect(x + 8, y + 8, width - 16, height - 16); // Adjust position and size for inner square
+      context.stroke();
+    }
+  }
+}
+```
+This code snippet creates a 5x5 grid of squares on a canvas element. It defines the width, height, and spacing of the squares, then uses nested loops to iterate through each position in the grid. Inside the loops, it calculates the x and y coordinates for each square and draws its outline using the context.stroke() method.  
+
+An interesting feature is the random chance to draw a smaller square inside some of the larger ones. The Math.random() > 0.5 condition checks if a random number is greater than 0.5. If it is, a smaller rectangle is drawn with an offset and adjusted size.
+
 
