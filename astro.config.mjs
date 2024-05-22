@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import { remarkReadingTime } from './remark-reading-time.mjs';
 import tailwind from "@astrojs/tailwind";
 import robotsTxt from "astro-robots-txt";
 
@@ -28,4 +29,7 @@ export default defineConfig({
       }
     }
   )],
+  markdown: {
+    remarkPlugins: [remarkReadingTime],
+  }
 });
