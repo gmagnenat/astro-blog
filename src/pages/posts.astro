@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
+import BlogCard from '../components/BlogCard.astro';
 
 const publishedPosts = await getCollection('posts', ({ data }) => {
     return data.draft !== true;
@@ -19,26 +20,13 @@ const sortedPosts = publishedPosts.sort(
         <!-- Page title -->
         <div class="mb-24 text-center">
           <span class="text-lg text-blue-400 font-bold">What I've been up to</span>
-          <h2 class="mt-8 text-6xl font-bold font-heading text-white">Latest blog</h2>
+          <h1 class="mt-8 text-6xl font-bold font-heading text-white">Latest blog</h1>
         </div>
         <div class="flex flex-wrap -mx-6">
           <ul class="relative grid md:grid-cols-3 md:gap-8 px-6 transition-all duration-[3000] ease-in-out">
             {
                 sortedPosts.map((post) => (
-                    <li class="focus-within:border-purple-500 relative mb-6 bg-gray-900 border border-gray-500 rounded-lg hover:-translate-y-0.5">
-                      <div class="image-wrapper">
-                        <Image
-                          class="mb-8 w-full h-52 rounded-lg object-cover p-4" 
-                          src={post.data.postimage!.src}
-                          alt={post.data.postimage!.alt}
-                          width="200"
-                          height="200"
-                        />
-                      </div>
-                        <div class="px-8 lg:px-14 pb-10 content-wrapper">
-                          <a class="focus:outline-none after:absolute after:inset-0 z-[1] inline-block pt-4 text-lg text-white hover:text-gray-100 font-bold border-t border-gray-400" href={`/post/${post.slug}`}>{post.data.title}</a>
-                        </div>
-                    </li>
+                    <BlogCard post={post} />
                 ))
             }
         </ul>
