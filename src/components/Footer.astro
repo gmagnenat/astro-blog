@@ -1,9 +1,10 @@
 ---
-const github = "github";
-const linkedin = 'linkedin';
-const username = "gmagnenat";
+import Social from './Social.astro';
 ---
-<footer class="text-center py-4 flex flex-col gap-2">
-  <p>Learn more about my projects on <a target="_blank" href={`https://www.${github}.com/${username}`}>{github}</a>!</p>
-  <p>Get in touch on <a target="_blank" href={`https://www.${linkedin}.com/in/${username}`}>{linkedin}</a></p>
+<footer class="py-4 flex flex-col gap-2">
+  <div class="flex gap-2 mx-auto">
+    <Social platform="x" username="gmagnenat" />
+    <Social platform="instagram" username="gmagnenat" />
+    <Social platform="github" username="gmagnenat" />
+  </div>
 </footer>

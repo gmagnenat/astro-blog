@@ -15,7 +15,7 @@ console.log("yo")
         description="Gwenael Magnenat - Personal Website. A web developer and electronic musician based in Switzerland"
         openGraph={{
           basic: {
-            title: "A Very Descriptive Title",
+            title: `${pageTitle}`,
             type: "A type.",
             image: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
           }
@@ -32,7 +32,7 @@ console.log("yo")
               name: "twitter:image",
               content: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
             },
-            { name: "twitter:title", content: "Tinker Tailor Soldier Spy" },
+            { name: "twitter:title", content: `${pageTitle}`},
             { name: "twitter:description", content: "Agent" },
           ],
         }}
@@ -46,5 +46,8 @@ console.log("yo")
         <Header />
         <slot />
         <Footer />
+        <script>
+          import "../scripts/menu.js";
+        </script>
     </body>
 </html>

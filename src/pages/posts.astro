@@ -13,7 +13,7 @@ const sortedPosts = publishedPosts.sort(
 );
 ---
 
-<BaseLayout pageTitle="List of Posts">
+<BaseLayout pageTitle="List of blog posts">
     <section class="relative py-20 2xl:py-40 overflow-hidden">
       <div class="container px-4 mx-auto">
         <!-- Page title -->
@@ -25,7 +25,7 @@ const sortedPosts = publishedPosts.sort(
           <ul class="relative grid md:grid-cols-3 md:gap-8 px-6 transition-all duration-[3000] ease-in-out">
             {
                 sortedPosts.map((post) => (
-                    <li class="relative mb-6 bg-gray-900 border border-gray-500 rounded-lg hover:-translate-y-0.5">
+                    <li class="focus-within:border-purple-500 relative mb-6 bg-gray-900 border border-gray-500 rounded-lg hover:-translate-y-0.5">
                       <div class="image-wrapper">
                         <Image
                           class="mb-8 w-full h-52 rounded-lg object-cover p-4" 
@@ -36,7 +36,7 @@ const sortedPosts = publishedPosts.sort(
                         />
                       </div>
                         <div class="px-8 lg:px-14 pb-10 content-wrapper">
-                          <a class="after:absolute after:inset-0 z-[1] inline-block pt-4 text-lg text-white hover:text-gray-100 font-bold border-t border-gray-400" href={`/post/${post.slug}`}>{post.data.title}</a>
+                          <a class="focus:outline-none after:absolute after:inset-0 z-[1] inline-block pt-4 text-lg text-white hover:text-gray-100 font-bold border-t border-gray-400" href={`/post/${post.slug}`}>{post.data.title}</a>
                         </div>
                     </li>
                 ))

@@ -7,6 +7,7 @@ draft: false
 postimage:
     src: '../../assets/firstpost/firstpostimage.jpg'
     alt: 'My Image'
+tags: ["code", "javaScript", "learning"]
 ---
 
 Imagine you want to create a visually engaging grid layout on your webpage. The canvas element, combined with JavaScript, allows you to achieve this and more. We'll build a script that generates a 5x5 grid of squares, with the option of having smaller squares appear randomly within some of the larger ones.
