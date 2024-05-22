@@ -4,7 +4,6 @@ const { post } = Astro.props;
 const slug = post.slug;
 const { Content, remarkPluginFrontmatter } = await post.render();
 ---
-{console.log(post.render())}
   <li class="focus-within:border-purple-500 relative mb-6 bg-gray-900 border border-gray-500 rounded-lg hover:-translate-y-0.5">
     <div class="image-wrapper">
       <Image
