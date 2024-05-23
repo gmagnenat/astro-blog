@@ -2,23 +2,27 @@
   @apply my-8
 }
 
+.post__content h2, h3 {
+  @apply font-semibold my-2 mt-4 text-slate-200;
+}
+
 .post__content h2 {
-  @apply text-2xl font-semibold my-2 mt-4;
+  @apply text-2xl;
 }
 
 .post__content h3 {
-  @apply text-xl font-semibold my-2 mt-4;
+  @apply text-xl;
 }
 
-.post__content p {
-  @apply my-4;
+.post__content p, .post__content ol li, .post__content ul li {
+  @apply my-4 text-lg text-slate-300;
 }
 
 .post__content ol {
   @apply list-decimal pl-4 my-4;
 }
 
-.post__content ol li {
+.post__content ol li, .post__content ul li {
   @apply my-2;
 }
 
@@ -30,4 +34,12 @@
 
 .post__content ul {
   @apply list-disc pl-4 my-4;
+}
+
+.post__content code {
+  @apply bg-gray-700 rounded-md px-1.5;
+}
+
+.post__content a {
+  @apply border-b hover:border-b-gray-500 transition-all pb-1;
 }
