@@ -5,7 +5,7 @@ publishedDate: 2024-05-23
 featured: true
 draft: false
 postimage:
-    src: '../../assets/firstpost/firstpostimage.jpg'
+    src: '../../assets/canvas-spiral-drawing/canvas-spiral-drawing.jpg'
     alt: 'My Image'
 tags: ["code", "javascript", "learning", "canvas"]
 ---

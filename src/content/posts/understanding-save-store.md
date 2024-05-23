@@ -5,7 +5,7 @@ publishedDate: 2024-05-23
 featured: true
 draft: false
 postimage:
-    src: '../../assets/firstpost/firstpostimage.jpg'
+    src: '../../assets/understanding-save-store/understanding-save-store.jpg'
     alt: 'My Image'
 tags: ["code", "javascript", "learning", "canvas"]
 ---
