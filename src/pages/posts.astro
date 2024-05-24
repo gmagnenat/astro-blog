@@ -12,9 +12,11 @@ const sortedPosts = publishedPosts.sort(
     (a, b) =>
         b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf()
 );
+
+const pageTitle = "List of blog posts";
 ---
 
-<BaseLayout pageTitle="List of blog posts">
+<BaseLayout pageTitle={pageTitle}>
     <section class="relative py-20 2xl:py-40 overflow-hidden">
       <div class="container px-4 mx-auto">
         <!-- Page title -->

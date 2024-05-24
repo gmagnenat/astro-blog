@@ -11,7 +11,7 @@ const { title, description = '', ogType = 'website', ogTitle = title } = Astro.p
 const siteBaseURL = new URL(Astro.url);
 const defaultImage = new URL(defaultImageFile.src, siteBaseURL);
 
-let {image: _image} = Astro.props;
+let { image: _image } = Astro.props;
 _image = _image || defaultImage;
 
 let image = null;
@@ -22,8 +22,8 @@ if (typeof _image === 'string') {
 } else {
 	image = defaultImage;
 }
----
 
+---
 <html lang="en">
     <head>
       <SEO 
@@ -31,25 +31,45 @@ if (typeof _image === 'string') {
         description={description}
         openGraph={{
           basic: {
-            title: `${ogTitle}`,
-            type: `${ogType? ogType : 'website'}`,
-            image: `${image}`
-          }
+            title: ogTitle,
+            type: ogType,
+            image: _image?.src ? _image.src : defaultImage.toString(),
+          },
+          image: {
+            url: image.toString(),
+            secureUrl: image.toString(),
+            alt: ogTitle,
+            height: _image?.height,
+            width: _image?.width,
+            type: _image?.format && `image/${_image.format}`,
+          },
         }}
         twitter={{
-          creator: "@magnenatg"
+          creator: "@magnenatg",
+          image: image ? image.toString() : undefined,
+          imageAlt: ogTitle,
+          title: ogTitle,
+          site: '@magnenatg',
+          description: description,
+          card: image ? 'summary_large_image' : 'summary',
         }}
         extend={{
           // extending the default link tags
           link: [{ rel: "icon", href: "/favicon.ico" }],
           // extending the default meta tags
           meta: [
-            {
-              name: "twitter:image",
-              content: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
-            },
-            { name: "twitter:title", content: `${title}`},
-            { name: "twitter:description", content: "Agent" },
+           {
+            name: 'og:locale',
+            content: 'en_US',
+           },
+           {
+            name: 'og:description',
+            content: description,
+           },
+           {
+            name: 'og:site_name',
+            content: 'Gwenael Magnenat - Web Developer',
+           }
           ],
         }}
       />
