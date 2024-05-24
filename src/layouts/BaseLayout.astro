@@ -4,19 +4,36 @@ import { SEO } from 'astro-seo';
 import '../styles/global.css';
 import Footer from "../components/Footer.astro";
 
-const { pageTitle } = Astro.props;
+import defaultImageFile from '../assets/firstpostimage.jpg';
+
+const { title, description = '', ogType = 'website', ogTitle = title } = Astro.props;
+
+const siteBaseURL = new URL(Astro.url);
+const defaultImage = new URL(defaultImageFile.src, siteBaseURL);
+
+let {image: _image} = Astro.props;
+_image = _image || defaultImage;
+
+let image = null;
+if (typeof _image === 'string') {
+    image = new URL(_image, siteBaseURL);
+} else if (_image && typeof _image['href'] !== 'undefined') {
+    image = new URL(_image['href'], siteBaseURL);
+} else {
+	image = defaultImage;
+}
 ---
 
 <html lang="en">
     <head>
       <SEO 
-        title={pageTitle || 'Gwenaël Magnenat - Web Developer'}
-        description="Gwenael Magnenat - Personal Website. A web developer and electronic musician based in Switzerland"
+        title={title || 'Gwenaël Magnenat - Web Developer'}
+        description={description}
         openGraph={{
           basic: {
-            title: `${pageTitle}`,
-            type: "A type.",
-            image: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+            title: `${ogTitle}`,
+            type: `${ogType? ogType : 'website'}`,
+            image: `${image}`
           }
         }}
         twitter={{
@@ -31,7 +48,7 @@ const { pageTitle } = Astro.props;
               name: "twitter:image",
               content: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
             },
-            { name: "twitter:title", content: `${pageTitle}`},
+            { name: "twitter:title", content: `${title}`},
             { name: "twitter:description", content: "Agent" },
           ],
         }}

@@ -13,6 +13,7 @@ export const postSchema = ({ image }: { image: any }) => z.object({
     publishedDate: z.string().or(z.date()).transform((str) => new Date(str)),
     featured: z.boolean().default(false),
     draft: z.boolean().default(true),
+    postSeoImage: z.string(),
     postimage: imageSchema({ image }).optional(),
 });
 

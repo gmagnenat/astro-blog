@@ -7,6 +7,7 @@ draft: false
 postimage:
     src: '../../assets/understanding-save-store/understanding-save-store.jpg'
     alt: 'My Image'
+postSeoImage: '../../assets/understanding-save-store/understanding-save-store.jpg'
 tags: ["code", "javascript", "learning", "canvas"]
 ---
 CanvasSketch allows developers to create interactive visuals within web browsers. As projects become more complex, managing drawing styles and transformations can become challenging. This is where `context.save()` and `context.restore()` come into play, providing a robust mechanism for managing the drawing state in canvasSketch.
