@@ -3,6 +3,7 @@ import Header from "../components/Header.astro";
 import { SEO } from 'astro-seo';
 import '../styles/global.css';
 import Footer from "../components/Footer.astro";
+import { ViewTransitions } from "astro:transitions";
 
 import defaultImageFile from '../assets/firstpostimage.jpg';
 
@@ -77,6 +78,7 @@ if (typeof _image === 'string') {
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />        
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
+        <ViewTransitions />
     </head>
     <body class="min-h-screen h-full flex flex-col bg-gray-950 text-white">
         <Header />
