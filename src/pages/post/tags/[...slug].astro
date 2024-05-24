@@ -32,7 +32,7 @@ if (allPostsWithTag.length === 0) {
   return Astro.redirect("/404");
 }
 ---
-<BaseLayout pageTitle={`Gwenael Magnenat's blog | ${slug}`} description={`All posts about ${slug}`}>
+<BaseLayout title={`Gwenael Magnenat's blog | ${slug}`} description={`All posts about ${slug}`}>
   <section class="relative py-20 2xl:py-40 overflow-hidden">
     <div class="container px-4 mx-auto">
       <!-- Page title -->
