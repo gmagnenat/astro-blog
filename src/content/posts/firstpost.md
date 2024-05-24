@@ -73,8 +73,5 @@ This post has introduced a basic example of using canvas and JavaScript to creat
 ## Experiments
 A few snapshot of my experiments using the concepts learned here. Shape, position, lineWidth, random value
 
-![ctx experiment 1](../../assets/firstpost/contextExperiment1.jpg)
-![ctx experiment 2](../../assets/firstpost/contextExperiement2.jpg)
-![ctx experiment 3](../../assets/firstpost/contextExperiment3.jpg)
 
 
