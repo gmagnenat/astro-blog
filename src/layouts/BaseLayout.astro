@@ -7,7 +7,7 @@ import { ViewTransitions } from "astro:transitions";
 
 import defaultImageFile from '../assets/firstpostimage.jpg';
 
-const { title, description = '', ogType = 'website', ogTitle = title } = Astro.props;
+const { title, description = 'Gwenaël Magnenat, senior web developer based in Lausanne Switzerland', ogType = 'website', ogTitle = title } = Astro.props;
 
 const siteBaseURL = new URL(Astro.url);
 const defaultImage = new URL(defaultImageFile.src, siteBaseURL);
