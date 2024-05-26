@@ -1,6 +1,6 @@
 ---
 title: "Web Developer"
-employer: 'vingtneuf degres sàrl (now donuts communication)'
+employer: 'vingtneuf degres sàrl'
 timeline: '2021 - 2022'
 featured: true
 draft: false

@@ -1,6 +1,4 @@
 ---
-import { getCollection } from "astro:content";
-import JobCard from "../components/JobCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = 'About me';
 
@@ -14,23 +12,11 @@ const identity = {
 	hobbies: ["music", "birdwatching", "scuba-diving", "hiking"]
 }
 
-const publishedJobs = await getCollection('jobs', ({ data }) => {
-    return data.draft !== true;
-});
-
 ---
 
 <BaseLayout title={pageTitle}>
 	<div class="flex flex-col gap-8 flex-grow">
 		<span class="text-6xl uppercase mt-10">{pageTitle}</span>
     <p class="w-full md:max-w-3xl text-2xl">I am a {identity.occupation} based in {identity.country}, dedicated to building web applications that are accessible to all. With a wide range of experience in various web technologies, I am a team player and excellent communicator.</p>
-	</div>
-	<div class="mt-8 max-w-2xl flex flex-col gap-8">
-		{
-			publishedJobs.map((job) => {
-				return <JobCard job={job} />
-			})
-		}
-
 	</div>
 </BaseLayout>
