@@ -10,6 +10,9 @@ const { remarkPluginFrontmatter } = await post.render();
         class="mb-8 w-full h-52 rounded-lg object-cover p-4" 
         src={post.data.postimage!.src}
         alt={post.data.postimage!.alt}
+        width={400}
+        height={250}
+        loading={"eager"}
       />
       
     </div>
