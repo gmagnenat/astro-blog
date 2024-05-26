@@ -17,8 +17,7 @@ Object.entries(images).map(([key]) => {
   if (key.startsWith(`/src/assets/${post.slug}/slider/`)) postImages.push(key);
 })
 ---
-
-<BaseLayout title={post.data.title} description={post.data.description} type="article" image={post.data.postimage!.src}>
+<BaseLayout title={post.data.title} description={post.data.description} ogType="article" image={post.data.postimage!.src}>
     <section class="relative py-20 2xl:py-40 overflow-hidden w-full">
         <div class="relative container mx-auto">
           <div class="max-w-5xl mb-16 md:mb-24 mx-auto text-center">

@@ -1,0 +1,31 @@
+---
+import { type CollectionEntry } from "astro:content";
+
+
+const { job } = Astro.props as {job: CollectionEntry<"jobs">};
+const { Content } = await job.render();
+
+// const tags = job.data.tags[0].split(', ').map(item => item.trim());
+---
+<div class="job-card border-b border-gray-900 pb-6 job-card">
+  <span class="bg-purple-400 px-2 py-1 rounded-full">{job.data.employer}</span>
+  <p class="my-4">{job.data.timeline}</p>
+  <h2 class="font-bold text-3xl">{job.data.title}</h2>
+  <div class="flex flex-col gap-2 job__content mt-4">
+    <!-- TODO: get content -->
+    <Content />
+  </div>
+  <div class="mt-4">
+    <ul class="flex gap-2 flex-wrap">
+     {job.data.tags.map((tag) => {
+      return <li class="border border-purple-400 px-2 rounded-full">{tag}</li>
+     })}
+    </ul>
+  </div>	
+</div>
+
+<style>
+  .job__content {
+
+  }
+</style>

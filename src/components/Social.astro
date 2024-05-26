@@ -1,4 +1,18 @@
 ---
 const {platform, username} = Astro.props;
 ---
-<a href={`https://www.${platform}.com/${username}`}>{platform}</a>
+{platform === 'linkedin' ? 
+<a class="min-w-28 flex border border-gray-800 px-4 py-2 justify-center rounded-full" href={`https://www.${platform}.com/in/${username}`}>
+  <span class="sr-only">
+    {username} on {platform}
+  </span>
+  {platform}
+</a>
+: 
+<a class="min-w-28 flex border border-gray-800 px-4 py-2 rounded-full justify-center" href={`https://www.${platform}.com/${username}`}>
+  <span class="sr-only">
+    {username} on {platform}
+  </span>
+  {platform}
+</a>
+}

@@ -1,10 +1,10 @@
 ---
 title: "Web Developer, Web Project Manager"
-employer: 'donuts communication Sa'
+employer: 'donuts communication SA'
 timeline: '2022 - current'
 featured: true
 draft: false
-tags: ['solution architecture, e-commerce, gatsbyjs, sanity, nuxtjs, laravel, heroku, wordpress development, project management, git']
+tags: ["solution architecture", "e-commerce", "gatsbyjs", "sanity", "nuxtjs", "laravel", "heroku", "wordpress development", "project management", "git"]
 ---
 Strongly involved in entreprise internal solution implementation for project and time management using Monday.com.
 
