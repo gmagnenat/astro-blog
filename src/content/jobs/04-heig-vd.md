@@ -1,7 +1,7 @@
 ---
 title: "Media Engineer, Scientific Collaborator"
 employer: 'HEIG-VD, MEI'
-timeline: '2010 - 2021'
+timeline: '2014 - 2017'
 featured: true
 draft: false
 tags: ["responsive web design", "mobile development", "linux servers management", "ansible", "technical support", "ruby on rails"]
