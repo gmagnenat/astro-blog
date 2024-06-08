@@ -7,7 +7,7 @@ const { remarkPluginFrontmatter } = await post.render();
   <li class="focus-within:border-purple-500 relative mb-6 bg-gray-900 border border-gray-500 rounded-lg hover:-translate-y-0.5">
     <div class="image-wrapper">
       <Image
-        class="mb-8 w-full h-52 rounded-lg object-cover p-4" 
+        class="~mb-4/8 w-full h-52 rounded-lg object-cover p-3" 
         src={post.data.postimage!.src}
         alt={post.data.postimage!.alt}
         width={400}
@@ -16,7 +16,7 @@ const { remarkPluginFrontmatter } = await post.render();
       />
       
     </div>
-      <div class="px-8 lg:px-14 pb-10 content-wrapper">
+      <div class="~px-4/8 ~pb-6/8 content-wrapper">
         <p>{remarkPluginFrontmatter?.minutesRead}</p>
         <a class="focus:outline-none after:absolute after:inset-0 z-[1] inline-block pt-4 text-lg text-white hover:text-gray-100 font-bold border-t border-gray-400" href={`/post/${slug}`}>{post.data.title}</a>
       </div>

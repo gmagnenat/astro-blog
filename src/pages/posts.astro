@@ -17,15 +17,15 @@ const pageTitle = "List of blog posts";
 ---
 
 <BaseLayout title={pageTitle}>
-    <section class="relative py-20 2xl:py-40 overflow-hidden">
+    <section class="relative pb-20 pt-10 2xl:py-40 overflow-hidden">
       <div class="container px-4 mx-auto">
         <!-- Page title -->
         <div class="mb-24 text-center">
           <span class="text-lg text-blue-400 font-bold">What I've been up to</span>
-          <h1 class="mt-8 text-6xl font-bold font-heading text-white">Latest blog</h1>
+          <h1 class="mt-8 ~text-4xl/5xl md:~text-5xl/6xl font-bold font-heading text-white">Latest blog</h1>
         </div>
         <div class="flex flex-wrap -mx-6">
-          <ul class="relative grid md:grid-cols-3 md:gap-8 px-6 transition-all duration-[3000] ease-in-out">
+          <ul class="relative grid mx-auto md:grid-cols-2 lg:grid-cols-3 md:gap-8 px-6 transition-all duration-[3000] ease-in-out">
             {
                 sortedPosts.map((post) => (
                     <BlogCard post={post} />

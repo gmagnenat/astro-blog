@@ -8,9 +8,9 @@ const { Content } = await job.render();
 // const tags = job.data.tags[0].split(', ').map(item => item.trim());
 ---
 <div class="job-card border-b border-gray-900 pb-6 job-card">
-  <span class="bg-purple-400 px-2 py-1 rounded-full">{job.data.employer}</span>
+  <span class="bg-purple-400 border-purple-300 border text-gray-900 font-semibold px-2 py-1 rounded-full">{job.data.employer}</span>
   <p class="my-4">{job.data.timeline}</p>
-  <h2 class="font-bold text-3xl">{job.data.title}</h2>
+  <h2 class="font-bold ~text-xl/3xl">{job.data.title}</h2>
   <div class="flex flex-col gap-2 job__content mt-4">
     <!-- TODO: get content -->
     <Content />
@@ -18,7 +18,7 @@ const { Content } = await job.render();
   <div class="mt-4">
     <ul class="flex gap-2 flex-wrap">
      {job.data.tags.map((tag) => {
-      return <li class="border border-purple-400 px-2 rounded-full">{tag}</li>
+      return <li class="border border-purple-900 bg-purple-400/20 text-sm px-2 rounded-full">{tag}</li>
      })}
     </ul>
   </div>	
