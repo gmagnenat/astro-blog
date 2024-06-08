@@ -7,7 +7,7 @@ import astroExpressiveCode from "astro-expressive-code";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://gm-blog.pages.dev/',
+  site: 'https://gmagnenat.com/',
   integrations: [
     tailwind(), 
     robotsTxt(), 
