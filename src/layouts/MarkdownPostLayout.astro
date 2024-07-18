@@ -21,7 +21,9 @@ Object.entries(images).map(([key]) => {
     <section class="relative pb-20 pt-10 2xl:py-40 overflow-hidden w-full">
         <div class="relative container mx-auto">
           <div class="max-w-5xl mb-16 md:mb-24 mx-auto text-center">
-            <span class="text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-yellow-200 to-orange-600">#code</span>
+            <div class="text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-yellow-200 to-orange-600">{post.data.tags.map((post => {
+              return <a href=`/post/tags/${post}`>#{post} </a>
+            }))}</div>
             <h1 class="mt-7 ~text-2xl/5xl md:~text-5xl/6xl ~px-12/0 text-white font-bold font-heading">{post.data.title}</h1>
           </div>
           <div class="flex flex-wrap -m-8 mb-4 md:mb-12 ~p-4/0">
@@ -33,7 +35,7 @@ Object.entries(images).map(([key]) => {
                 />
             </div>
           </div>
-          <div class="max-w-4xl mx-auto text-center ~p-8/0">
+          <div class="max-w-4xl mx-auto text-center ~p-4/0">
             <p class="mb-8 md:mb-10 text-xl text-left md:text-3xl text-gray-200">{post.data.description}</p>
             <div class="text-gray-100 text-left w-full post__content">
                 <slot />
