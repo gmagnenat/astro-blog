@@ -1,7 +1,7 @@
 ---
 title: "Web Developer, Web Project Manager"
 employer: 'donuts communication SA'
-timeline: '2022 - current'
+timeline: '2022 - 2024'
 featured: true
 draft: false
 tags: ["solution architecture", "e-commerce", "gatsbyjs", "sanity", "nuxtjs", "laravel", "heroku", "wordpress development", "project management", "git"]
