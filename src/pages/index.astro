@@ -5,10 +5,15 @@ const pageTitle = "Gwenaël Magnenat - Web developer";
 ---
 
 <BaseLayout title={pageTitle}>
-	<div class="flex flex-col flex-grow ~px-4/0">
-		<h1 class="flex flex-col flex-grow justify-between">
-			<span class="~text-4xl/5xl md:~text-5xl/6xl uppercase heading-line">Gwenaël Magnenat</span>
-			<span class="~text-4xl/5xl md:~text-5xl/6xl block text-right uppercase heading-line">Web Developer</span>
+	<div class="~px-4/0 gap-4 py-10">
+		<h1 class="~text-4xl/5xl md:~text-6xl/8xl font-bold heading-line">
+			Gwenaël Magnenat
 		</h1>
+		<blockquote class="~text-2xl/4xl md:~text-5xl/6xl text-white mt-4">
+			Web Developer <br /> with a focus on
+			<span class="before:block before:absolute before:-inset-1 before:-skew-y-1 before:bg-gm-blue relative inline-block">
+				<span class="relative text-black font-semibold">accessibility</span>
+			</span>
+		</blockquote>
 	</div>
 </BaseLayout>

@@ -8,7 +8,12 @@ export default {
 	theme: {
 		screens,
 		fontSize,
-		extend: {},
+		extend: {
+			colors: {
+				'gm-blue': '#0099FF',
+				'gm-dark': '#202020'
+			}
+		},
 	},
 	plugins: [
 		fluid
