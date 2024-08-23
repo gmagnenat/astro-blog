@@ -27,13 +27,17 @@
   </div>
 </nav>
 
-<div class="hidden navbar-menu fixed top-0 left-0 bottom-0 w-5/6 max-w-sm z-50 mobile-menu" id="mobile-menu">
-  <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-80"></div>
-  <nav class="relative flex flex-col py-8 h-full w-full bg-gray-800 border-r border-gray-700 overflow-y-auto">
+<!-- Mobile navigation -->
+<div class="hidden navbar-menu fixed top-0 right-0 bottom-0 w-5/6 max-w-sm z-50 mobile-menu" id="mobile-menu">
+  <nav class="relative flex flex-col py-8 h-full w-full bg-gm-dark border-l border-gray-700 overflow-y-auto">
     <div class="flex items-center mb-16 pr-6">
       <a class="ml-10 mr-auto text-2xl text-gray-white font-bold" href="/">
         gm
       </a>
+      <button class="navbar-close rounded-full p-2 transition-colors bg-white/5 hover:bg-white/10">
+        <span class="sr-only">Close navigation</span>
+        <svg class="svg-icon" style="width: 2em; height: 2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M777.856 280.192l-33.92-33.952-231.872 231.872-231.84-231.872-33.984 33.888 231.872 231.904-231.84 231.84 33.888 33.984 231.904-231.904 231.84 231.872 33.952-33.888-231.872-231.904z"  /></svg>
+      </button>
     </div>
     <div>
       <ul>

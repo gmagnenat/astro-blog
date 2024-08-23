@@ -14,9 +14,49 @@ const identity = {
 
 ---
 
-<BaseLayout title={pageTitle}>
-	<div class="flex flex-col gap-8 flex-grow mx-auto">
+<BaseLayout title=`${pageTitle} | Gwenaël Magnenat`>
+	<div class="flex flex-col">
 		<h1 class="~text-4xl/5xl md:~text-5xl/6xl uppercase mt-10">{pageTitle}</h1>
-    <p class="w-full md:max-w-3xl ~text-lg/2xl">I am a {identity.occupation} based in {identity.country}, dedicated to building web applications that are accessible to all. With a wide range of experience in various web technologies, I am a team player and excellent communicator.</p>
+    <p class="w-full ~text-lg/2xl max-w-[50ch] mt-8">I am a {identity.occupation} based in {identity.country}, dedicated to building web applications that are accessible to all. With a wide range of experience in various web technologies, I am a team player and excellent communicator.</p>
 	</div>
+
+	<section class="mt-12">
+		<h2 class="text-2xl font-bold ">What can I bring on the table?</h2>
+		<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 mt-8">
+			<div class="flex flex-col">
+				<h3>Technical skills</h3>
+				<p>I can assist with various technical aspects of your organization, including IT tool implementation, strategic studies and decision-making, as well as analyses and benchmarking.</p>
+			</div>
+			<div class="flex flex-col">
+				<h3>Web development</h3>
+				<p>With extensive experience in modern web development, I have a deep understanding of the web project lifecycle. I can quickly integrate and contribute effectively to your development stack.</p>
+			</div>
+			<div class="flex flex-col">
+				<h3>Communication skills</h3>
+				<p>As a clear communicator, I bridge the gap between development and management teams. I have managed various digital and web projects, maintaining regular contact with clients and key partners.</p>
+			</div>
+			<div class="flex flex-col">
+				<h3>Project management skills</h3>
+				<p>With experience managing projects from start to finish, I effectively define priorities, assess risks, and manage costs and deadlines.</p>
+			</div>
+			<div class="flex flex-col">
+				<h3>A passion for accessibility</h3>
+				<p>Digital accessibility is essential and is a central focus of my work. I can help you develop a strategy for change and prepare your organization accordingly.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="mt-12">
+		<h2 class="text-2xl font-bold ">Curious to know more about me?</h2>
+		<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 mt-8">
+			<div class="flex flex-col">
+				<h3>Contact me</h3>
+				<p>You will find links to my various profile on social networks in the footer of this page</p>
+			</div>
+			<div class="flex flex-col">
+				<h3>Drop me a message</h3>
+				<p>If you prefer a form, you can use this one to <a class="bg-gm-blue hover:text-opacity-70 hover:rotate-45 py-1 px-1.5 text-gm-dark font-bold rounded-md" href="https://tally.so/r/w5L5RN" target="_blank">contact me<span class="sr-only">the link will open in a new tab</span></a></p>
+			</div>
+		</div>
+	</section>
 </BaseLayout>

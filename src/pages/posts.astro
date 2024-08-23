@@ -12,10 +12,10 @@ const sortedPosts = publishedPosts.sort(
         b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf()
 );
 
-const pageTitle = "List of blog posts";
+const pageTitle = "Blog";
 ---
 
-<BaseLayout title={pageTitle}>
+<BaseLayout title=`${pageTitle} | Gwenaël Magnenat`>
     <section class="relative pb-20 pt-10 2xl:py-40 overflow-hidden">
       <div class="container px-4 mx-auto">
         <!-- Page title -->
