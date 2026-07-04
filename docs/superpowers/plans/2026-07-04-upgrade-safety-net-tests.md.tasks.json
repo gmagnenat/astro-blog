@@ -4,27 +4,27 @@
     {
       "id": 1,
       "subject": "Task 1: Install test tooling and wire configs",
-      "status": "pending",
+      "status": "completed",
       "description": "**Goal:** Add Vitest and Playwright as devDependencies, with configs that keep the two suites from colliding, and `pnpm test` / `pnpm test:e2e` scripts.\n\n**Files:**\n- Modify: `package.json`\n- Create: `vitest.config.ts`\n- Create: `playwright.config.ts`\n\n**Acceptance Criteria:**\n- [ ] `pnpm exec vitest --version` prints a version\n- [ ] `pnpm exec playwright --version` prints a version\n- [ ] Chromium browser installed for Playwright\n- [ ] `package.json` has `test` and `test:e2e` scripts\n\n**Verify:** `pnpm exec vitest --version && pnpm exec playwright --version` → both print version strings, no errors\n\n```json:metadata\n{\"files\": [\"package.json\", \"vitest.config.ts\", \"playwright.config.ts\"], \"verifyCommand\": \"pnpm exec vitest --version && pnpm exec playwright --version\", \"acceptanceCriteria\": [\"pnpm exec vitest --version prints a version\", \"pnpm exec playwright --version prints a version\", \"Chromium browser installed for Playwright\", \"package.json has test and test:e2e scripts\"]}\n```"
     },
     {
       "id": 2,
       "subject": "Task 2: Vitest build-output safety net test",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [1],
       "description": "**Goal:** A Vitest suite that, after `astro build`, asserts every expected page exists in `dist/` — static pages, one page per post, one page per tag, and `robots.txt`.\n\n**Files:**\n- Create: `test/build.test.ts`\n\n**Acceptance Criteria:**\n- [ ] Running `vitest run` against a stale/missing `dist/` fails (proves the test actually checks something)\n- [ ] Running `pnpm build && pnpm exec vitest run` passes with all assertions green\n- [ ] Test derives post slugs and tags from `src/content/posts/*.md` at run time — no hardcoded slug/tag list\n\n**Verify:** `rm -rf dist && pnpm exec vitest run` → fails; `pnpm build && pnpm exec vitest run` → all tests pass\n\n```json:metadata\n{\"files\": [\"test/build.test.ts\"], \"verifyCommand\": \"pnpm build && pnpm exec vitest run\", \"acceptanceCriteria\": [\"rm -rf dist && pnpm exec vitest run fails\", \"pnpm build && pnpm exec vitest run passes\", \"slugs/tags derived from src/content/posts/*.md at run time, not hardcoded\"]}\n```"
     },
     {
       "id": 3,
       "subject": "Task 3: Playwright e2e page-load test",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [1],
       "description": "**Goal:** A Playwright suite that loads key routes against `astro preview` and asserts each returns 200, shows its expected heading, and logs zero console errors.\n\n**Files:**\n- Create: `e2e/pages.spec.ts`\n\n**Acceptance Criteria:**\n- [ ] All 6 routes (`/`, `/about`, `/cv`, `/posts`, one post, one tag) are covered\n- [ ] Each assertion checks HTTP status, heading text, and console error count\n- [ ] `pnpm build && pnpm test:e2e` passes\n\n**Verify:** `pnpm build && pnpm exec playwright test` → all tests pass, 0 failures\n\n```json:metadata\n{\"files\": [\"e2e/pages.spec.ts\"], \"verifyCommand\": \"pnpm build && pnpm exec playwright test\", \"acceptanceCriteria\": [\"all 6 routes covered\", \"each test checks status 200, heading text, and zero console errors\", \"pnpm build && pnpm test:e2e passes\"]}\n```"
     },
     {
       "id": 4,
       "subject": "Task 4: Confirm baseline — both suites pass together",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [2, 3],
       "description": "**Goal:** Confirm both suites pass together as a single baseline run, on the current pre-upgrade `develop` branch, so there's a known-good reference before the Astro major bump.\n\n**Files:**\n- None (verification only)\n\n**Acceptance Criteria:**\n- [ ] `pnpm test` passes (Vitest build-output suite)\n- [ ] `pnpm test:e2e` passes (Playwright e2e suite)\n- [ ] Both pass consecutively with no manual intervention\n\n**Verify:** `pnpm test && pnpm test:e2e` → both suites pass, combined exit code 0\n\n```json:metadata\n{\"files\": [], \"verifyCommand\": \"pnpm test && pnpm test:e2e\", \"acceptanceCriteria\": [\"pnpm test passes\", \"pnpm test:e2e passes\", \"both pass consecutively with no manual intervention\"]}\n```"
     }
