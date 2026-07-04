@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "astro build && vitest run",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.3",
@@ -26,6 +28,9 @@
     "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "fluid-tailwind": "^0.3.9"
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.0",
+    "fluid-tailwind": "^0.3.9",
+    "vitest": "^4.1.9"
   }
 }
