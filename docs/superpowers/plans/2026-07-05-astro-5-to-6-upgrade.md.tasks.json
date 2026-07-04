@@ -17,7 +17,7 @@
     {
       "id": 10,
       "subject": "Task 3: Fix Zod v4 import path in schemas",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [9],
       "description": "**Goal:** Update the two schema files to import `z` (and `SchemaContext`) from `astro/zod` instead of the deprecated `astro:content` re-export, required by Astro 6's move to Zod v4.\n\n**Files:**\n- Modify: `src/schemas/PostSchema.ts`\n- Modify: `src/schemas/JobSchema.ts`\n\n**Acceptance Criteria:**\n- [ ] Neither schema file imports `z` or `SchemaContext` from `astro:content`\n- [ ] Both import from `astro/zod` instead\n- [ ] No other change to schema logic (field definitions, validators, defaults all identical)\n- [ ] `pnpm build` no longer fails on a Zod/schema-related error (may still fail on expressive-code, fixed in Task 4)\n\n**Verify:** `pnpm build` — Zod-import error is gone\n\n```json:metadata\n{\"files\": [\"src/schemas/PostSchema.ts\", \"src/schemas/JobSchema.ts\"], \"verifyCommand\": \"pnpm build\", \"acceptanceCriteria\": [\"neither schema file imports z or SchemaContext from astro:content\", \"both import from astro/zod instead\", \"no other schema logic changed\", \"pnpm build no longer fails on a Zod-related error\"]}\n```"
     },
