@@ -1,0 +1,40 @@
+{
+  "planPath": "docs/superpowers/plans/2026-07-05-astro-5-to-6-upgrade.md",
+  "tasks": [
+    {
+      "id": 8,
+      "subject": "Task 1: Bump Astro core and low-risk integrations (5→6)",
+      "status": "pending",
+      "description": "**Goal:** Astro core and the two integrations with no known compatibility risk (`astro-robots-txt`, `astro-seo`) are on Astro-6-compatible versions. The build is EXPECTED to still fail after this task — that's normal, not a bug, because `@astrojs/tailwind` and the `astro:content` Zod re-export are both broken on Astro 6 and get fixed in Tasks 2 and 3.\n\n**Files:**\n- Modify: `package.json`\n- Modify: `pnpm-lock.yaml`\n\n**Acceptance Criteria:**\n- [ ] `pnpm astro --version` reports a 6.x version\n- [ ] `astro-robots-txt` and `astro-seo` are bumped to their latest versions\n- [ ] `@astrojs/tailwind`, `astro-expressive-code`, and `@expressive-code/plugin-line-numbers` are NOT touched in this task (handled in Tasks 2 and 4)\n\n**Verify:** `pnpm astro --version` → prints `6.x.x`\n\n```json:metadata\n{\"files\": [\"package.json\", \"pnpm-lock.yaml\"], \"verifyCommand\": \"pnpm astro --version\", \"acceptanceCriteria\": [\"pnpm astro --version reports 6.x\", \"astro-robots-txt and astro-seo bumped to latest\", \"@astrojs/tailwind, astro-expressive-code, @expressive-code/plugin-line-numbers untouched\"]}\n```"
+    },
+    {
+      "id": 9,
+      "subject": "Task 2: Replace @astrojs/tailwind with plain PostCSS",
+      "status": "pending",
+      "blockedBy": [8],
+      "description": "**Goal:** Remove the deprecated `@astrojs/tailwind` integration and wire up Tailwind 3 directly via PostCSS, with zero visual/behavioral change to the compiled CSS.\n\n**Files:**\n- Modify: `astro.config.mjs`\n- Modify: `package.json`\n- Create: `postcss.config.mjs`\n- Modify: `src/styles/global.css`\n\n**Acceptance Criteria:**\n- [ ] `astro.config.mjs` no longer imports or uses `@astrojs/tailwind`\n- [ ] `package.json` no longer lists `@astrojs/tailwind`; lists `tailwindcss` (v3) and `autoprefixer` as direct devDependencies\n- [ ] `postcss.config.mjs` exists with `tailwindcss` and `autoprefixer` plugins\n- [ ] `src/styles/global.css` starts with the three `@tailwind` directives\n- [ ] `tailwind.config.mjs` is unchanged\n\n**Verify:** `pnpm build` no longer fails with a Tailwind-integration-related error (may still fail on the Zod import issue, fixed in Task 3)\n\n```json:metadata\n{\"files\": [\"astro.config.mjs\", \"package.json\", \"postcss.config.mjs\", \"src/styles/global.css\"], \"verifyCommand\": \"pnpm build\", \"acceptanceCriteria\": [\"astro.config.mjs no longer references @astrojs/tailwind\", \"package.json lists tailwindcss and autoprefixer as direct devDependencies, no @astrojs/tailwind\", \"postcss.config.mjs exists with tailwindcss and autoprefixer plugins\", \"global.css starts with @tailwind directives\", \"tailwind.config.mjs unchanged\"]}\n```"
+    },
+    {
+      "id": 10,
+      "subject": "Task 3: Fix Zod v4 import path in schemas",
+      "status": "pending",
+      "blockedBy": [9],
+      "description": "**Goal:** Update the two schema files to import `z` (and `SchemaContext`) from `astro/zod` instead of the deprecated `astro:content` re-export, required by Astro 6's move to Zod v4.\n\n**Files:**\n- Modify: `src/schemas/PostSchema.ts`\n- Modify: `src/schemas/JobSchema.ts`\n\n**Acceptance Criteria:**\n- [ ] Neither schema file imports `z` or `SchemaContext` from `astro:content`\n- [ ] Both import from `astro/zod` instead\n- [ ] No other change to schema logic (field definitions, validators, defaults all identical)\n- [ ] `pnpm build` no longer fails on a Zod/schema-related error (may still fail on expressive-code, fixed in Task 4)\n\n**Verify:** `pnpm build` — Zod-import error is gone\n\n```json:metadata\n{\"files\": [\"src/schemas/PostSchema.ts\", \"src/schemas/JobSchema.ts\"], \"verifyCommand\": \"pnpm build\", \"acceptanceCriteria\": [\"neither schema file imports z or SchemaContext from astro:content\", \"both import from astro/zod instead\", \"no other schema logic changed\", \"pnpm build no longer fails on a Zod-related error\"]}\n```"
+    },
+    {
+      "id": 11,
+      "subject": "Task 4: Bump astro-expressive-code and resolve bundling risk",
+      "status": "pending",
+      "blockedBy": [10],
+      "description": "**Goal:** Bump `astro-expressive-code` and `@expressive-code/plugin-line-numbers` off the Astro-5-only `^0.38.3` pin to a version that supports Astro 6, applying the documented `removeUnusedThemes: false` workaround if the previously-encountered theme-bundling bug reproduces.\n\n**Files:**\n- Modify: `package.json`\n- Modify: `astro.config.mjs` (only if the workaround is needed)\n\n**Acceptance Criteria:**\n- [ ] `astro-expressive-code` and `@expressive-code/plugin-line-numbers` bumped to a version whose peer range includes Astro 6\n- [ ] `pnpm build` succeeds with zero errors\n- [ ] If `\"Theme is not included in this bundle\"` reproduces, `removeUnusedThemes: false` is added to the `astroExpressiveCode(...)` config and re-verified\n\n**Verify:** `pnpm build` → exits 0, both configured themes (`dracula`, `solarized-light`) present in built CSS output: `grep -rl \"dracula\" dist/_astro/*.css && grep -rl \"solarized-light\" dist/_astro/*.css`\n\n```json:metadata\n{\"files\": [\"package.json\", \"astro.config.mjs\"], \"verifyCommand\": \"pnpm build && grep -rl 'dracula' dist/_astro/*.css && grep -rl 'solarized-light' dist/_astro/*.css\", \"acceptanceCriteria\": [\"astro-expressive-code and plugin-line-numbers bumped to Astro-6-compatible version\", \"pnpm build succeeds with zero errors\", \"if bundling bug reproduces, removeUnusedThemes:false workaround applied and verified\", \"both dracula and solarized-light themes present in built CSS\"]}\n```"
+    },
+    {
+      "id": 12,
+      "subject": "Task 5: Verify full safety net green (5→6)",
+      "status": "pending",
+      "blockedBy": [11],
+      "description": "**Goal:** Confirm the fully-upgraded site (Astro 6, PostCSS Tailwind, Zod v4 imports, bumped expressive-code) passes both safety-net suites unmodified.\n\n**Files:**\n- None (verification only)\n\n**Acceptance Criteria:**\n- [ ] `pnpm test` (Vitest build-output suite) passes with zero changes to `test/build.test.ts`\n- [ ] `pnpm test:e2e` (Playwright page-load suite) passes with zero changes to `e2e/pages.spec.ts`\n- [ ] `pnpm build` shows zero errors and zero warnings\n\n**Verify:** `pnpm test && pnpm test:e2e` → both suites pass, combined exit code 0\n\n```json:metadata\n{\"files\": [], \"verifyCommand\": \"pnpm test && pnpm test:e2e\", \"acceptanceCriteria\": [\"pnpm test passes with zero changes to test/build.test.ts\", \"pnpm test:e2e passes with zero changes to e2e/pages.spec.ts\", \"pnpm build shows zero errors and zero warnings\"]}\n```"
+    }
+  ],
+  "lastUpdated": "2026-07-05"
+}
