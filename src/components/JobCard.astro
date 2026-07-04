@@ -1,9 +1,9 @@
 ---
-import { type CollectionEntry } from "astro:content";
+import { type CollectionEntry, render } from "astro:content";
 
 
 const { job } = Astro.props as {job: CollectionEntry<"jobs">};
-const { Content } = await job.render();
+const { Content } = await render(job);
 
 // const tags = job.data.tags[0].split(', ').map(item => item.trim());
 ---
