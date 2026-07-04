@@ -26,3 +26,12 @@ pnpm-debug.log*
 # Playwright test output
 test-results/
 playwright-report/
+
+.todos/
+.sidecar/
+.sidecar-agent
+.sidecar-task
+.sidecar-pr
+.sidecar-start.sh
+.sidecar-base
+.td-root
