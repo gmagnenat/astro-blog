@@ -4,7 +4,7 @@
     {
       "id": 8,
       "subject": "Task 1: Bump Astro core and low-risk integrations (5→6)",
-      "status": "pending",
+      "status": "completed",
       "description": "**Goal:** Astro core and the two integrations with no known compatibility risk (`astro-robots-txt`, `astro-seo`) are on Astro-6-compatible versions. The build is EXPECTED to still fail after this task — that's normal, not a bug, because `@astrojs/tailwind` and the `astro:content` Zod re-export are both broken on Astro 6 and get fixed in Tasks 2 and 3.\n\n**Files:**\n- Modify: `package.json`\n- Modify: `pnpm-lock.yaml`\n\n**Acceptance Criteria:**\n- [ ] `pnpm astro --version` reports a 6.x version\n- [ ] `astro-robots-txt` and `astro-seo` are bumped to their latest versions\n- [ ] `@astrojs/tailwind`, `astro-expressive-code`, and `@expressive-code/plugin-line-numbers` are NOT touched in this task (handled in Tasks 2 and 4)\n\n**Verify:** `pnpm astro --version` → prints `6.x.x`\n\n```json:metadata\n{\"files\": [\"package.json\", \"pnpm-lock.yaml\"], \"verifyCommand\": \"pnpm astro --version\", \"acceptanceCriteria\": [\"pnpm astro --version reports 6.x\", \"astro-robots-txt and astro-seo bumped to latest\", \"@astrojs/tailwind, astro-expressive-code, @expressive-code/plugin-line-numbers untouched\"]}\n```"
     },
     {
