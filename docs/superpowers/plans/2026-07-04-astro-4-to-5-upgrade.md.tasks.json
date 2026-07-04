@@ -4,7 +4,7 @@
     {
       "id": 5,
       "subject": "Task 1: Bump Astro core and all integrations",
-      "status": "pending",
+      "status": "completed",
       "description": "**Goal:** Astro and every integration in `package.json` is on its latest Astro-5-compatible version, with the site still building on the OLD content collections API (Astro 5 supports the old syntax via a deprecation warning, not a hard error) — isolating \"did the version bump alone break anything\" from the content-layer migration in Task 2.\n\n**Files:**\n- Modify: `package.json`\n- Modify: `pnpm-lock.yaml`\n\n**Acceptance Criteria:**\n- [ ] `pnpm astro --version` reports a 5.x version\n- [ ] `pnpm build` succeeds (may print a content-collections deprecation warning — expected, resolved in Task 2)\n- [ ] No dependency in `package.json` still resolves to an Astro-4-only version\n\n**Verify:** `pnpm astro --version` → prints `5.x.x`; `pnpm build` → exits 0\n\n```json:metadata\n{\"files\": [\"package.json\", \"pnpm-lock.yaml\"], \"verifyCommand\": \"pnpm astro --version && pnpm build\", \"acceptanceCriteria\": [\"pnpm astro --version reports 5.x\", \"pnpm build succeeds\", \"no dependency resolves to Astro-4-only version\"]}\n```"
     },
     {
@@ -22,5 +22,5 @@
       "description": "**Goal:** Confirm the upgraded site passes both safety-net suites unmodified, proving the upgrade didn't change user-visible behavior.\n\n**Files:**\n- None (verification only)\n\n**Acceptance Criteria:**\n- [ ] `pnpm test` (Vitest build-output suite) passes with zero changes to `test/build.test.ts`\n- [ ] `pnpm test:e2e` (Playwright page-load suite) passes with zero changes to `e2e/pages.spec.ts`\n- [ ] `pnpm build` shows zero TypeScript errors and zero deprecation warnings\n\n**Verify:** `pnpm test && pnpm test:e2e` → both suites pass, combined exit code 0\n\n```json:metadata\n{\"files\": [], \"verifyCommand\": \"pnpm test && pnpm test:e2e\", \"acceptanceCriteria\": [\"pnpm test passes with zero changes to test/build.test.ts\", \"pnpm test:e2e passes with zero changes to e2e/pages.spec.ts\", \"pnpm build shows zero TypeScript errors and zero deprecation warnings\"]}\n```"
     }
   ],
-  "lastUpdated": "2026-07-04"
+  "lastUpdated": "2026-07-05"
 }
