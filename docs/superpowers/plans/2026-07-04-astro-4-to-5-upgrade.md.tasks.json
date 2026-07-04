@@ -1,0 +1,26 @@
+{
+  "planPath": "docs/superpowers/plans/2026-07-04-astro-4-to-5-upgrade.md",
+  "tasks": [
+    {
+      "id": 5,
+      "subject": "Task 1: Bump Astro core and all integrations",
+      "status": "pending",
+      "description": "**Goal:** Astro and every integration in `package.json` is on its latest Astro-5-compatible version, with the site still building on the OLD content collections API (Astro 5 supports the old syntax via a deprecation warning, not a hard error) — isolating \"did the version bump alone break anything\" from the content-layer migration in Task 2.\n\n**Files:**\n- Modify: `package.json`\n- Modify: `pnpm-lock.yaml`\n\n**Acceptance Criteria:**\n- [ ] `pnpm astro --version` reports a 5.x version\n- [ ] `pnpm build` succeeds (may print a content-collections deprecation warning — expected, resolved in Task 2)\n- [ ] No dependency in `package.json` still resolves to an Astro-4-only version\n\n**Verify:** `pnpm astro --version` → prints `5.x.x`; `pnpm build` → exits 0\n\n```json:metadata\n{\"files\": [\"package.json\", \"pnpm-lock.yaml\"], \"verifyCommand\": \"pnpm astro --version && pnpm build\", \"acceptanceCriteria\": [\"pnpm astro --version reports 5.x\", \"pnpm build succeeds\", \"no dependency resolves to Astro-4-only version\"]}\n```"
+    },
+    {
+      "id": 6,
+      "subject": "Task 2: Migrate content collections to the Content Layer API",
+      "status": "pending",
+      "blockedBy": [5],
+      "description": "**Goal:** Replace the deprecated `defineCollection({type: 'content', schema})` syntax with the `glob()`-loader Content Layer API, and update every call site that used the old entry's `.slug`/`.render()` shape.\n\n**Files:**\n- Delete: `src/content/config.ts`\n- Create: `src/content.config.ts`\n- Modify: `src/components/JobCard.astro`\n- Modify: `src/components/BlogCard.astro`\n- Modify: `src/layouts/MarkdownPostLayout.astro`\n- Modify: `src/pages/post/[...slug].astro`\n\n**Acceptance Criteria:**\n- [ ] `src/content.config.ts` exists, `src/content/config.ts` is deleted\n- [ ] No file references `defineCollection({type: 'content', ...})`\n- [ ] No file calls `.render()` on a collection entry; all use standalone `render(entry)` import\n- [ ] No file reads `.slug` on a posts/jobs collection entry; all use `.id`\n- [ ] `pnpm build` succeeds with no content-collections deprecation warning\n\n**Verify:** `pnpm build` → exits 0, no deprecation warning about `type: 'content'`\n\nFull exact before/after code for every file is in `docs/superpowers/plans/2026-07-04-astro-4-to-5-upgrade.md` under Task 2.\n\n```json:metadata\n{\"files\": [\"src/content.config.ts\", \"src/components/JobCard.astro\", \"src/components/BlogCard.astro\", \"src/layouts/MarkdownPostLayout.astro\", \"src/pages/post/[...slug].astro\"], \"verifyCommand\": \"pnpm build\", \"acceptanceCriteria\": [\"src/content.config.ts exists, src/content/config.ts deleted\", \"no defineCollection({type:'content'}) references remain\", \"no .render() calls on collection entries, all use render(entry)\", \"no .slug reads on posts/jobs entries, all use .id\", \"pnpm build has no content-collections deprecation warning\"]}\n```"
+    },
+    {
+      "id": 7,
+      "subject": "Task 3: Verify full safety net green",
+      "status": "pending",
+      "blockedBy": [6],
+      "description": "**Goal:** Confirm the upgraded site passes both safety-net suites unmodified, proving the upgrade didn't change user-visible behavior.\n\n**Files:**\n- None (verification only)\n\n**Acceptance Criteria:**\n- [ ] `pnpm test` (Vitest build-output suite) passes with zero changes to `test/build.test.ts`\n- [ ] `pnpm test:e2e` (Playwright page-load suite) passes with zero changes to `e2e/pages.spec.ts`\n- [ ] `pnpm build` shows zero TypeScript errors and zero deprecation warnings\n\n**Verify:** `pnpm test && pnpm test:e2e` → both suites pass, combined exit code 0\n\n```json:metadata\n{\"files\": [], \"verifyCommand\": \"pnpm test && pnpm test:e2e\", \"acceptanceCriteria\": [\"pnpm test passes with zero changes to test/build.test.ts\", \"pnpm test:e2e passes with zero changes to e2e/pages.spec.ts\", \"pnpm build shows zero TypeScript errors and zero deprecation warnings\"]}\n```"
+    }
+  ],
+  "lastUpdated": "2026-07-04"
+}
