@@ -14,7 +14,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{j
 const postImages: string[] = [];
 
 Object.entries(images).map(([key]) => {
-  if (key.startsWith(`/src/assets/${post.slug}/slider/`)) postImages.push(key);
+  if (key.startsWith(`/src/assets/${post.id}/slider/`)) postImages.push(key);
 })
 ---
 <BaseLayout title={post.data.title} description={post.data.description} ogType="article" image={post.data.postimage!.src}>

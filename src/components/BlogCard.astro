@@ -1,8 +1,9 @@
 ---
 import Image from "astro/components/Image.astro"
+import { render } from "astro:content";
 const { post } = Astro.props;
-const slug = post.slug;
-const { remarkPluginFrontmatter } = await post.render();
+const slug = post.id;
+const { remarkPluginFrontmatter } = await render(post);
 ---
   <li class="focus-within:border-gm-blue relative mb-6 bg-gray-900 border border-gray-500 rounded-lg hover:-translate-y-0.5">
     <div class="image-wrapper">
