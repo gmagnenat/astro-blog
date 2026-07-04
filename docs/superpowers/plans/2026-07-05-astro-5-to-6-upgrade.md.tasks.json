@@ -10,7 +10,7 @@
     {
       "id": 9,
       "subject": "Task 2: Replace @astrojs/tailwind with plain PostCSS",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [8],
       "description": "**Goal:** Remove the deprecated `@astrojs/tailwind` integration and wire up Tailwind 3 directly via PostCSS, with zero visual/behavioral change to the compiled CSS.\n\n**Files:**\n- Modify: `astro.config.mjs`\n- Modify: `package.json`\n- Create: `postcss.config.mjs`\n- Modify: `src/styles/global.css`\n\n**Acceptance Criteria:**\n- [ ] `astro.config.mjs` no longer imports or uses `@astrojs/tailwind`\n- [ ] `package.json` no longer lists `@astrojs/tailwind`; lists `tailwindcss` (v3) and `autoprefixer` as direct devDependencies\n- [ ] `postcss.config.mjs` exists with `tailwindcss` and `autoprefixer` plugins\n- [ ] `src/styles/global.css` starts with the three `@tailwind` directives\n- [ ] `tailwind.config.mjs` is unchanged\n\n**Verify:** `pnpm build` no longer fails with a Tailwind-integration-related error (may still fail on the Zod import issue, fixed in Task 3)\n\n```json:metadata\n{\"files\": [\"astro.config.mjs\", \"package.json\", \"postcss.config.mjs\", \"src/styles/global.css\"], \"verifyCommand\": \"pnpm build\", \"acceptanceCriteria\": [\"astro.config.mjs no longer references @astrojs/tailwind\", \"package.json lists tailwindcss and autoprefixer as direct devDependencies, no @astrojs/tailwind\", \"postcss.config.mjs exists with tailwindcss and autoprefixer plugins\", \"global.css starts with @tailwind directives\", \"tailwind.config.mjs unchanged\"]}\n```"
     },
