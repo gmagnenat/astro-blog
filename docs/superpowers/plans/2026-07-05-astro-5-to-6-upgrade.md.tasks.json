@@ -31,7 +31,7 @@
     {
       "id": 12,
       "subject": "Task 5: Verify full safety net green (5→6)",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [11],
       "description": "**Goal:** Confirm the fully-upgraded site (Astro 6, PostCSS Tailwind, Zod v4 imports, bumped expressive-code) passes both safety-net suites unmodified.\n\n**Files:**\n- None (verification only)\n\n**Acceptance Criteria:**\n- [ ] `pnpm test` (Vitest build-output suite) passes with zero changes to `test/build.test.ts`\n- [ ] `pnpm test:e2e` (Playwright page-load suite) passes with zero changes to `e2e/pages.spec.ts`\n- [ ] `pnpm build` shows zero errors and zero warnings\n\n**Verify:** `pnpm test && pnpm test:e2e` → both suites pass, combined exit code 0\n\n```json:metadata\n{\"files\": [], \"verifyCommand\": \"pnpm test && pnpm test:e2e\", \"acceptanceCriteria\": [\"pnpm test passes with zero changes to test/build.test.ts\", \"pnpm test:e2e passes with zero changes to e2e/pages.spec.ts\", \"pnpm build shows zero errors and zero warnings\"]}\n```"
     }
