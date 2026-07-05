@@ -12,6 +12,9 @@ export default defineConfig({
     astroExpressiveCode(
     {
       themes: ['dracula', 'solarized-light'],
+      // Workaround for a Shiki theme-bundling bug in astro-expressive-code 0.39+
+      // ("Theme X is not included in this bundle"). Do not remove without
+      // confirming the bug is fixed upstream, or the build will break again.
       removeUnusedThemes: false,
       shiki: {
         langs: [
