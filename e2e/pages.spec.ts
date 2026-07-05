@@ -25,3 +25,8 @@ for (const { path, heading } of pages) {
     expect(consoleErrors).toEqual([]);
   });
 }
+
+test('homepage hero text renders with a space before "accessibility"', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('blockquote')).toContainText('with a focus on accessibility');
+});
