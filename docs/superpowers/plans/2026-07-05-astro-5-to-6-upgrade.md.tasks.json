@@ -24,7 +24,7 @@
     {
       "id": 11,
       "subject": "Task 4: Bump astro-expressive-code and resolve bundling risk",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [10],
       "description": "**Goal:** Bump `astro-expressive-code` and `@expressive-code/plugin-line-numbers` off the Astro-5-only `^0.38.3` pin to a version that supports Astro 6, applying the documented `removeUnusedThemes: false` workaround if the previously-encountered theme-bundling bug reproduces.\n\n**Files:**\n- Modify: `package.json`\n- Modify: `astro.config.mjs` (only if the workaround is needed)\n\n**Acceptance Criteria:**\n- [ ] `astro-expressive-code` and `@expressive-code/plugin-line-numbers` bumped to a version whose peer range includes Astro 6\n- [ ] `pnpm build` succeeds with zero errors\n- [ ] If `\"Theme is not included in this bundle\"` reproduces, `removeUnusedThemes: false` is added to the `astroExpressiveCode(...)` config and re-verified\n\n**Verify:** `pnpm build` → exits 0, both configured themes (`dracula`, `solarized-light`) present in built CSS output: `grep -rl \"dracula\" dist/_astro/*.css && grep -rl \"solarized-light\" dist/_astro/*.css`\n\n```json:metadata\n{\"files\": [\"package.json\", \"astro.config.mjs\"], \"verifyCommand\": \"pnpm build && grep -rl 'dracula' dist/_astro/*.css && grep -rl 'solarized-light' dist/_astro/*.css\", \"acceptanceCriteria\": [\"astro-expressive-code and plugin-line-numbers bumped to Astro-6-compatible version\", \"pnpm build succeeds with zero errors\", \"if bundling bug reproduces, removeUnusedThemes:false workaround applied and verified\", \"both dracula and solarized-light themes present in built CSS\"]}\n```"
     },
