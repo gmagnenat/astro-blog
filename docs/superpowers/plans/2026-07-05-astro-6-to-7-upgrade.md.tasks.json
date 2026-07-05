@@ -17,7 +17,7 @@
     {
       "id": 15,
       "subject": "Task 3: Bump astro-seo and verify astro-expressive-code",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [14],
       "description": "**Goal:** Bump the one remaining third-party integration with unconfirmed-but-lower-risk Astro 7 status (`astro-seo`), and confirm `astro-expressive-code` (already Astro-7-compatible per its declared peer range, no version bump needed) still works correctly — specifically that the `removeUnusedThemes: false` workaround still produces both configured themes.\n\n**Files:**\n- Modify: `package.json`\n\n**Acceptance Criteria:**\n- [ ] `astro-seo` bumped to latest\n- [ ] `astro-expressive-code` version UNCHANGED (still 0.44.0, already Astro-7-compatible)\n- [ ] `pnpm build` succeeds with zero errors\n- [ ] Both configured themes (`dracula`, `solarized-light`) present in built CSS output\n\n**Verify:** `pnpm build` → exits 0; `grep -rl \"dracula\" dist/_astro/*.css && grep -rl \"solarized-light\" dist/_astro/*.css` → both find a match\n\n```json:metadata\n{\"files\": [\"package.json\"], \"verifyCommand\": \"pnpm build && grep -rl 'dracula' dist/_astro/*.css && grep -rl 'solarized-light' dist/_astro/*.css\", \"acceptanceCriteria\": [\"astro-seo bumped to latest\", \"astro-expressive-code version unchanged at 0.44.0\", \"pnpm build succeeds with zero errors\", \"both dracula and solarized-light themes present in built CSS\"]}\n```"
     },
