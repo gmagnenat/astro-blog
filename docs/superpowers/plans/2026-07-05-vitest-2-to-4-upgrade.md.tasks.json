@@ -4,7 +4,7 @@
     {
       "id": 17,
       "subject": "Task 1: Bump Vitest to latest 4.x",
-      "status": "pending",
+      "status": "completed",
       "description": "**Goal:** Vitest is on the latest 4.x version, `pnpm test` passes unmodified.\n\n**Files:**\n- Modify: `package.json`\n- Modify: `pnpm-lock.yaml`\n\n**Acceptance Criteria:**\n- [ ] `pnpm exec vitest --version` reports a 4.x version\n- [ ] `pnpm test` passes with zero changes to `test/build.test.ts` or `vitest.config.ts`\n- [ ] `pnpm test:e2e` still passes (sanity check nothing else broke)\n\n**Verify:** `pnpm test && pnpm test:e2e` → both pass, combined exit code 0\n\n```json:metadata\n{\"files\": [\"package.json\", \"pnpm-lock.yaml\"], \"verifyCommand\": \"pnpm test && pnpm test:e2e\", \"acceptanceCriteria\": [\"pnpm exec vitest --version reports 4.x\", \"pnpm test passes with zero changes to test/build.test.ts or vitest.config.ts\", \"pnpm test:e2e still passes\"]}\n```"
     }
   ],
