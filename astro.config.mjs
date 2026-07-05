@@ -4,6 +4,7 @@ import { defineConfig } from 'astro/config';
 // this import, and its version should track whatever astro resolves it to.
 import { unified } from '@astrojs/markdown-remark';
 import { remarkReadingTime } from './remark-reading-time.mjs';
+import tailwindcss from '@tailwindcss/vite';
 
 import astroExpressiveCode from "astro-expressive-code";
 
@@ -35,5 +36,8 @@ export default defineConfig({
   )],
   markdown: {
     processor: unified({ remarkPlugins: [remarkReadingTime] }),
-  }
+  },
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
