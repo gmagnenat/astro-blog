@@ -4,7 +4,6 @@ import { defineConfig } from 'astro/config';
 // this import, and its version should track whatever astro resolves it to.
 import { unified } from '@astrojs/markdown-remark';
 import { remarkReadingTime } from './remark-reading-time.mjs';
-import robotsTxt from "astro-robots-txt";
 
 import astroExpressiveCode from "astro-expressive-code";
 
@@ -12,7 +11,6 @@ import astroExpressiveCode from "astro-expressive-code";
 export default defineConfig({
   site: 'https://gmagnenat.com/',
   integrations: [
-    robotsTxt(),
     astroExpressiveCode(
     {
       themes: ['dracula', 'solarized-light'],
