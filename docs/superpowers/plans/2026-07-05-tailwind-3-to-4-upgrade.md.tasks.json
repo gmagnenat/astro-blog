@@ -1,0 +1,12 @@
+{
+  "planPath": "docs/superpowers/plans/2026-07-05-tailwind-3-to-4-upgrade.md",
+  "tasks": [
+    {
+      "id": 19,
+      "subject": "Task 1: Swap to Tailwind 4, migrate config, drop fluid-tailwind",
+      "status": "pending",
+      "description": "See docs/superpowers/plans/2026-07-05-tailwind-3-to-4-upgrade.md, Task 1, for full steps."
+    }
+  ],
+  "lastUpdated": "2026-07-05"
+}
