@@ -1,4 +1,7 @@
 import { defineConfig } from 'astro/config';
+// @astrojs/markdown-remark is normally just a transitive dep of astro; it's
+// listed directly here because pnpm's strict node_modules requires it for
+// this import, and its version should track whatever astro resolves it to.
 import { unified } from '@astrojs/markdown-remark';
 import { remarkReadingTime } from './remark-reading-time.mjs';
 import robotsTxt from "astro-robots-txt";
