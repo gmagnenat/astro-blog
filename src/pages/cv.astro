@@ -4,9 +4,12 @@ import JobCard from "../components/JobCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = 'CV';
 
+// Job filenames are numbered (01-donuts, 02-29-degres, ...) to encode the
+// intended display order; sort by id to make that explicit rather than
+// relying on getCollection()'s enumeration order.
 const publishedJobs = (await getCollection('jobs', ({ data }) => {
     return data.draft !== true;
-})).sort((a, b) => a.id.localeCompare(b.id));
+})).sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
 
 ---
 
