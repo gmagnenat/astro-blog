@@ -4,7 +4,7 @@
     {
       "id": 13,
       "subject": "Task 1: Bump Astro core to 7.x",
-      "status": "pending",
+      "status": "completed",
       "description": "**Goal:** Astro core and official `@astrojs/*` packages are on Astro-7-compatible versions.\n\n**Files:**\n- Modify: `package.json`\n- Modify: `pnpm-lock.yaml`\n\n**Acceptance Criteria:**\n- [ ] `pnpm astro --version` reports a 7.x version\n- [ ] `@astrojs/check` and `@astrojs/markdown-remark` are bumped to Astro-7-compatible versions\n\n**Verify:** `pnpm astro --version` → prints `7.x.x`\n\n```json:metadata\n{\"files\": [\"package.json\", \"pnpm-lock.yaml\"], \"verifyCommand\": \"pnpm astro --version\", \"acceptanceCriteria\": [\"pnpm astro --version reports 7.x\", \"@astrojs/check and @astrojs/markdown-remark bumped to Astro-7-compatible versions\"]}\n```"
     },
     {
