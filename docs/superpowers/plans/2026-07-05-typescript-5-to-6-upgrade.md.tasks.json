@@ -1,0 +1,12 @@
+{
+  "planPath": "docs/superpowers/plans/2026-07-05-typescript-5-to-6-upgrade.md",
+  "tasks": [
+    {
+      "id": 18,
+      "subject": "Task 1: Bump TypeScript to latest 6.x",
+      "status": "pending",
+      "description": "**Goal:** TypeScript is on the latest 6.x version, `astro check` reports the same diagnostics as before (0 errors, 0 warnings, 3 pre-existing hints), full safety net passes.\n\n**Files:**\n- Modify: `package.json`\n- Modify: `pnpm-lock.yaml`\n\n**Acceptance Criteria:**\n- [ ] `pnpm exec tsc --version` reports a 6.x version\n- [ ] `pnpm build` shows 0 errors, 0 warnings, 3 hints — same as pre-upgrade\n- [ ] `pnpm test` and `pnpm test:e2e` both pass\n\n**Verify:** `pnpm build && pnpm test && pnpm test:e2e` → all pass, combined exit code 0\n\n```json:metadata\n{\"files\": [\"package.json\", \"pnpm-lock.yaml\"], \"verifyCommand\": \"pnpm build && pnpm test && pnpm test:e2e\", \"acceptanceCriteria\": [\"pnpm exec tsc --version reports 6.x\", \"pnpm build shows 0 errors, 0 warnings, 3 hints same as pre-upgrade\", \"pnpm test and pnpm test:e2e both pass\"]}\n```"
+    }
+  ],
+  "lastUpdated": "2026-07-05"
+}
