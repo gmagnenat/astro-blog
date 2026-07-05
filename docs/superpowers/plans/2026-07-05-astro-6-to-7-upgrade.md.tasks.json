@@ -10,7 +10,7 @@
     {
       "id": 14,
       "subject": "Task 2: Remove astro-robots-txt, add static robots.txt",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [13],
       "description": "**Goal:** Replace the stale, unmaintained `astro-robots-txt` integration (last published 2023, no confirmed Astro 7 support, hooks the build pipeline) with a static `public/robots.txt` producing byte-identical output.\n\n**Files:**\n- Modify: `astro.config.mjs`\n- Modify: `package.json`\n- Create: `public/robots.txt`\n\n**Acceptance Criteria:**\n- [ ] `astro.config.mjs` no longer imports or uses `astro-robots-txt`\n- [ ] `package.json` no longer lists `astro-robots-txt`\n- [ ] `public/robots.txt` exists with the exact pre-upgrade generated content\n- [ ] `dist/robots.txt` (after build) is byte-identical to the pre-upgrade integration's output\n\n**Verify:** `pnpm build && cat dist/robots.txt` → matches exactly:\n```\nUser-agent: *\nAllow: /\nSitemap: https://gmagnenat.com/sitemap-index.xml\n```\n\n```json:metadata\n{\"files\": [\"astro.config.mjs\", \"package.json\", \"public/robots.txt\"], \"verifyCommand\": \"pnpm build && cat dist/robots.txt\", \"acceptanceCriteria\": [\"astro.config.mjs no longer references astro-robots-txt\", \"package.json no longer lists astro-robots-txt\", \"public/robots.txt exists with exact pre-upgrade content\", \"dist/robots.txt byte-identical to pre-upgrade output\"]}\n```"
     },
