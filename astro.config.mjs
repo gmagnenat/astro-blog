@@ -12,6 +12,7 @@ export default defineConfig({
     astroExpressiveCode(
     {
       themes: ['dracula', 'solarized-light'],
+      removeUnusedThemes: false,
       shiki: {
         langs: [
 
