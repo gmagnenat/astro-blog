@@ -1,0 +1,33 @@
+{
+  "planPath": "docs/superpowers/plans/2026-07-05-astro-6-to-7-upgrade.md",
+  "tasks": [
+    {
+      "id": 13,
+      "subject": "Task 1: Bump Astro core to 7.x",
+      "status": "pending",
+      "description": "**Goal:** Astro core and official `@astrojs/*` packages are on Astro-7-compatible versions.\n\n**Files:**\n- Modify: `package.json`\n- Modify: `pnpm-lock.yaml`\n\n**Acceptance Criteria:**\n- [ ] `pnpm astro --version` reports a 7.x version\n- [ ] `@astrojs/check` and `@astrojs/markdown-remark` are bumped to Astro-7-compatible versions\n\n**Verify:** `pnpm astro --version` → prints `7.x.x`\n\n```json:metadata\n{\"files\": [\"package.json\", \"pnpm-lock.yaml\"], \"verifyCommand\": \"pnpm astro --version\", \"acceptanceCriteria\": [\"pnpm astro --version reports 7.x\", \"@astrojs/check and @astrojs/markdown-remark bumped to Astro-7-compatible versions\"]}\n```"
+    },
+    {
+      "id": 14,
+      "subject": "Task 2: Remove astro-robots-txt, add static robots.txt",
+      "status": "pending",
+      "blockedBy": [13],
+      "description": "**Goal:** Replace the stale, unmaintained `astro-robots-txt` integration (last published 2023, no confirmed Astro 7 support, hooks the build pipeline) with a static `public/robots.txt` producing byte-identical output.\n\n**Files:**\n- Modify: `astro.config.mjs`\n- Modify: `package.json`\n- Create: `public/robots.txt`\n\n**Acceptance Criteria:**\n- [ ] `astro.config.mjs` no longer imports or uses `astro-robots-txt`\n- [ ] `package.json` no longer lists `astro-robots-txt`\n- [ ] `public/robots.txt` exists with the exact pre-upgrade generated content\n- [ ] `dist/robots.txt` (after build) is byte-identical to the pre-upgrade integration's output\n\n**Verify:** `pnpm build && cat dist/robots.txt` → matches exactly:\n```\nUser-agent: *\nAllow: /\nSitemap: https://gmagnenat.com/sitemap-index.xml\n```\n\n```json:metadata\n{\"files\": [\"astro.config.mjs\", \"package.json\", \"public/robots.txt\"], \"verifyCommand\": \"pnpm build && cat dist/robots.txt\", \"acceptanceCriteria\": [\"astro.config.mjs no longer references astro-robots-txt\", \"package.json no longer lists astro-robots-txt\", \"public/robots.txt exists with exact pre-upgrade content\", \"dist/robots.txt byte-identical to pre-upgrade output\"]}\n```"
+    },
+    {
+      "id": 15,
+      "subject": "Task 3: Bump astro-seo and verify astro-expressive-code",
+      "status": "pending",
+      "blockedBy": [14],
+      "description": "**Goal:** Bump the one remaining third-party integration with unconfirmed-but-lower-risk Astro 7 status (`astro-seo`), and confirm `astro-expressive-code` (already Astro-7-compatible per its declared peer range, no version bump needed) still works correctly — specifically that the `removeUnusedThemes: false` workaround still produces both configured themes.\n\n**Files:**\n- Modify: `package.json`\n\n**Acceptance Criteria:**\n- [ ] `astro-seo` bumped to latest\n- [ ] `astro-expressive-code` version UNCHANGED (still 0.44.0, already Astro-7-compatible)\n- [ ] `pnpm build` succeeds with zero errors\n- [ ] Both configured themes (`dracula`, `solarized-light`) present in built CSS output\n\n**Verify:** `pnpm build` → exits 0; `grep -rl \"dracula\" dist/_astro/*.css && grep -rl \"solarized-light\" dist/_astro/*.css` → both find a match\n\n```json:metadata\n{\"files\": [\"package.json\"], \"verifyCommand\": \"pnpm build && grep -rl 'dracula' dist/_astro/*.css && grep -rl 'solarized-light' dist/_astro/*.css\", \"acceptanceCriteria\": [\"astro-seo bumped to latest\", \"astro-expressive-code version unchanged at 0.44.0\", \"pnpm build succeeds with zero errors\", \"both dracula and solarized-light themes present in built CSS\"]}\n```"
+    },
+    {
+      "id": 16,
+      "subject": "Task 4: Build, visual, and full safety-net verification (6→7)",
+      "status": "pending",
+      "blockedBy": [15],
+      "description": "**Goal:** Confirm the fully-upgraded site (Astro 7, static robots.txt, bumped astro-seo) has no HTML-strictness build failures, no visible whitespace-compression regressions from the `compressHTML: 'jsx'` default change, and passes both safety-net suites unmodified.\n\n**Files:**\n- None (verification only)\n\n**Acceptance Criteria:**\n- [ ] `pnpm build` succeeds with zero errors (also serves as the HTML-strictness check)\n- [ ] Manual visual check of `/posts` and one tag page shows no whitespace collapsed between tag pills or listing cards\n- [ ] `pnpm test` (Vitest build-output suite) passes with zero changes to `test/build.test.ts`\n- [ ] `pnpm test:e2e` (Playwright page-load suite) passes with zero changes to `e2e/pages.spec.ts`\n\n**Verify:** `pnpm test && pnpm test:e2e` → both suites pass, combined exit code 0\n\n```json:metadata\n{\"files\": [], \"verifyCommand\": \"pnpm build && pnpm test && pnpm test:e2e\", \"acceptanceCriteria\": [\"pnpm build succeeds with zero errors\", \"manual visual check of /posts and a tag page shows no whitespace collapse\", \"pnpm test passes with zero changes to test/build.test.ts\", \"pnpm test:e2e passes with zero changes to e2e/pages.spec.ts\"]}\n```"
+    }
+  ],
+  "lastUpdated": "2026-07-05"
+}
