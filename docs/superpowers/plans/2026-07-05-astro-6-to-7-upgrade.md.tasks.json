@@ -24,7 +24,7 @@
     {
       "id": 16,
       "subject": "Task 4: Build, visual, and full safety-net verification (6→7)",
-      "status": "pending",
+      "status": "completed",
       "blockedBy": [15],
       "description": "**Goal:** Confirm the fully-upgraded site (Astro 7, static robots.txt, bumped astro-seo) has no HTML-strictness build failures, no visible whitespace-compression regressions from the `compressHTML: 'jsx'` default change, and passes both safety-net suites unmodified.\n\n**Files:**\n- None (verification only)\n\n**Acceptance Criteria:**\n- [ ] `pnpm build` succeeds with zero errors (also serves as the HTML-strictness check)\n- [ ] Manual visual check of `/posts` and one tag page shows no whitespace collapsed between tag pills or listing cards\n- [ ] `pnpm test` (Vitest build-output suite) passes with zero changes to `test/build.test.ts`\n- [ ] `pnpm test:e2e` (Playwright page-load suite) passes with zero changes to `e2e/pages.spec.ts`\n\n**Verify:** `pnpm test && pnpm test:e2e` → both suites pass, combined exit code 0\n\n```json:metadata\n{\"files\": [], \"verifyCommand\": \"pnpm build && pnpm test && pnpm test:e2e\", \"acceptanceCriteria\": [\"pnpm build succeeds with zero errors\", \"manual visual check of /posts and a tag page shows no whitespace collapse\", \"pnpm test passes with zero changes to test/build.test.ts\", \"pnpm test:e2e passes with zero changes to e2e/pages.spec.ts\"]}\n```"
     }
