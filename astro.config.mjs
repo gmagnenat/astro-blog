@@ -1,6 +1,9 @@
 import { defineConfig } from 'astro/config';
+// @astrojs/markdown-remark is normally just a transitive dep of astro; it's
+// listed directly here because pnpm's strict node_modules requires it for
+// this import, and its version should track whatever astro resolves it to.
+import { unified } from '@astrojs/markdown-remark';
 import { remarkReadingTime } from './remark-reading-time.mjs';
-import tailwind from "@astrojs/tailwind";
 import robotsTxt from "astro-robots-txt";
 
 import astroExpressiveCode from "astro-expressive-code";
@@ -9,11 +12,14 @@ import astroExpressiveCode from "astro-expressive-code";
 export default defineConfig({
   site: 'https://gmagnenat.com/',
   integrations: [
-    tailwind(), 
-    robotsTxt(), 
+    robotsTxt(),
     astroExpressiveCode(
     {
       themes: ['dracula', 'solarized-light'],
+      // Workaround for a Shiki theme-bundling bug in astro-expressive-code 0.39+
+      // ("Theme X is not included in this bundle"). Do not remove without
+      // confirming the bug is fixed upstream, or the build will break again.
+      removeUnusedThemes: false,
       shiki: {
         langs: [
 
@@ -30,6 +36,6 @@ export default defineConfig({
     }
   )],
   markdown: {
-    remarkPlugins: [remarkReadingTime],
+    processor: unified({ remarkPlugins: [remarkReadingTime] }),
   }
 });
