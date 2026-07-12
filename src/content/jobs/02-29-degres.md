@@ -6,12 +6,10 @@ featured: true
 draft: false
 tags: ["html5/css3", "javascript", "php", "wireframing", "wordpress", "web development", "project management", "communication skills"]
 ---
-Development of websites for clients within budget and deadlines.
+Delivered client websites in HTML/CSS, JavaScript, PHP and WordPress, on budget and on schedule.
 
-Set up professional methodology and unified processes for the development of scalable web solutions.
+Established shared methodology and processes for building web projects that scale.
 
-Worked on a system to estimate correctly the work and budget needed for new projects.
+Built an estimation system to scope and price new projects accurately before kickoff.
 
-Mentoring with team members to higher the team skills and strengthen the work processes.
-
-Various digital and communication project management with long term clients.
+Managed digital and communication projects with long-term clients, and mentored teammates to strengthen the team's practices.
