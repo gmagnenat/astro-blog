@@ -28,11 +28,11 @@ const dateStr = post.data.publishedDate.toLocaleDateString('en-US', {
             <!-- HEADER -->
             <div class="post-head">
                 <a href="/posts" class="back-link">← Blog</a>
-                <div class="post-tags" role="list" aria-label="Tags">
+                <ul class="post-tags" role="list" aria-label="Tags">
                     {post.data.tags.map((tag) => (
-                        <a role="listitem" href={`/post/tags/${tag}`} class={tag === 'accessibility' ? 'tag tag-accent' : 'tag'}>{tag}</a>
+                        <li><a href={`/post/tags/${tag}`} class={tag === 'accessibility' ? 'tag tag-accent' : 'tag'}>{tag}</a></li>
                     ))}
-                </div>
+                </ul>
                 <h1 class="post-title">{post.data.title}</h1>
                 <p class="post-meta">{minutesRead ? `${minutesRead} · ` : ''}{dateStr}</p>
             </div>
@@ -82,7 +82,7 @@ const dateStr = post.data.publishedDate.toLocaleDateString('en-US', {
         text-decoration: none; margin-bottom: 2.5rem; transition: color 0.15s;
     }
     .back-link:hover { color: #f0f0f0; }
-    .post-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .post-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.5rem; padding: 0; list-style: none; }
     .tag {
         font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 100px;
         background: #161616; color: #aaa; border: 1px solid #242424; text-decoration: none;
