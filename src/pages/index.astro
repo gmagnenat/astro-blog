@@ -1,19 +1,580 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
-const pageTitle = "Gwenaël Magnenat - Web developer";
+const pageTitle = "Gwenaël Magnenat";
+const pageDescription =
+	"Gwenaël Magnenat — Senior full-stack developer in Lausanne. Accessibility means specs first, real testing, and blocking ship when it's not right.";
+
+// Blog posts wired from the content collection; LinkedIn posts stay hardcoded.
+const catFor = (tags?: string[]) =>
+	tags?.includes("accessibility") ? "accessibility" : "creative";
+
+const blogPosts = await getCollection("posts", ({ data }) => data.draft !== true);
+const blogItems = blogPosts
+	.sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf())
+	.map((p) => {
+		const category = catFor(p.data.tags);
+		return {
+			category,
+			tagLabel: category === "accessibility" ? "Accessibility" : "Creative coding",
+			source: "Blog",
+			date: String(p.data.publishedDate.getFullYear()),
+			title: p.data.title,
+			excerpt: p.data.description,
+			url: `/post/${p.id}`,
+			external: false,
+			linkText: "Read post",
+			ariaLabel: `Read ${p.data.title} on the blog`,
+		};
+	});
+
+const linkedInItems = [
+	{
+		category: "accessibility",
+		tagLabel: "Accessibility",
+		source: "LinkedIn",
+		date: "Jul 2025",
+		title: "Les outils automatisés ne voient pas 70% des problèmes d'accessibilité",
+		excerpt:
+			"axe, Lighthouse, WAVE sont utiles. Mais ils couvrent environ 30% des critères WCAG. Le reste exige du jugement, du contexte, et d'avoir utilisé un lecteur d'écran pour de vrai.",
+		url: "https://linkedin.com/in/gmagnenat",
+		external: true,
+		linkText: "Read on LinkedIn",
+		ariaLabel: "Read this LinkedIn post, opens in new tab",
+	},
+	{
+		category: "accessibility",
+		tagLabel: "Accessibility",
+		source: "LinkedIn",
+		date: "Jun 2025",
+		title: "L'accessibilité doit bloquer la mise en production",
+		excerpt:
+			"Pas comme suggestion. Pas comme «on regardera après le lancement». Bloquer. Voici comment structurer ça en équipe sans que ça devienne un frein à tout.",
+		url: "https://linkedin.com/in/gmagnenat",
+		external: true,
+		linkText: "Read on LinkedIn",
+		ariaLabel: "Read this LinkedIn post, opens in new tab",
+	},
+	{
+		category: "accessibility",
+		tagLabel: "Accessibility",
+		source: "LinkedIn",
+		date: "May 2025",
+		title: "L'IA reproduit l'inaccessibilité du web par défaut",
+		excerpt:
+			"Les modèles ont appris d'un web qui exclut la plupart des personnes handicapées. Sans spécification explicite, ils reproduisent ces patterns. Ce n'est pas un bug, c'est le dataset.",
+		url: "https://linkedin.com/in/gmagnenat",
+		external: true,
+		linkText: "Read on LinkedIn",
+		ariaLabel: "Read this LinkedIn post, opens in new tab",
+	},
+];
+
+const writing = [...linkedInItems, ...blogItems];
 ---
 
-<BaseLayout title={pageTitle}>
-	<div class="~px-4/0 gap-4 py-10">
-		<h1 class="~text-4xl/5xl md:~text-6xl/8xl font-bold heading-line">
-			Gwenaël Magnenat
-		</h1>
-		<blockquote class="~text-2xl/4xl md:~text-5xl/6xl text-white mt-4">
-			Web Developer <br /> with a focus on{' '}
-			<span class="before:block before:absolute before:-inset-1 before:-skew-y-1 before:bg-gm-blue relative inline-block">
-				<span class="relative text-gm-dark font-semibold">accessibility</span>
-			</span>
-		</blockquote>
+<BaseLayout title={pageTitle} description={pageDescription} bare={true}>
+	<a href="#main-content" class="skip-link">Skip to main content</a>
+
+	<!-- NAV -->
+	<header
+		style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(15,15,15,0.94); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid #1c1c1c;"
+	>
+		<nav
+			aria-label="Main navigation"
+			style="max-width: 1200px; margin: 0 auto; padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 2rem;"
+		>
+			<a
+				href="/"
+				aria-label="gm — home"
+				style="font-size: 18px; font-weight: 700; letter-spacing: -0.03em; text-decoration: none; color: #f0f0f0; flex-shrink: 0;"
+				>gm</a
+			>
+			<ul role="list" class="desktop-nav">
+				<li><a href="/about" class="nav-link">About</a></li>
+				<li><a href="/cv" class="nav-link">CV</a></li>
+				<li><a href="/post/tags/code" class="nav-link">Tags</a></li>
+				<li><a href="/posts" class="nav-blog">Blog</a></li>
+			</ul>
+			<button
+				class="hamburger-btn"
+				id="hamburger-btn"
+				aria-expanded="false"
+				aria-controls="mobile-nav-menu"
+				aria-label="Open navigation"
+			>
+				<div aria-hidden="true" class="hb-bar hb-bar-1"></div>
+				<div aria-hidden="true" class="hb-bar hb-bar-2"></div>
+				<div aria-hidden="true" class="hb-bar hb-bar-3"></div>
+			</button>
+		</nav>
+	</header>
+
+	<div
+		id="mobile-nav-menu"
+		role="dialog"
+		aria-modal="true"
+		aria-label="Navigation menu"
+		class="mobile-overlay"
+	>
+		<div
+			style="height: 64px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1e1e1e; flex-shrink: 0;"
+		>
+			<a
+				href="/"
+				aria-label="gm — home"
+				style="font-size: 18px; font-weight: 700; letter-spacing: -0.03em; text-decoration: none; color: #f0f0f0;"
+				>gm</a
+			>
+			<button
+				id="mobile-close-btn"
+				aria-label="Close navigation"
+				style="background: none; border: none; cursor: pointer; color: #f0f0f0; font-size: 22px; padding: 8px; line-height: 1; font-family: inherit;"
+				>✕</button
+			>
+		</div>
+		<nav
+			aria-label="Mobile navigation"
+			style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 0;"
+		>
+			<a href="/about" class="mobile-link" style="border-bottom: 1px solid #1e1e1e;">About</a>
+			<a href="/cv" class="mobile-link" style="border-bottom: 1px solid #1e1e1e;">CV</a>
+			<a href="/post/tags/code" class="mobile-link" style="border-bottom: 1px solid #1e1e1e;">Tags</a>
+			<a href="/posts" class="mobile-link">Blog</a>
+		</nav>
+		<div
+			style="padding: 1.5rem 0; display: flex; gap: 1.5rem; flex-wrap: wrap; border-top: 1px solid #1e1e1e; flex-shrink: 0;"
+		>
+			<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" style="font-size: 14px; font-weight: 600; color: #f0f0f0; text-decoration: none;">LinkedIn ↗</a>
+			<a href="https://github.com/gmagnenat" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">GitHub</a>
+			<a href="https://x.com/magnenatg" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">X</a>
+			<a href="https://tally.so/r/w5L5RN" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">Contact</a>
+		</div>
 	</div>
+
+	<!-- MAIN -->
+	<main id="main-content" tabindex="-1">
+		<!-- HERO -->
+		<section
+			aria-labelledby="hero-heading"
+			style="position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden;"
+		>
+			<canvas
+				id="hero-canvas"
+				aria-hidden="true"
+				style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;"
+			></canvas>
+			<div
+				aria-hidden="true"
+				style="position: absolute; inset: 0; background: linear-gradient(to right, #0f0f0f 42%, rgba(15,15,15,0.55) 68%, transparent 88%);"
+			></div>
+			<div
+				style="position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 100px 2rem 80px; width: 100%;"
+			>
+				<div style="max-width: 640px;">
+					<p class="anim-1" style="font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #888; margin-bottom: 1.75rem;">Lausanne, Switzerland</p>
+					<h1 id="hero-heading" class="anim-1" style="font-size: clamp(54px, 7.5vw, 96px); font-weight: 700; letter-spacing: -0.04em; line-height: 0.94; color: #fff; margin-bottom: 2.25rem;">Gwenaël<br />Magnenat</h1>
+					<p class="anim-2" style="font-size: clamp(18px, 2.2vw, 25px); font-weight: 400; line-height: 1.45; color: #bbb; margin-bottom: 0.4rem;">Scanners catch ~30% of accessibility errors.</p>
+					<p class="anim-2" style="font-size: clamp(18px, 2.2vw, 25px); font-weight: 700; line-height: 1.45; color: #fff; margin-bottom: 3rem;">I build for the rest.</p>
+					<div class="anim-3" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+						<a href="#writing" class="cta-primary">Read my thinking →</a>
+						<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" class="cta-secondary">LinkedIn ↗</a>
+					</div>
+				</div>
+			</div>
+			<div aria-hidden="true" style="position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);">
+				<div style="width: 1px; height: 44px; background: linear-gradient(to bottom, #444, transparent);"></div>
+			</div>
+		</section>
+
+		<!-- MANIFESTO -->
+		<section aria-labelledby="positions-heading" style="max-width: 1200px; margin: 0 auto; padding: 120px 2rem 80px;">
+			<h2 id="positions-heading" style="font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #888; margin-bottom: 4rem;">What I actually think</h2>
+
+			<div style="display: grid; grid-template-columns: 52px 1fr; gap: 3rem; padding: 3.5rem 0; border-top: 1px solid #1e1e1e; align-items: start;">
+				<span aria-hidden="true" style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #2e2e2e; padding-top: 0.5rem;">01</span>
+				<div>
+					<p style="font-size: clamp(19px, 2.5vw, 33px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.25; color: #f0f0f0; margin-bottom: 1.25rem;">A clear accessibility spec is the biggest development accelerator I know.</p>
+					<p style="font-size: 16px; color: #888; line-height: 1.8; max-width: 600px;">Not tests, not reviews, not better tooling. The spec. When developers know what's expected before they write a line of code, accessibility isn't a late phase — it's the default output.</p>
+				</div>
+			</div>
+
+			<div style="display: grid; grid-template-columns: 52px 1fr; gap: 3rem; padding: 3.5rem 0; border-top: 1px solid #1e1e1e; align-items: start;">
+				<span aria-hidden="true" style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #2e2e2e; padding-top: 0.5rem;">02</span>
+				<div>
+					<p style="font-size: clamp(19px, 2.5vw, 33px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.25; color: #f0f0f0; margin-bottom: 1.25rem;">Automated tools give false confidence. axe, Lighthouse, WAVE — useful, but they see about 30%.</p>
+					<p style="font-size: 16px; color: #888; line-height: 1.8; max-width: 600px;">The rest requires judgment: navigating with a keyboard, using a real screen reader, understanding why a pattern fails before it ships. Passing a scan is the floor, not the ceiling.</p>
+				</div>
+			</div>
+
+			<div style="display: grid; grid-template-columns: 52px 1fr; gap: 3rem; padding: 3.5rem 0; border-top: 1px solid #1e1e1e; border-bottom: 1px solid #1e1e1e; align-items: start;">
+				<span aria-hidden="true" style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #2e2e2e; padding-top: 0.5rem;">03</span>
+				<div>
+					<p style="font-size: clamp(19px, 2.5vw, 33px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.25; color: #f0f0f0; margin-bottom: 1.25rem;">AI reproduces the inaccessibility of the web it learned from. That's not a bug — it's the dataset.</p>
+					<p style="font-size: 16px; color: #888; line-height: 1.8; max-width: 600px;">Models trained on a web that excludes most disabled users will output more of the same — unless someone specifies otherwise. Spec quality matters even more now.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- WRITING -->
+		<section id="writing" aria-labelledby="writing-heading" style="background: #0b0b0b; padding: 100px 0;">
+			<div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+				<div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-bottom: 3rem; flex-wrap: wrap;">
+					<h2 id="writing-heading" style="font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #888;">Writing</h2>
+					<div role="group" aria-label="Filter writing by topic" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+						<button class="filter-tab is-active" data-filter="all" aria-pressed="true">All</button>
+						<button class="filter-tab" data-filter="accessibility" aria-pressed="false">Accessibility</button>
+						<button class="filter-tab" data-filter="creative" aria-pressed="false">Creative coding</button>
+					</div>
+				</div>
+
+				<p id="filter-status" aria-live="polite" aria-atomic="true" class="sr-only"></p>
+
+				<div id="writing-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: #1e1e1e;">
+					{
+						writing.map((post) => (
+							<article
+								data-category={post.category}
+								style="background: #0b0b0b; padding: 2rem; display: flex; flex-direction: column; gap: 1rem; min-height: 220px;"
+							>
+								<div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+									<span class={post.category === "accessibility" ? "tag tag-a11y" : "tag tag-creative"}>{post.tagLabel}</span>
+									<span style="font-size: 12px; color: #888; font-weight: 500; white-space: nowrap;">{post.source} · {post.date}</span>
+								</div>
+								<h3 style="font-size: 17px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.4; color: #f0f0f0;">{post.title}</h3>
+								<p class="card-excerpt" style="font-size: 14px; color: #888; line-height: 1.75; flex: 1;">{post.excerpt}</p>
+								{post.external ? (
+									<a href={post.url} target="_blank" rel="noopener noreferrer" class="post-link" aria-label={post.ariaLabel}>{post.linkText} →</a>
+								) : (
+									<a href={post.url} class="post-link" aria-label={post.ariaLabel}>{post.linkText} →</a>
+								)}
+							</article>
+						))
+					}
+				</div>
+
+				<div style="margin-top: 1px; background: #0f0f0f; border: 1px solid #1e1e1e; border-top: none; padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;">
+					<div>
+						<p style="font-size: 16px; font-weight: 600; color: #f0f0f0; margin-bottom: 0.3rem;">3× a week on LinkedIn</p>
+						<p style="font-size: 14px; color: #888;">Mostly French. Real accessibility problems in real products.</p>
+					</div>
+					<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" class="li-btn">Follow on LinkedIn ↗</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- ABOUT -->
+		<section aria-labelledby="about-heading" style="max-width: 1200px; margin: 0 auto; padding: 120px 2rem;">
+			<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 5rem; align-items: start;">
+				<div>
+					<h2 id="about-heading" style="font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #888; margin-bottom: 2.5rem;">About</h2>
+					<p style="font-size: 20px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.55; color: #d0d0d0; margin-bottom: 1.75rem;">I've been building web interfaces for over a decade. Most of the last several years have been accessibility work.</p>
+					<p style="font-size: 16px; color: #888; line-height: 1.8; margin-bottom: 1.25rem;">Writing specs developers can actually use. Auditing products with real assistive technology — not just scanners. Pushing back when something almost passes but isn't right.</p>
+					<p style="font-size: 16px; color: #888; line-height: 1.8; margin-bottom: 1.25rem;">Based in Lausanne, Switzerland. I work in French and English. I post on LinkedIn three times a week — mostly in French, mostly about real problems in real products.</p>
+					<p style="font-size: 16px; color: #888; line-height: 1.8; margin-bottom: 2.5rem;">I'm also interested in what happens when code is the medium. Spirals, grids, emergent patterns. That side lives on the blog.</p>
+					<div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+						<a href="/about" class="text-link">Full bio →</a>
+						<a href="/cv" class="text-link">CV →</a>
+					</div>
+				</div>
+				<div style="display: flex; flex-direction: column;">
+					<div style="border: 1px solid #1e1e1e; padding: 1.75rem;">
+						<p style="font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 1.5rem;">Specialities</p>
+						<ul role="list" style="list-style: none; display: flex; flex-direction: column; gap: 0.875rem;">
+							<li style="font-size: 15px; color: #d0d0d0; padding-left: 1rem; border-left: 2px solid #1860e0; line-height: 1.4;">Accessibility audits &amp; specification</li>
+							<li style="font-size: 15px; color: #888; padding-left: 1rem; border-left: 2px solid #242424; line-height: 1.4;">Full-stack development (TypeScript, Node, Astro)</li>
+							<li style="font-size: 15px; color: #888; padding-left: 1rem; border-left: 2px solid #242424; line-height: 1.4;">Component architecture &amp; design systems</li>
+							<li style="font-size: 15px; color: #888; padding-left: 1rem; border-left: 2px solid #242424; line-height: 1.4;">Creative coding &amp; generative art</li>
+						</ul>
+					</div>
+					<div style="border: 1px solid #1e1e1e; border-top: none; padding: 1.75rem;">
+						<p style="font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 1.25rem;">Availability</p>
+						<div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+							<span style="width: 8px; height: 8px; border-radius: 50%; background: #22c55e; flex-shrink: 0; margin-top: 5px;"></span>
+							<p style="font-size: 15px; color: #c0c0c0; line-height: 1.5;">Available for accessibility consulting and development work in Switzerland</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- FOOTER -->
+	<footer style="border-top: 1px solid #1e1e1e; padding: 2.5rem 2rem;">
+		<div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;">
+			<div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+				<a href="/" aria-label="gm — home" style="font-size: 17px; font-weight: 700; letter-spacing: -0.03em; text-decoration: none; color: #f0f0f0;">gm</a>
+				<p style="font-size: 13px; color: #888;">© 2025 Gwenaël Magnenat</p>
+			</div>
+			<nav aria-label="Social links" style="display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
+				<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" class="footer-li">LinkedIn ↗</a>
+				<a href="https://github.com/gmagnenat" target="_blank" rel="noopener noreferrer" class="footer-social">GitHub</a>
+				<a href="https://instagram.com/gmagnenat" target="_blank" rel="noopener noreferrer" class="footer-social">Instagram</a>
+				<a href="https://x.com/magnenatg" target="_blank" rel="noopener noreferrer" class="footer-social">X</a>
+				<a href="https://tally.so/r/w5L5RN" target="_blank" rel="noopener noreferrer" class="footer-social">Contact</a>
+			</nav>
+		</div>
+	</footer>
 </BaseLayout>
+
+<style is:global>
+	/* Homepage-only styles ported from the design. Typography kept as the site
+	   default font (Space Grotesk intentionally dropped); sizes/weights adopted. */
+	#main-content:focus { outline: none; }
+	.skip-link {
+		position: absolute; top: -200%; left: 1rem; z-index: 9999;
+		background: #1860e0; color: #fff; padding: 0.5rem 1.25rem;
+		font-size: 15px; font-weight: 600; border-radius: 0 0 6px 6px; text-decoration: none;
+	}
+	.skip-link:focus { top: 0; outline: 2px solid #fff; outline-offset: 2px; }
+	.sr-only {
+		position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+		overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+	}
+	a:focus-visible { outline: 2px solid #1860e0; outline-offset: 3px; border-radius: 2px; }
+	button:focus-visible { outline: 2px solid #1860e0; outline-offset: 3px; }
+
+	@keyframes fadeUp {
+		from { opacity: 0; transform: translateY(20px); }
+		to   { opacity: 1; transform: translateY(0); }
+	}
+	.anim-1 { animation: fadeUp 0.8s ease both; }
+	.anim-2 { animation: fadeUp 0.8s ease 0.15s both; }
+	.anim-3 { animation: fadeUp 0.8s ease 0.3s both; }
+	@media (prefers-reduced-motion: reduce) {
+		.anim-1, .anim-2, .anim-3 { animation: none; }
+	}
+
+	.nav-link { font-size: 15px; font-weight: 500; text-decoration: none; color: #999; transition: color 0.15s; }
+	.nav-link:hover { color: #f0f0f0; }
+	.nav-blog {
+		font-size: 15px; font-weight: 600; text-decoration: none; color: #f0f0f0;
+		border: 1.5px solid rgba(240,240,240,0.45); padding: 7px 20px;
+		border-radius: 100px; transition: background 0.15s, color 0.15s, border-color 0.15s;
+	}
+	.nav-blog:hover { background: #f0f0f0; color: #0f0f0f; border-color: #f0f0f0; }
+
+	.cta-primary {
+		display: inline-flex; align-items: center; gap: 0.4rem;
+		font-size: 15px; font-weight: 600; color: #fff; text-decoration: none;
+		background: #1860e0; padding: 11px 26px; border-radius: 100px; transition: background 0.15s;
+	}
+	.cta-primary:hover { background: #2472f5; color: #fff; }
+	.cta-secondary {
+		display: inline-flex; align-items: center; gap: 0.4rem;
+		font-size: 15px; font-weight: 500; color: #999; text-decoration: none;
+		border: 1px solid #2a2a2a; padding: 11px 26px; border-radius: 100px;
+		transition: color 0.15s, border-color 0.15s;
+	}
+	.cta-secondary:hover { color: #f0f0f0; border-color: #555; }
+
+	.post-link {
+		font-size: 13px; font-weight: 600; color: #5b8ef5; text-decoration: none;
+		display: inline-flex; align-items: center; gap: 4px; width: fit-content; margin-top: auto;
+		transition: color 0.15s;
+	}
+	.post-link:hover { color: #7aaeff; }
+	.text-link {
+		font-size: 14px; font-weight: 600; color: #f0f0f0; text-decoration: none;
+		padding-bottom: 2px; border-bottom: 1px solid #333; transition: border-color 0.15s;
+	}
+	.text-link:hover { border-color: #f0f0f0; }
+	.li-btn {
+		display: inline-flex; align-items: center; gap: 0.5rem;
+		font-size: 14px; font-weight: 600; color: #fff; text-decoration: none;
+		background: #0A66C2; padding: 10px 22px; border-radius: 6px;
+		white-space: nowrap; flex-shrink: 0; transition: background 0.15s;
+	}
+	.li-btn:hover { background: #0958aa; color: #fff; }
+	.footer-social { font-size: 14px; text-decoration: none; color: #888; transition: color 0.15s; }
+	.footer-social:hover { color: #ccc; }
+	.footer-li { font-size: 14px; font-weight: 600; text-decoration: none; color: #f0f0f0; transition: color 0.15s; }
+	.footer-li:hover { color: #fff; }
+
+	.tag {
+		font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+		padding: 3px 10px; border-radius: 100px; white-space: nowrap;
+	}
+	.tag-a11y { background: rgba(24,96,224,0.15); color: #7aadff; border: 1px solid rgba(24,96,224,0.3); }
+	.tag-creative { background: rgba(20,160,140,0.15); color: #4dd9c4; border: 1px solid rgba(20,160,140,0.3); }
+
+	/* Collection descriptions are long SEO blurbs — clamp for card parity. */
+	.card-excerpt {
+		display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.filter-tab {
+		padding: 7px 20px; border-radius: 100px; border: 1px solid #252525;
+		background: transparent; color: #999; cursor: pointer;
+		font-size: 13px; font-weight: 500; font-family: inherit;
+		transition: all 0.15s ease; white-space: nowrap;
+	}
+	.filter-tab.is-active { border-color: #1860e0; background: #1860e0; color: #fff; }
+
+	.desktop-nav { display: flex; align-items: center; gap: 2rem; list-style: none; flex-wrap: wrap; margin: 0; padding: 0; }
+	.hamburger-btn {
+		display: none; background: none; border: none; cursor: pointer;
+		padding: 10px 8px; color: #f0f0f0; flex-direction: column; gap: 5px;
+		align-items: center; justify-content: center;
+	}
+	.hamburger-btn:focus-visible { outline: 2px solid #1860e0; outline-offset: 3px; border-radius: 4px; }
+	.hb-bar { width: 22px; height: 2px; background: #f0f0f0; display: block; transition: transform 0.2s, opacity 0.2s; }
+	.hamburger-btn[aria-expanded="true"] .hb-bar-1 { transform: rotate(45deg) translate(4px, 4px); }
+	.hamburger-btn[aria-expanded="true"] .hb-bar-2 { opacity: 0; }
+	.hamburger-btn[aria-expanded="true"] .hb-bar-3 { transform: rotate(-45deg) translate(4px, -4px); }
+
+	.mobile-overlay {
+		display: none; position: fixed; inset: 0; z-index: 200;
+		background: #0f0f0f; flex-direction: column; padding: 0 2rem;
+	}
+	.mobile-overlay.is-open { display: flex; }
+	.mobile-link {
+		font-size: 38px; font-weight: 700; letter-spacing: -0.03em; color: #f0f0f0;
+		text-decoration: none; padding: 1rem 0; transition: color 0.15s;
+	}
+	.mobile-link:hover { color: #555; }
+
+	@media (max-width: 680px) {
+		.hamburger-btn { display: flex; }
+		.desktop-nav { display: none; }
+	}
+</style>
+
+<script>
+	// --- Mobile navigation ---
+	const hamburger = document.getElementById("hamburger-btn");
+	const overlay = document.getElementById("mobile-nav-menu");
+	const closeBtn = document.getElementById("mobile-close-btn");
+
+	function openMenu() {
+		overlay?.classList.add("is-open");
+		hamburger?.setAttribute("aria-expanded", "true");
+		hamburger?.setAttribute("aria-label", "Close navigation");
+		document.body.style.overflow = "hidden";
+		overlay?.querySelector("a")?.focus();
+	}
+	function closeMenu() {
+		overlay?.classList.remove("is-open");
+		hamburger?.setAttribute("aria-expanded", "false");
+		hamburger?.setAttribute("aria-label", "Open navigation");
+		document.body.style.overflow = "";
+		hamburger?.focus();
+	}
+
+	hamburger?.addEventListener("click", () =>
+		overlay?.classList.contains("is-open") ? closeMenu() : openMenu()
+	);
+	closeBtn?.addEventListener("click", closeMenu);
+	overlay?.querySelectorAll("nav a").forEach((a) =>
+		a.addEventListener("click", closeMenu)
+	);
+	document.addEventListener("keydown", (e) => {
+		if (e.key === "Escape" && overlay?.classList.contains("is-open")) closeMenu();
+	});
+
+	// --- Writing filter ---
+	const tabs = document.querySelectorAll<HTMLButtonElement>(".filter-tab");
+	const cards = document.querySelectorAll<HTMLElement>("#writing-grid article");
+	const status = document.getElementById("filter-status");
+
+	function applyFilter(filter: string) {
+		let visible = 0;
+		cards.forEach((card) => {
+			const show = filter === "all" || card.dataset.category === filter;
+			card.style.display = show ? "flex" : "none";
+			if (show) visible++;
+		});
+		tabs.forEach((t) => {
+			const active = t.dataset.filter === filter;
+			t.classList.toggle("is-active", active);
+			t.setAttribute("aria-pressed", String(active));
+		});
+		if (status) {
+			const label =
+				filter === "all" ? "" : filter === "accessibility" ? " in Accessibility" : " in Creative coding";
+			status.textContent = `Showing ${visible} post${visible !== 1 ? "s" : ""}${label}`;
+		}
+	}
+	tabs.forEach((t) =>
+		t.addEventListener("click", () => applyFilter(t.dataset.filter || "all"))
+	);
+
+	// --- Hero canvas ---
+	const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement | null;
+	if (canvas) {
+		const ctx = canvas.getContext("2d")!;
+		const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+		let animId = 0;
+		let t = 0;
+
+		const resize = () => {
+			const dpr = Math.min(window.devicePixelRatio || 1, 2);
+			const rect = canvas.getBoundingClientRect();
+			canvas.width = Math.round(rect.width * dpr);
+			canvas.height = Math.round(rect.height * dpr);
+			ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+		};
+		resize();
+
+		const draw = () => {
+			const w = canvas.offsetWidth;
+			const h = canvas.offsetHeight;
+			ctx.clearRect(0, 0, w, h);
+
+			const cx = w * 0.74;
+			const cy = h * 0.47;
+			const maxR = Math.min(w * 0.34, h * 0.68);
+
+			// Dot grid (circular clipping boundary)
+			ctx.beginPath();
+			const dotStep = 36;
+			const gx0 = Math.ceil((cx - maxR * 1.05) / dotStep) * dotStep;
+			const gy0 = Math.ceil((cy - maxR * 1.05) / dotStep) * dotStep;
+			for (let gx = gx0; gx <= cx + maxR * 1.05; gx += dotStep) {
+				for (let gy = gy0; gy <= cy + maxR * 1.05; gy += dotStep) {
+					const dx = gx - cx, dy = gy - cy;
+					if (dx * dx + dy * dy <= maxR * maxR) {
+						ctx.moveTo(gx + 1.5, gy);
+						ctx.arc(gx, gy, 1.5, 0, 6.2832);
+					}
+				}
+			}
+			ctx.fillStyle = "rgba(70, 120, 220, 0.055)";
+			ctx.fill();
+
+			// Two Archimedean spirals
+			const turns = 9;
+			const rotation = prefersReduced ? 0 : t * 0.004;
+			for (let s = 0; s < 2; s++) {
+				const phase = s * Math.PI + rotation;
+				const alpha = s === 0 ? 0.11 : 0.07;
+				ctx.beginPath();
+				for (let i = 0; i <= 700; i++) {
+					const prog = i / 700;
+					const angle = prog * turns * 6.2832 + phase;
+					const r = prog * maxR;
+					const x = cx + r * Math.cos(angle);
+					const y = cy + r * Math.sin(angle);
+					i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+				}
+				ctx.strokeStyle = "rgba(24, 96, 224, " + alpha + ")";
+				ctx.lineWidth = 1;
+				ctx.stroke();
+			}
+
+			if (!prefersReduced) {
+				t++;
+				animId = requestAnimationFrame(draw);
+			}
+		};
+
+		const onResize = () => {
+			resize();
+			if (prefersReduced) draw();
+		};
+		window.addEventListener("resize", onResize);
+		draw();
+	}
+</script>

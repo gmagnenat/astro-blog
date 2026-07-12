@@ -7,7 +7,7 @@ import Footer from "../components/Footer.astro";
 
 import defaultImageFile from '../assets/firstpostimage.jpg';
 
-const { title, description = 'Gwenaël Magnenat, senior web developer based in Lausanne Switzerland', ogType = 'website', ogTitle = title } = Astro.props;
+const { title, description = 'Gwenaël Magnenat, senior web developer based in Lausanne Switzerland', ogType = 'website', ogTitle = title, bare = false } = Astro.props;
 
 const siteBaseURL = new URL(Astro.url);
 const defaultImage = new URL(defaultImageFile.src, siteBaseURL);
@@ -80,7 +80,12 @@ if (typeof _image === 'string') {
         <meta name="generator" content={Astro.generator} />
         <!-- <ViewTransitions /> -->
     </head>
-    <body class="min-h-screen h-full flex flex-col bg-gm-dark text-white">
+    {bare ? (
+      <body class="min-h-screen" style="background:#0f0f0f;color:#f0f0f0;">
+        <slot />
+      </body>
+    ) : (
+      <body class="min-h-screen h-full flex flex-col bg-gm-dark text-white">
         <Header />
         <main class="flex flex-col flex-grow ~px-4/10">
           <slot />
@@ -89,5 +94,6 @@ if (typeof _image === 'string') {
         <script>
           import "../scripts/menu.js";
         </script>
-    </body>
+      </body>
+    )}
 </html>
