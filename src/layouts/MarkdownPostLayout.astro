@@ -22,7 +22,7 @@ const dateStr = post.data.publishedDate.toLocaleDateString('en-US', {
     year: 'numeric', month: 'long', day: 'numeric',
 });
 ---
-<BaseLayout title={post.data.title} description={post.data.description} ogType="article" image={post.data.postimage!.src} bare={true}>
+<BaseLayout title={post.data.title} description={post.data.description} ogType="article" image={post.data.postimage!.src}>
     <main id="main-content" tabindex="-1">
         <article>
             <!-- HEADER -->

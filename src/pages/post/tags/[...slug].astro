@@ -53,7 +53,7 @@ const otherTags = [...new Set(published.map((p) => p.data.tags).flat())]
 const count = posts.length;
 ---
 
-<BaseLayout title={`Posts tagged ${slug} | Gwenaël Magnenat`} description={`All posts tagged ${slug}`} bare={true}>
+<BaseLayout title={`Posts tagged ${slug} | Gwenaël Magnenat`} description={`All posts tagged ${slug}`}>
 	<main id="main-content" tabindex="-1">
 		<div class="page-wrap">
 			<a href="/posts" class="back-link">← Blog</a>
