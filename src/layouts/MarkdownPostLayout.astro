@@ -1,61 +1,124 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { Image, imageConfig } from 'astro:assets';
+import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 import BaseLayout from './BaseLayout.astro';
 
 interface Props {
     post: CollectionEntry<'posts'>;
+    minutesRead?: string;
 }
 
-const { post } = Astro.props;
+const { post, minutesRead } = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif}');
 const postImages: string[] = [];
 
 Object.entries(images).map(([key]) => {
   if (key.startsWith(`/src/assets/${post.id}/slider/`)) postImages.push(key);
 })
+
+const dateStr = post.data.publishedDate.toLocaleDateString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric',
+});
 ---
-<BaseLayout title={post.data.title} description={post.data.description} ogType="article" image={post.data.postimage!.src}>
-    <section class="relative pb-20 pt-10 2xl:py-40 overflow-hidden w-full">
-        <div class="relative container mx-auto">
-          <div class="max-w-5xl mb-16 md:mb-24 mx-auto text-center">
-            <div class="text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-yellow-200 to-orange-600">{post.data.tags.map((post => {
-              return <a href=`/post/tags/${post}`>#{post} </a>
-            }))}</div>
-            <h1 class="mt-7 ~text-2xl/5xl md:~text-5xl/6xl ~px-12/0 text-white font-bold font-heading">{post.data.title}</h1>
-          </div>
-          <div class="flex flex-wrap -m-8 mb-4 md:mb-12 ~p-4/0">
-            <div class="w-full h-96 p-8">
+<BaseLayout title={post.data.title} description={post.data.description} ogType="article" image={post.data.postimage!.src} bare={true}>
+    <main id="main-content" tabindex="-1">
+        <article>
+            <!-- HEADER -->
+            <div class="post-head">
+                <a href="/posts" class="back-link">← Blog</a>
+                <div class="post-tags" role="list" aria-label="Tags">
+                    {post.data.tags.map((tag) => (
+                        <a role="listitem" href={`/post/tags/${tag}`} class={tag === 'accessibility' ? 'tag tag-accent' : 'tag'}>{tag}</a>
+                    ))}
+                </div>
+                <h1 class="post-title">{post.data.title}</h1>
+                <p class="post-meta">{minutesRead ? `${minutesRead} · ` : ''}{dateStr}</p>
+            </div>
+
+            <!-- HERO IMAGE -->
+            <figure class="post-hero">
                 <Image
                     src={post.data.postimage!.src}
                     alt={post.data.postimage!.alt}
-                    class="w-full h-full object-cover rounded-md"
+                    class="post-hero-img"
                 />
-            </div>
-          </div>
-          <div class="max-w-4xl mx-auto text-center ~p-4/0">
-            <p class="mb-8 md:mb-10 text-xl text-left md:text-3xl text-gray-200">{post.data.description}</p>
-            <div class="text-gray-100 text-left w-full post__content">
-                <slot />
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {
-                  postImages.map((image) => {
-                    return <div>
-                      <Image 
-                      src={images[image]()}
-                      alt={post.data.title}
-                      width={1080}
-                      height={1080}
-                      class="aspect-square object-cover"
-                    />
+            </figure>
+
+            <!-- BODY -->
+            <div class="post-column">
+                <p class="post-lead">{post.data.description}</p>
+                <div class="post__content">
+                    <slot />
+                </div>
+
+                {postImages.length > 0 && (
+                    <div class="post-gallery">
+                        {postImages.map((image) => (
+                            <Image
+                                src={images[image]()}
+                                alt={post.data.title}
+                                width={1080}
+                                height={1080}
+                                class="post-gallery-img"
+                            />
+                        ))}
                     </div>
-                  })
-                 }
+                )}
+
+                <div class="post-footer">
+                    <a href="/posts" class="back-link">← Back to all writing</a>
+                </div>
             </div>
-          </div>
-        </div>
-      </section>
+        </article>
+    </main>
 </BaseLayout>
+
+<style>
+    .post-head { max-width: 760px; margin: 0 auto; padding: 120px 2rem 0; }
+    .back-link {
+        display: inline-block; font-size: 13px; font-weight: 600; color: #888;
+        text-decoration: none; margin-bottom: 2.5rem; transition: color 0.15s;
+    }
+    .back-link:hover { color: #f0f0f0; }
+    .post-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .tag {
+        font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 100px;
+        background: #161616; color: #aaa; border: 1px solid #242424; text-decoration: none;
+        transition: border-color 0.15s, color 0.15s;
+    }
+    .tag:hover { color: #f0f0f0; border-color: #444; }
+    .tag-accent {
+        font-weight: 600; letter-spacing: 0.04em;
+        background: rgba(24,96,224,0.15); color: #7aadff; border-color: rgba(24,96,224,0.3);
+    }
+    .tag-accent:hover { color: #a9caff; }
+    .post-title {
+        font-size: clamp(30px, 4.5vw, 52px); font-weight: 700; letter-spacing: -0.035em;
+        line-height: 1.1; color: #fff; margin-bottom: 1rem;
+    }
+    .post-meta { font-size: 14px; color: #888; }
+
+    .post-hero { max-width: 960px; margin: 3.5rem auto 0; padding: 0 2rem; }
+    .post-hero-img {
+        width: 100%; height: clamp(240px, 42vw, 460px); object-fit: cover;
+        border-radius: 10px; border: 1px solid #1e1e1e;
+    }
+
+    .post-column { max-width: 760px; margin: 0 auto; padding: 3.5rem 2rem 2rem; }
+    .post-lead {
+        font-size: clamp(18px, 2.2vw, 22px); font-weight: 500; line-height: 1.55;
+        letter-spacing: -0.01em; color: #d0d0d0; margin-bottom: 2.5rem;
+        padding-bottom: 2.5rem; border-bottom: 1px solid #1e1e1e;
+    }
+
+    .post-gallery {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 0.75rem; margin: 3rem 0;
+    }
+    .post-gallery-img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; }
+
+    .post-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #1e1e1e; }
+    .post-footer .back-link { margin-bottom: 0; }
+</style>

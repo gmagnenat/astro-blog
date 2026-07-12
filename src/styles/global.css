@@ -14,8 +14,11 @@ main:focus { outline: none; }
 a:focus-visible { outline: 2px solid #1860e0; outline-offset: 3px; border-radius: 2px; }
 button:focus-visible { outline: 2px solid #1860e0; outline-offset: 3px; }
 
-.post__content h2, h3 {
-  @apply font-semibold my-2 mt-4 text-slate-200;
+/* Article prose — dark design palette (post detail pages). */
+.post__content h2, .post__content h3 {
+  @apply font-semibold mt-10 mb-3;
+  color: #f0f0f0;
+  letter-spacing: -0.01em;
 }
 
 .post__content h2 {
@@ -27,7 +30,10 @@ button:focus-visible { outline: 2px solid #1860e0; outline-offset: 3px; }
 }
 
 .post__content p, .post__content ol li, .post__content ul li {
-  @apply my-4 text-lg text-slate-300;
+  @apply my-4;
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: #c4c4c4;
 }
 
 .post__content ol {
@@ -41,6 +47,7 @@ button:focus-visible { outline: 2px solid #1860e0; outline-offset: 3px; }
 .post__content img {
   width: min(500px, 100%);
   margin-inline: auto;
+  border-radius: 8px;
   @apply py-8;
 }
 
@@ -49,11 +56,15 @@ button:focus-visible { outline: 2px solid #1860e0; outline-offset: 3px; }
 }
 
 .post__content code {
-  @apply bg-gray-700 rounded-md px-1.5;
+  background: #1a1a1a;
+  border: 1px solid #262626;
+  color: #e0e0e0;
+  @apply rounded-md px-1.5;
 }
 
 .post__content a {
-  @apply border-b hover:border-b-gray-500 transition-all pb-1;
+  color: #5b8ef5;
+  @apply border-b border-transparent hover:border-current transition-all pb-0.5;
 }
 
 @layer utilities {
