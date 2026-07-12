@@ -1,27 +1,173 @@
 ---
 import { getCollection } from "astro:content";
-import JobCard from "../components/JobCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-const pageTitle = 'CV';
+
+const pageTitle = "CV";
+const pageDescription =
+	"CV — Gwenaël Magnenat, senior full-stack developer and accessibility specialist in Lausanne, Switzerland.";
 
 // Job filenames are numbered (01-donuts, 02-29-degres, ...) to encode the
-// intended display order; sort by id to make that explicit rather than
-// relying on getCollection()'s enumeration order.
-const publishedJobs = (await getCollection('jobs', ({ data }) => {
-    return data.draft !== true;
-})).sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
+// intended display order; sort by id to make that explicit.
+const jobs = (await getCollection("jobs", ({ data }) => data.draft !== true)).sort((a, b) =>
+	a.id.localeCompare(b.id, undefined, { numeric: true })
+);
 
+// Each job body is prose paragraphs; split into bullet points for the design.
+const roles = jobs.map((job) => ({
+	...job.data,
+	bullets: job.body
+		? job.body.split(/\n\s*\n/).map((p) => p.trim().replace(/\s+/g, " ")).filter(Boolean)
+		: [],
+}));
+
+// Curated expertise summary (not derived from job tags).
+const expertise = [
+	"TypeScript", "Astro", "Node.js", "React", "Nuxt / Vue",
+	"Gatsby", "Sanity", "WordPress", "Laravel / PHP",
+	"Linux · Ansible", "Canvas · WebGL",
+];
 ---
 
-<BaseLayout title=`${pageTitle} | Gwenaël Magnenat`>
-	<div class="max-w-2xl flex flex-col gap-8 mx-auto">
-		<h1 class="~text-4xl/5xl md:~text-5xl/6xl uppercase mt-10">{pageTitle}</h1>
-    <h2 class="~text-2xl/4xl uppercase">work experience</h2>
-		{
-			publishedJobs.map((job) => {
-				return <JobCard job={job} />
-			})
-		}
+<BaseLayout title=`${pageTitle} | Gwenaël Magnenat` description={pageDescription} bare={true}>
+	<main id="main-content" tabindex="-1">
+		<div class="page-wrap">
+			<!-- PAGE HEADER -->
+			<header class="cv-header">
+				<div>
+					<p class="eyebrow">CV</p>
+					<h1 class="page-title">Gwenaël Magnenat</h1>
+					<p class="page-subtitle">Senior Full-stack Developer &amp; Accessibility Specialist · Lausanne, Switzerland</p>
+				</div>
+				<div class="cv-actions">
+					<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" class="dl-btn">LinkedIn ↗</a>
+				</div>
+			</header>
 
-	</div>
+			<!-- EXPERTISE CHIPS -->
+			<div role="list" aria-label="Core expertise" class="chips">
+				<span role="listitem" class="chip chip-accent">Accessibility</span>
+				{expertise.map((e) => <span role="listitem" class="chip">{e}</span>)}
+			</div>
+
+			<!-- EXPERIENCE -->
+			<section aria-labelledby="experience-heading">
+				<h2 id="experience-heading" class="section-heading">Work experience</h2>
+				{
+					roles.map((role) => (
+						<div class="role">
+							<div class="role-date">
+								<p>{role.timeline}</p>
+							</div>
+							<div>
+								<h3 class="role-title">{role.title}</h3>
+								<p class="role-employer">{role.employer}</p>
+								<ul role="list" class="role-bullets">
+									{role.bullets.map((b) => (
+										<li>
+											<span aria-hidden="true" class="dash">—</span>
+											{b}
+										</li>
+									))}
+								</ul>
+								<div class="role-tags">
+									{role.tags.map((t) => (
+										<span class="role-tag">{t}</span>
+									))}
+								</div>
+							</div>
+						</div>
+					))
+				}
+			</section>
+
+			<!-- ON ACCESSIBILITY -->
+			<aside aria-label="A note on accessibility focus" class="a11y-note">
+				<p class="a11y-note-title">On accessibility</p>
+				<p class="a11y-note-body">
+					Accessibility has been a consistent thread across these roles — writing specs
+					developers could act on, pushing back when something almost passed but wasn't right,
+					and advocating for it as a ship blocker rather than an afterthought. I write about
+					this three times a week on LinkedIn and maintain a public blog on the topic.
+				</p>
+				<div class="a11y-note-links">
+					<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" class="note-link">LinkedIn writing ↗</a>
+					<a href="/posts" class="note-link">Blog →</a>
+				</div>
+			</aside>
+		</div>
+	</main>
 </BaseLayout>
+
+<style>
+	.page-wrap { max-width: 1200px; margin: 0 auto; padding: 120px 2rem 80px; }
+	.eyebrow {
+		font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+		text-transform: uppercase; color: #888; margin-bottom: 1rem;
+	}
+	.page-title {
+		font-size: clamp(36px, 5vw, 64px); font-weight: 700; letter-spacing: -0.04em;
+		line-height: 1; color: #fff; margin-bottom: 0.75rem;
+	}
+	.page-subtitle { font-size: 18px; color: #888; font-weight: 400; }
+
+	.cv-header {
+		display: flex; align-items: flex-start; justify-content: space-between;
+		gap: 2rem; flex-wrap: wrap; margin-bottom: 4rem;
+	}
+	.cv-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; padding-top: 0.5rem; }
+	.dl-btn {
+		display: inline-flex; align-items: center; gap: 0.4rem;
+		font-size: 14px; font-weight: 600; color: #fff; text-decoration: none;
+		border: 1px solid #2a2a2a; padding: 9px 20px; border-radius: 6px;
+		transition: border-color 0.15s, background 0.15s; white-space: nowrap;
+	}
+	.dl-btn:hover { border-color: #555; background: #1a1a1a; color: #fff; }
+
+	.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 5rem; }
+	.chip {
+		font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 100px;
+		background: #161616; color: #aaa; border: 1px solid #242424; white-space: nowrap;
+	}
+	.chip-accent {
+		font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+		background: rgba(24,96,224,0.15); color: #7aadff; border-color: rgba(24,96,224,0.3);
+	}
+
+	.section-heading {
+		font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+		text-transform: uppercase; color: #888; margin-bottom: 3.5rem;
+	}
+
+	.role {
+		display: grid; grid-template-columns: 120px 1fr; gap: 3rem;
+		padding: 3rem 0; border-top: 1px solid #1e1e1e; align-items: start;
+	}
+	.role:last-child { border-bottom: 1px solid #1e1e1e; }
+	.role-date { text-align: right; padding-top: 0.2rem; }
+	.role-date p { font-size: 13px; font-weight: 500; color: #888; line-height: 1.4; letter-spacing: -0.01em; }
+	.role-title { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: #f0f0f0; margin-bottom: 0.25rem; }
+	.role-employer { font-size: 15px; font-weight: 600; color: #1860e0; margin-bottom: 1.25rem; letter-spacing: -0.01em; }
+	.role-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.75rem; }
+	.role-bullets li { font-size: 15px; color: #888; line-height: 1.6; padding-left: 1.25rem; position: relative; }
+	.dash { position: absolute; left: 0; color: #333; }
+	.role-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+	.role-tag {
+		font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 4px;
+		background: #161616; color: #666; border: 1px solid #222; white-space: nowrap;
+	}
+
+	.a11y-note {
+		margin-top: 4rem; padding: 2rem 2.5rem;
+		border-left: 2px solid #1860e0; background: rgba(24,96,224,0.06);
+	}
+	.a11y-note-title { font-size: 15px; font-weight: 600; color: #f0f0f0; margin-bottom: 0.5rem; }
+	.a11y-note-body { font-size: 15px; color: #888; line-height: 1.75; max-width: 680px; }
+	.a11y-note-links { display: flex; gap: 1rem; margin-top: 1.25rem; flex-wrap: wrap; }
+	.note-link { font-size: 13px; font-weight: 600; color: #5b8ef5; text-decoration: none; transition: color 0.15s; }
+	.note-link:hover { color: #7aaeff; }
+
+	@media (max-width: 560px) {
+		.role { grid-template-columns: 1fr; gap: 0.75rem; }
+		.role-date { text-align: left; }
+	}
+</style>
