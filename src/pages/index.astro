@@ -29,47 +29,22 @@ const blogItems = blogPosts
 		};
 	});
 
-const linkedInItems = [
-	{
-		category: "accessibility",
-		tagLabel: "Accessibility",
-		source: "LinkedIn",
-		date: "Jul 2025",
-		title: "Les outils automatisés ne voient pas 70% des problèmes d'accessibilité",
-		excerpt:
-			"axe, Lighthouse, WAVE sont utiles. Mais ils couvrent environ 30% des critères WCAG. Le reste exige du jugement, du contexte, et d'avoir utilisé un lecteur d'écran pour de vrai.",
-		url: "https://linkedin.com/in/gmagnenat",
-		external: true,
-		linkText: "Read on LinkedIn",
-		ariaLabel: "Read this LinkedIn post, opens in new tab",
-	},
-	{
-		category: "accessibility",
-		tagLabel: "Accessibility",
-		source: "LinkedIn",
-		date: "Jun 2025",
-		title: "L'accessibilité doit bloquer la mise en production",
-		excerpt:
-			"Pas comme suggestion. Pas comme «on regardera après le lancement». Bloquer. Voici comment structurer ça en équipe sans que ça devienne un frein à tout.",
-		url: "https://linkedin.com/in/gmagnenat",
-		external: true,
-		linkText: "Read on LinkedIn",
-		ariaLabel: "Read this LinkedIn post, opens in new tab",
-	},
-	{
-		category: "accessibility",
-		tagLabel: "Accessibility",
-		source: "LinkedIn",
-		date: "May 2025",
-		title: "L'IA reproduit l'inaccessibilité du web par défaut",
-		excerpt:
-			"Les modèles ont appris d'un web qui exclut la plupart des personnes handicapées. Sans spécification explicite, ils reproduisent ces patterns. Ce n'est pas un bug, c'est le dataset.",
-		url: "https://linkedin.com/in/gmagnenat",
-		external: true,
-		linkText: "Read on LinkedIn",
-		ariaLabel: "Read this LinkedIn post, opens in new tab",
-	},
-];
+// LinkedIn posts are all accessibility topics, external links.
+const linkedInPosts = await getCollection("linkedin", ({ data }) => data.draft !== true);
+const linkedInItems = linkedInPosts
+	.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf())
+	.map((p) => ({
+	category: "accessibility",
+	tagLabel: "Accessibility",
+	source: "LinkedIn",
+	date: p.data.date,
+	title: p.data.title,
+	excerpt: p.data.excerpt,
+	url: p.data.url,
+	external: true,
+	linkText: "Read on LinkedIn",
+	ariaLabel: "Read this LinkedIn post, opens in new tab",
+}));
 
 const writing = [...linkedInItems, ...blogItems];
 ---
