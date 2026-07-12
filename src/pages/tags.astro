@@ -1,0 +1,28 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Tags from "../components/Tags.astro";
+
+const posts = await getCollection("posts", ({ data }) => data.draft !== true);
+const tags = posts
+	.map((post) => post.data.tags)
+	.flat()
+	.reduce<{ [key: string]: number }>((result, tag) => {
+		result[tag] = (result[tag] || 0) + 1;
+		return result;
+	}, {});
+
+const pageTitle = "Tags";
+---
+
+<BaseLayout title=`${pageTitle} | Gwenaël Magnenat` description="Browse blog posts by tag">
+	<section class="relative pb-20 pt-10 2xl:py-40">
+		<div class="container px-4 mx-auto">
+			<div class="mb-16 text-center">
+				<span class="text-lg text-gm-blue font-bold">Browse by topic</span>
+				<h1 class="mt-8 ~text-4xl/5xl md:~text-5xl/6xl font-bold text-white">Tags</h1>
+			</div>
+			<Tags tags={tags} />
+		</div>
+	</section>
+</BaseLayout>

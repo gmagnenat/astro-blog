@@ -13,6 +13,7 @@ const catFor = (tags?: string[]) =>
 const blogPosts = await getCollection("posts", ({ data }) => data.draft !== true);
 const blogItems = blogPosts
 	.sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf())
+	.slice(0, 3)
 	.map((p) => {
 		const category = catFor(p.data.tags);
 		return {
@@ -69,7 +70,7 @@ const writing = [...linkedInItems, ...blogItems];
 			<ul role="list" class="desktop-nav">
 				<li><a href="/about" class="nav-link">About</a></li>
 				<li><a href="/cv" class="nav-link">CV</a></li>
-				<li><a href="/post/tags/code" class="nav-link">Tags</a></li>
+				<li><a href="/tags" class="nav-link">Tags</a></li>
 				<li><a href="/posts" class="nav-blog">Blog</a></li>
 			</ul>
 			<button
@@ -115,7 +116,7 @@ const writing = [...linkedInItems, ...blogItems];
 		>
 			<a href="/about" class="mobile-link" style="border-bottom: 1px solid #1e1e1e;">About</a>
 			<a href="/cv" class="mobile-link" style="border-bottom: 1px solid #1e1e1e;">CV</a>
-			<a href="/post/tags/code" class="mobile-link" style="border-bottom: 1px solid #1e1e1e;">Tags</a>
+			<a href="/tags" class="mobile-link" style="border-bottom: 1px solid #1e1e1e;">Tags</a>
 			<a href="/posts" class="mobile-link">Blog</a>
 		</nav>
 		<div
