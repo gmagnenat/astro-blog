@@ -1,63 +1,137 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-const pageTitle = 'About me';
 
+const pageTitle = "About";
+const pageDescription =
+	"About Gwenaël Magnenat — senior web developer and accessibility specialist in Lausanne, Switzerland.";
 
-
-const identity = {
-	firstName: "Gwenaël",
-	lastName: "Magnenat",
-	occupation: "Web Developer",
-	country: "Switzerland",
-	hobbies: ["music", "birdwatching", "scuba-diving", "hiking"]
-}
-
+const skills = [
+	{
+		title: "Technical skills",
+		body: "I can assist with various technical aspects of your organization, including IT tool implementation, strategic studies and decision-making, as well as analyses and benchmarking.",
+	},
+	{
+		title: "Web development",
+		body: "With extensive experience in modern web development, I have a deep understanding of the web project lifecycle. I can quickly integrate and contribute effectively to your development stack.",
+	},
+	{
+		title: "Communication skills",
+		body: "As a clear communicator, I bridge the gap between development and management teams. I have managed various digital and web projects, maintaining regular contact with clients and key partners.",
+	},
+	{
+		title: "Project management",
+		body: "With experience managing projects from start to finish, I effectively define priorities, assess risks, and manage costs and deadlines.",
+	},
+];
 ---
 
-<BaseLayout title=`${pageTitle} | Gwenaël Magnenat`>
-	<div class="flex flex-col">
-		<h1 class="~text-4xl/5xl md:~text-5xl/6xl uppercase mt-10">{pageTitle}</h1>
-    <p class="w-full ~text-lg/2xl max-w-[50ch] mt-8">I am a {identity.occupation} based in {identity.country}, dedicated to building web applications that are accessible to all. With a wide range of experience in various web technologies, I am a team player and excellent communicator.</p>
-	</div>
+<BaseLayout title=`${pageTitle} | Gwenaël Magnenat` description={pageDescription} bare={true}>
+	<main id="main-content" tabindex="-1">
+		<div class="page-wrap">
+			<!-- PAGE HEADER -->
+			<header class="page-header">
+				<p class="eyebrow">About</p>
+				<h1 class="page-title">Gwenaël Magnenat</h1>
+				<p class="page-subtitle">Web Developer &amp; Accessibility Specialist · Lausanne, Switzerland</p>
+			</header>
 
-	<section class="mt-12">
-		<h2 class="text-2xl font-bold ">What can I bring on the table?</h2>
-		<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-			<div class="flex flex-col">
-				<h3>Technical skills</h3>
-				<p>I can assist with various technical aspects of your organization, including IT tool implementation, strategic studies and decision-making, as well as analyses and benchmarking.</p>
-			</div>
-			<div class="flex flex-col">
-				<h3>Web development</h3>
-				<p>With extensive experience in modern web development, I have a deep understanding of the web project lifecycle. I can quickly integrate and contribute effectively to your development stack.</p>
-			</div>
-			<div class="flex flex-col">
-				<h3>Communication skills</h3>
-				<p>As a clear communicator, I bridge the gap between development and management teams. I have managed various digital and web projects, maintaining regular contact with clients and key partners.</p>
-			</div>
-			<div class="flex flex-col">
-				<h3>Project management skills</h3>
-				<p>With experience managing projects from start to finish, I effectively define priorities, assess risks, and manage costs and deadlines.</p>
-			</div>
-			<div class="flex flex-col">
-				<h3>A passion for accessibility</h3>
-				<p>Digital accessibility is essential and is a central focus of my work. I can help you develop a strategy for change and prepare your organization accordingly.</p>
-			</div>
-		</div>
-	</section>
+			<p class="lead">
+				I build web applications that are accessible to all. With a wide range of experience
+				across web technologies, I am a team player and a clear communicator — as comfortable
+				writing specs developers can act on as I am integrating into an existing stack.
+			</p>
 
-	<section class="mt-12">
-		<h2 class="text-2xl font-bold ">Curious to know more about me?</h2>
-		<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-			<div class="flex flex-col">
-				
-				<p>You can find links to my social media profiles in the footer of this page.</p>
-			</div>
-			<div class="flex flex-col">
-				
-				<p>If you prefer a form there is one just bellow.</p> 
-				<a class="bg-gm-blue hover:text-gm-dark/70 transition-transform hover:-rotate-2 mt-4 py-1 px-1.5 text-gm-dark font-bold rounded-md max-w-max" href="https://tally.so/r/w5L5RN" target="_blank">contact me<span class="sr-only">the link will open in a new tab</span></a>
-			</div>
+			<!-- WHAT I BRING -->
+			<section aria-labelledby="bring-heading" class="section">
+				<h2 id="bring-heading" class="section-heading">What I can bring</h2>
+				<div class="skill-grid">
+					{
+						skills.map((s) => (
+							<div class="skill-card">
+								<h3 class="skill-title">{s.title}</h3>
+								<p class="skill-body">{s.body}</p>
+							</div>
+						))
+					}
+				</div>
+			</section>
+
+			<!-- ON ACCESSIBILITY -->
+			<aside aria-label="A note on accessibility focus" class="a11y-note">
+				<p class="a11y-note-title">On accessibility</p>
+				<p class="a11y-note-body">
+					Digital accessibility is a central focus of my work — writing specs developers can
+					act on, auditing products with real assistive technology rather than scanners alone,
+					and advocating for it as a ship blocker rather than an afterthought. I can help you
+					build a strategy for change and prepare your organization accordingly. I write about
+					this three times a week on LinkedIn and keep a public blog on the topic.
+				</p>
+				<div class="a11y-note-links">
+					<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" class="note-link">LinkedIn writing ↗</a>
+					<a href="/posts" class="note-link">Blog →</a>
+				</div>
+			</aside>
+
+			<!-- CONTACT -->
+			<section aria-labelledby="contact-heading" class="section">
+				<h2 id="contact-heading" class="section-heading">Curious to know more?</h2>
+				<p class="lead" style="margin-bottom: 1.75rem;">
+					Social links are in the footer. If you prefer a form, there's one below.
+				</p>
+				<a href="https://tally.so/r/w5L5RN" target="_blank" rel="noopener noreferrer" class="contact-btn">
+					Contact me<span class="sr-only"> (opens in a new tab)</span> ↗
+				</a>
+			</section>
 		</div>
-	</section>
+	</main>
 </BaseLayout>
+
+<style>
+	.page-wrap { max-width: 1200px; margin: 0 auto; padding: 120px 2rem 80px; }
+	.page-header { margin-bottom: 3rem; }
+	.eyebrow {
+		font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+		text-transform: uppercase; color: #888; margin-bottom: 1rem;
+	}
+	.page-title {
+		font-size: clamp(36px, 5vw, 64px); font-weight: 700; letter-spacing: -0.04em;
+		line-height: 1; color: #fff; margin-bottom: 0.75rem;
+	}
+	.page-subtitle { font-size: 18px; color: #888; font-weight: 400; }
+
+	.lead {
+		font-size: 20px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.55;
+		color: #d0d0d0; max-width: 720px; margin-bottom: 5rem;
+	}
+
+	.section { margin-bottom: 5rem; }
+	.section-heading {
+		font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+		text-transform: uppercase; color: #888; margin-bottom: 2.5rem;
+	}
+
+	.skill-grid {
+		display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1px; background: #1e1e1e; border: 1px solid #1e1e1e;
+	}
+	.skill-card { background: #0f0f0f; padding: 1.75rem; }
+	.skill-title { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: #f0f0f0; margin-bottom: 0.75rem; }
+	.skill-body { font-size: 15px; color: #888; line-height: 1.7; }
+
+	.a11y-note {
+		margin-bottom: 5rem; padding: 2rem 2.5rem;
+		border-left: 2px solid #1860e0; background: rgba(24,96,224,0.06);
+	}
+	.a11y-note-title { font-size: 15px; font-weight: 600; color: #f0f0f0; margin-bottom: 0.5rem; }
+	.a11y-note-body { font-size: 15px; color: #888; line-height: 1.75; max-width: 680px; }
+	.a11y-note-links { display: flex; gap: 1rem; margin-top: 1.25rem; flex-wrap: wrap; }
+	.note-link { font-size: 13px; font-weight: 600; color: #5b8ef5; text-decoration: none; transition: color 0.15s; }
+	.note-link:hover { color: #7aaeff; }
+
+	.contact-btn {
+		display: inline-flex; align-items: center; gap: 0.4rem;
+		font-size: 15px; font-weight: 600; color: #fff; text-decoration: none;
+		background: #1860e0; padding: 11px 26px; border-radius: 100px; transition: background 0.15s;
+	}
+	.contact-btn:hover { background: #2472f5; color: #fff; }
+</style>

@@ -1,0 +1,34 @@
+---
+// Shared dark chrome footer ported from the design. Rendered by BaseLayout
+// in `bare` mode alongside SiteNav.
+---
+<footer class="site-footer">
+	<div class="site-footer-inner">
+		<div class="site-footer-brand">
+			<a href="/" aria-label="gm — home" class="footer-logo">gm</a>
+			<p style="font-size: 13px; color: #888;">© 2025 Gwenaël Magnenat</p>
+		</div>
+		<nav aria-label="Social links" class="site-footer-social">
+			<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" class="footer-li">LinkedIn ↗</a>
+			<a href="https://github.com/gmagnenat" target="_blank" rel="noopener noreferrer" class="footer-social">GitHub</a>
+			<a href="https://instagram.com/gmagnenat" target="_blank" rel="noopener noreferrer" class="footer-social">Instagram</a>
+			<a href="https://x.com/magnenatg" target="_blank" rel="noopener noreferrer" class="footer-social">X</a>
+			<a href="https://tally.so/r/w5L5RN" target="_blank" rel="noopener noreferrer" class="footer-social">Contact</a>
+		</nav>
+	</div>
+</footer>
+
+<style>
+	.site-footer { border-top: 1px solid #1e1e1e; padding: 2.5rem 2rem; margin-top: 4rem; }
+	.site-footer-inner {
+		max-width: 1200px; margin: 0 auto; display: flex; align-items: center;
+		justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;
+	}
+	.site-footer-brand { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+	.footer-logo { font-size: 17px; font-weight: 700; letter-spacing: -0.03em; text-decoration: none; color: #f0f0f0; }
+	.site-footer-social { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+	.footer-social { font-size: 14px; text-decoration: none; color: #888; transition: color 0.15s; }
+	.footer-social:hover { color: #ccc; }
+	.footer-li { font-size: 14px; font-weight: 600; text-decoration: none; color: #f0f0f0; transition: color 0.15s; }
+	.footer-li:hover { color: #fff; }
+</style>

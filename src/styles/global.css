@@ -9,6 +9,11 @@
   @apply my-8
 }
 
+/* Global focus + main styling for the dark design chrome (SiteNav/SiteFooter). */
+main:focus { outline: none; }
+a:focus-visible { outline: 2px solid #1860e0; outline-offset: 3px; border-radius: 2px; }
+button:focus-visible { outline: 2px solid #1860e0; outline-offset: 3px; }
+
 .post__content h2, h3 {
   @apply font-semibold my-2 mt-4 text-slate-200;
 }

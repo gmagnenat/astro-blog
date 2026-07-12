@@ -1,0 +1,173 @@
+---
+// Shared dark chrome nav ported from the design (Homepage.dc.html / CV.dc.html).
+// Rendered by BaseLayout in `bare` mode so every page gets identical chrome.
+const { current = "" } = Astro.props;
+const links = [
+	{ href: "/about", label: "About" },
+	{ href: "/cv", label: "CV" },
+];
+const isCurrent = (href: string) => current === href || current === href + "/";
+---
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+	<nav aria-label="Main navigation" class="site-nav">
+		<a href="/" aria-label="gm — home" class="nav-logo">gm</a>
+		<ul role="list" class="desktop-nav">
+			{
+				links.map((l) => (
+					<li>
+						<a
+							href={l.href}
+							class="nav-link"
+							aria-current={isCurrent(l.href) ? "page" : undefined}
+							style={isCurrent(l.href) ? "color:#f0f0f0;" : undefined}
+						>
+							{l.label}
+						</a>
+					</li>
+				))
+			}
+			<li><a href="/posts" class="nav-blog" aria-current={isCurrent("/posts") ? "page" : undefined}>Blog</a></li>
+		</ul>
+		<button
+			class="hamburger-btn"
+			id="hamburger-btn"
+			aria-expanded="false"
+			aria-controls="mobile-nav-menu"
+			aria-label="Open navigation"
+		>
+			<div aria-hidden="true" class="hb-bar hb-bar-1"></div>
+			<div aria-hidden="true" class="hb-bar hb-bar-2"></div>
+			<div aria-hidden="true" class="hb-bar hb-bar-3"></div>
+		</button>
+	</nav>
+</header>
+
+<div
+	id="mobile-nav-menu"
+	role="dialog"
+	aria-modal="true"
+	aria-label="Navigation menu"
+	class="mobile-overlay"
+>
+	<div class="mobile-overlay-top">
+		<a href="/" aria-label="gm — home" class="nav-logo">gm</a>
+		<button id="mobile-close-btn" aria-label="Close navigation" class="mobile-close">✕</button>
+	</div>
+	<nav aria-label="Mobile navigation" class="mobile-nav">
+		<a href="/about" class="mobile-link" style="border-bottom: 1px solid #1e1e1e;">About</a>
+		<a href="/cv" class="mobile-link" style="border-bottom: 1px solid #1e1e1e;">CV</a>
+		<a href="/posts" class="mobile-link">Blog</a>
+	</nav>
+	<div class="mobile-social">
+		<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" style="font-size: 14px; font-weight: 600; color: #f0f0f0; text-decoration: none;">LinkedIn ↗</a>
+		<a href="https://github.com/gmagnenat" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">GitHub</a>
+		<a href="https://x.com/magnenatg" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">X</a>
+		<a href="https://tally.so/r/w5L5RN" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">Contact</a>
+	</div>
+</div>
+
+<style>
+	.skip-link {
+		position: absolute; top: -200%; left: 1rem; z-index: 9999;
+		background: #1860e0; color: #fff; padding: 0.5rem 1.25rem;
+		font-size: 15px; font-weight: 600; border-radius: 0 0 6px 6px; text-decoration: none;
+	}
+	.skip-link:focus { top: 0; outline: 2px solid #fff; outline-offset: 2px; }
+
+	.site-header {
+		position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+		background: rgba(15,15,15,0.94);
+		backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+		border-bottom: 1px solid #1c1c1c;
+	}
+	.site-nav {
+		max-width: 1200px; margin: 0 auto; padding: 0 2rem; height: 64px;
+		display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+	}
+	.nav-logo {
+		font-size: 18px; font-weight: 700; letter-spacing: -0.03em;
+		text-decoration: none; color: #f0f0f0; flex-shrink: 0;
+	}
+	.desktop-nav { display: flex; align-items: center; gap: 2rem; list-style: none; flex-wrap: wrap; margin: 0; padding: 0; }
+	.nav-link { font-size: 15px; font-weight: 500; text-decoration: none; color: #999; transition: color 0.15s; }
+	.nav-link:hover { color: #f0f0f0; }
+	.nav-blog {
+		font-size: 15px; font-weight: 600; text-decoration: none; color: #f0f0f0;
+		border: 1.5px solid rgba(240,240,240,0.45); padding: 7px 20px;
+		border-radius: 100px; transition: background 0.15s, color 0.15s, border-color 0.15s;
+	}
+	.nav-blog:hover { background: #f0f0f0; color: #0f0f0f; border-color: #f0f0f0; }
+
+	.hamburger-btn {
+		display: none; background: none; border: none; cursor: pointer;
+		padding: 10px 8px; color: #f0f0f0; flex-direction: column; gap: 5px;
+		align-items: center; justify-content: center;
+	}
+	.hamburger-btn:focus-visible { outline: 2px solid #1860e0; outline-offset: 3px; border-radius: 4px; }
+	.hb-bar { width: 22px; height: 2px; background: #f0f0f0; display: block; transition: transform 0.2s, opacity 0.2s; }
+	.hamburger-btn[aria-expanded="true"] .hb-bar-1 { transform: rotate(45deg) translate(4px, 4px); }
+	.hamburger-btn[aria-expanded="true"] .hb-bar-2 { opacity: 0; }
+	.hamburger-btn[aria-expanded="true"] .hb-bar-3 { transform: rotate(-45deg) translate(4px, -4px); }
+
+	.mobile-overlay {
+		display: none; position: fixed; inset: 0; z-index: 200;
+		background: #0f0f0f; flex-direction: column; padding: 0 2rem;
+	}
+	.mobile-overlay.is-open { display: flex; }
+	.mobile-overlay-top {
+		height: 64px; display: flex; align-items: center; justify-content: space-between;
+		border-bottom: 1px solid #1e1e1e; flex-shrink: 0;
+	}
+	.mobile-close {
+		background: none; border: none; cursor: pointer; color: #f0f0f0;
+		font-size: 22px; padding: 8px; line-height: 1; font-family: inherit;
+	}
+	.mobile-nav { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 0; }
+	.mobile-link {
+		font-size: 38px; font-weight: 700; letter-spacing: -0.03em; color: #f0f0f0;
+		text-decoration: none; padding: 1rem 0; transition: color 0.15s;
+	}
+	.mobile-link:hover { color: #555; }
+	.mobile-social {
+		padding: 1.5rem 0; display: flex; gap: 1.5rem; flex-wrap: wrap;
+		border-top: 1px solid #1e1e1e; flex-shrink: 0;
+	}
+
+	@media (max-width: 680px) {
+		.hamburger-btn { display: flex; }
+		.desktop-nav { display: none; }
+	}
+</style>
+
+<script>
+	const hamburger = document.getElementById("hamburger-btn");
+	const overlay = document.getElementById("mobile-nav-menu");
+	const closeBtn = document.getElementById("mobile-close-btn");
+
+	function openMenu() {
+		overlay?.classList.add("is-open");
+		hamburger?.setAttribute("aria-expanded", "true");
+		hamburger?.setAttribute("aria-label", "Close navigation");
+		document.body.style.overflow = "hidden";
+		overlay?.querySelector("a")?.focus();
+	}
+	function closeMenu() {
+		overlay?.classList.remove("is-open");
+		hamburger?.setAttribute("aria-expanded", "false");
+		hamburger?.setAttribute("aria-label", "Open navigation");
+		document.body.style.overflow = "";
+		hamburger?.focus();
+	}
+
+	hamburger?.addEventListener("click", () =>
+		overlay?.classList.contains("is-open") ? closeMenu() : openMenu()
+	);
+	closeBtn?.addEventListener("click", closeMenu);
+	overlay?.querySelectorAll("nav a").forEach((a) => a.addEventListener("click", closeMenu));
+	document.addEventListener("keydown", (e) => {
+		if (e.key === "Escape" && overlay?.classList.contains("is-open")) closeMenu();
+	});
+</script>
