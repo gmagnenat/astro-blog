@@ -6,14 +6,12 @@ featured: true
 draft: false
 tags: ["solution architecture", "e-commerce", "gatsbyjs", "sanity", "nuxtjs", "laravel", "heroku", "wordpress development", "project management", "git"]
 ---
-Strongly involved in entreprise internal solution implementation for project and time management using Monday.com.
+Helped roll out Monday.com company-wide as the shared system for project and time management.
 
-Digital project management with challenging budget and short deadlines.
+Built client websites in WordPress using the Oxygen and Bricks builders.
 
-Development of client websites using WordPress with Oxygen and Bricks as theme builders.
+Developed fast internal tools with a Gatsby front-end on a Sanity headless CMS.
 
-Development of performant internal projects using Gatsby for the Frontend and Sanity as a headless CMS.
+Maintained and extended the agency's own site — Nuxt.js and Laravel on Heroku, versioned with Git.
 
-Maintenance and development of the agency website. Nuxtjs, Laravel, heroku, git.
-
-Mentoring of the team to strengthen skills and build strong team work processes.
+Ran digital projects to tight budgets and deadlines, and mentored the team on skills and shared process.

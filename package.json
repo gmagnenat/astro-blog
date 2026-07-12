@@ -5,7 +5,15 @@
   "engines": {
     "node": ">=22.12.0"
   },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged"
+  },
+  "lint-staged": {
+    "*.astro": "eslint --max-warnings 0"
+  },
   "scripts": {
+    "prepare": "simple-git-hooks",
+    "lint": "eslint \"src/**/*.astro\"",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
@@ -28,11 +36,18 @@
     "sharp": "^0.33.4"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
     "@playwright/test": "^1.61.1",
     "@tailwindcss/vite": "^4.3.2",
     "@types/node": "^26.1.0",
+    "eslint": "^10.7.0",
+    "eslint-plugin-astro": "^2.1.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "lint-staged": "^17.0.8",
+    "simple-git-hooks": "^2.13.1",
     "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3",
+    "typescript-eslint": "^8.63.0",
     "vitest": "^4.1.9"
   }
 }

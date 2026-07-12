@@ -6,10 +6,10 @@ featured: true
 draft: false
 tags: ["contract negotiation", "tour organisation", "project management", "people skills", "music production"]
 ---
-Several music projects with international performances and regular releases on international music labels
+Released music on international labels and performed internationally.
 
-Tour organisation and financing in South America and Asia
+Organised and financed tours across South America and Asia.
 
-Music composition for short movies premiered in internation film festivals
+Composed scores for short films that premiered at international festivals.
 
-FOH Live sound engineering in concert venues + touring with several artists in Switzerland and abroad.
+Ran front-of-house live sound in concert venues, touring with several artists in Switzerland and abroad.

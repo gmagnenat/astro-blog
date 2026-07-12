@@ -6,12 +6,10 @@ featured: true
 draft: false
 tags: ["responsive web design", "mobile development", "linux servers management", "ansible", "technical support", "ruby on rails"]
 ---
-Web and mobile development
+Built web and mobile applications for the institute.
 
-In charge of several Linux servers for hosting the institute's projects
+Administered the Linux servers hosting the institute's projects — automating deployments, updates and monitoring with Ansible.
 
-Task automation, deployment procedures, monitoring
+Provided level-2 support and managed releases for a web application with 20,000+ users.
 
-Level 2 support and managing application update for a +20k users web application
-
-Stock management and student coaching in audio-visual courses
+Coached students in audio-visual courses and handled equipment stock.
