@@ -115,14 +115,14 @@ for (let i = 0; i < num; i++) {
 ```
 
 ## Key concepts
-### Radians and Degres
+### Radians and degrees
 While angles can be measured in degrees (e.g., 45 degrees), trigonometry functions typically work with radians. Radians are a unit of angular measurement based on the ratio of the arc length to the circle's radius. There are 2π radians in a full circle (360 degrees). The `math.degToRad()` function in canvasSketch helps us convert degrees to radians for compatibility with the trigonometric functions.
 
 ### Calculating the angle
 Inside the loop, we calculate the angle (`angle`) for each rectangle's placement. The formula is `angle = math.degToRad(360 / num) * i`, where `i` represents the current iteration number (0 to num-1). This essentially divides the full circle (360 degrees) into `num` equal angles in radians.
 
-### Leveraging Sine and Cosine
-Now comes the magic! We use the calculated angle (`angle`) with the sine (`sin(angle)`) and cosine (`cos(angle)`) functions to determine the x and y coordinates of the rectangle's center. These coordinates are relative to the center of the canvas (which we might have stored in variables like `cx` and `cy`).
+### Sine and cosine
+We use the calculated angle (`angle`) with the sine (`sin(angle)`) and cosine (`cos(angle)`) functions to determine the x and y coordinates of the rectangle's center. These coordinates are relative to the center of the canvas (which we might have stored in variables like `cx` and `cy`).
 - **X-Coordinate**: We calculate the x-coordinate by multiplying the radius with the cosine of the angle (`radius * cos(angle)`). As the angle increases, the cosine value oscillates between 1 (positive x-axis) and -1 (negative x-axis), creating the horizontal movement of the rectangles in the spiral.
-- **Y-Coordinat**e**: Similarly, the y-coordinate is calculated by multiplying the radius with the sine of the angle (`radius * sin(angle)`). The sine value oscillates between 1 (positive y-axis) and -1 (negative y-axis), resulting in the vertical movement of the rectangles, forming the spiral pattern.
+- **Y-Coordinate**: Similarly, the y-coordinate is calculated by multiplying the radius with the sine of the angle (`radius * sin(angle)`). The sine value oscillates between 1 (positive y-axis) and -1 (negative y-axis), resulting in the vertical movement of the rectangles, forming the spiral pattern.
 
