@@ -1,6 +1,6 @@
 ---
-title: 25% of the World Struggles to Access the Web
-description: "Discover how 25% of the world's population faces web accessibility barriers and learn practical steps to enhance your website's usability. Improve engagement, boost SEO, and ensure legal compliance with our comprehensive guide on the accessibility steps you need to focus on."
+title: One in Six People Has a Disability. Can They Use Your Website?
+description: "About 1.3 billion people live with a significant disability. What gets in their way online, why it matters for your site, and where to start fixing it."
 publishedDate: 2024-07-18
 featured: true
 draft: false
@@ -10,51 +10,46 @@ postimage:
 postSeoImage: '../../assets/breaking-barrier/jr-korpa-SFT9G3pAxLY-unsplash.jpg'
 tags: ["accessibility"]
 ---
-As the European Accessibility Act (EAA) implementation nears, it's essential to ask: Is your website truly accessible to everyone?
+The World Health Organization estimates that 1.3 billion people, about one in six, live with a significant disability ([WHO, 2023](https://www.who.int/news-room/fact-sheets/detail/disability-and-health)). Add everyone with a temporary injury, an ageing pair of eyes or a phone in bright sunlight, and the number of people who struggle with a badly built website gets a lot bigger.
 
-Recent studies reveal that nearly 25% of the world’s population faces barriers when accessing the web—a sharp rise from the 15% reported by WHO in 2011. This issue is more pressing than ever, affecting millions of individuals daily.
+In the EU, the European Accessibility Act has applied since 28 June 2025. It covers a lot of everyday digital services, e-commerce and banking among them. So the real question is how far your site is from where it needs to be.
 
-## Understanding Web Accessibility
+## What gets in the way
 
-Web accessibility refers to the inclusive practice of ensuring there are no barriers that prevent interaction with, or access to, websites by people with physical disabilities, situational disabilities, and socio-economic restrictions on bandwidth and speed. Here's a deeper look into the common barriers:
+Web accessibility means people can use your site whatever their abilities, device or connection. The most common barriers look like this.
 
-- **Visual Impairments**: Users with visual impairments rely on screen readers, high-contrast settings, or other tools to modify the layout and text. For instance, my friend who is visually impaired often struggles with websites that aren't optimized for screen readers, making simple tasks like reading articles or making purchases exceedingly difficult.
+### Vision
 
-- **Hearing Impairments**: Multimedia content should include captions and transcripts to be accessible to users with hearing impairments. Without these features, critical information remains out of reach for many.
+Blind and low-vision users rely on screen readers, zoom or high-contrast settings. Images without text alternatives, unlabelled buttons and layouts that break at 200% zoom shut them out quickly. A friend of mine who is visually impaired regularly gives up on online shops for exactly these reasons.
 
-- **Motor Disabilities**: Websites need to be navigable using keyboards or other assistive devices for users who cannot use a mouse. Ensuring button sizes and clickable areas are adequate can significantly improve usability.
+### Hearing
 
-- **Cognitive Challenges**: Clear and simple navigation and content structure are crucial. Users with cognitive disabilities benefit from straightforward language and intuitive layouts.
+Videos without captions or transcripts leave deaf and hard-of-hearing users with half the information, or none.
 
-- **Environmental Factors**: Screens should be readable in various lighting conditions, such as bright sunlight, to accommodate all users effectively.
+### Motor
 
-## The Impact of Ignoring Accessibility
+Some people can't use a mouse. They need everything to work with a keyboard or a switch, and targets big enough to hit.
 
-Ignoring these needs can lead to several negative outcomes:
-- **User Frustration**: Inaccessible content leaves many users out, causing frustration and alienation.
-- **Decreased Engagement**: If users cannot interact with your site, they’ll disengage, leading to lower traffic and reduced time spent on your pages.
-- **Lost Business**: Poor web accessibility can turn potential customers away, impacting your bottom line.
+### Cognitive
 
-## The Benefits of Prioritizing Web Accessibility
+Clear structure, plain language and predictable navigation help everyone, and they make the difference for people with cognitive disabilities.
 
-On the other hand, making your website accessible brings numerous benefits:
-- **Enhanced Usability**: All users, not just those with disabilities, enjoy a better experience. Accessibility features often improve overall site navigation and usability.
-- **Boosted SEO**: Accessible sites are better indexed by search engines due to improved semantic structure and readable content, leading to higher search rankings.
-- **Social Responsibility**: Demonstrating care for every user shows your commitment to social responsibility and inclusivity.
-- **Legal Compliance**: Adhering to accessibility standards reduces the risk of litigation, ensuring you comply with laws and regulations.
+### Context
 
-## Steps to Improve Web Accessibility
+Glare, a cracked screen or a slow connection turn small design choices into real obstacles.
 
-With the EAA deadline fast approaching, there's no better time to act. Here are some steps to enhance your website's accessibility:
+## What it costs to ignore it
 
-1. **Audit Your Current Accessibility**: Use tools like WAVE or Lighthouse to evaluate your site's current accessibility status.
-2. **Implement Changes**: Based on the audit results, make necessary adjustments such as adding alt text to images, ensuring keyboard navigability, and providing transcripts for multimedia content.
-3. **Test with Users**: Conduct usability tests with individuals who have disabilities to gain insights into real-world accessibility issues.
-4. **Stay Updated**: Keep abreast of accessibility standards and best practices to continuously improve your site.
+People who can't use your site leave. You lose the sale, the sign-up or the reader, and you rarely find out why, because most of them won't write in to complain. With the EAA in force, there's now legal risk on top of that.
 
-## Conclusion
+The upside is that most accessibility fixes make the site better for everyone. Proper headings and semantic HTML also help search engines understand your pages, which is a nice side effect.
 
-By prioritizing web accessibility, you not only foster an inclusive digital environment but also unlock the full potential of your online presence. This commitment to accessibility can lead to better user experiences, higher engagement, and greater business success.
+## Where to start
 
-Have you or someone you know been impacted by web accessibility issues? Share your stories in the comments below—I’d love to learn how we can make the web more accessible for everyone.
+1. Run an automated scan, but don't stop there. Tools like axe, WAVE or Lighthouse find the obvious problems in minutes. They only catch about 30% of them, so a clean report is only a first step.
+2. Test it yourself. Put the mouse away and go through your main pages with the keyboard. Then turn on a screen reader (VoiceOver on a Mac, NVDA on Windows) and try to complete a real task, like buying something or filling in the contact form.
+3. Fix what blocks people first. A checkout you can't finish matters more than a slightly low contrast ratio in the footer.
+4. Test with disabled users. Nothing replaces watching someone who uses assistive technology every day try your site.
+5. Write it into the spec. Accessibility is cheapest when it's in the requirements from day one.
 
+If you've run into a site that shut you out, or you're working through this on your own product, I'd like to hear about it. You can reach me on [LinkedIn](https://linkedin.com/in/gmagnenat).

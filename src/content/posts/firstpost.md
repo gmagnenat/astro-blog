@@ -1,6 +1,6 @@
 ---
 title: Drawing a Dynamic Grid with Canvas and JavaScript
-description: 'Learn how to create a dynamic grid of squares with interactive elements using HTML canvas and JavaScript. Explore customization options and unleash your creativity for engaging web graphics.'
+description: 'Draw a 5x5 grid of squares on an HTML canvas with JavaScript, with smaller squares appearing at random inside some of them.'
 publishedDate: 2024-05-22
 featured: true
 draft: false
@@ -10,7 +10,7 @@ postimage:
 tags: ["code", "javascript", "learning", "canvas"]
 postSeoImage: '../../assets/firstpost/firstpostimage.jpg'
 ---
-Imagine you want to create a visually engaging grid layout on your webpage. The canvas element, combined with JavaScript, allows you to achieve this and more. We'll build a script that generates a 5x5 grid of squares, with the option of having smaller squares appear randomly within some of the larger ones.
+This is a small canvas exercise: a script that draws a 5x5 grid of squares, where some squares randomly get a smaller square inside them. It only needs a canvas element and a few lines of JavaScript.
 
 ## Setting Up the Canvas
 First, you'll need an HTML canvas element in your document:
@@ -65,13 +65,13 @@ for (let i = 0; i < 5; i++) {
 9. The inner loop includes an if statement that uses Math.random(). This function generates a random number between 0 and 1. If the number is greater than 0.5, another square with a slightly smaller size and offset position is drawn inside the larger square.
 
 ## Customizations
-Play around with the code and experiment with different values for width, height, gap, and the logic for drawing the inner squares. You can also explore different colors and fill styles (using context.fillStyle) to create more visually appealing variations.
+Change the width, height and gap values, or the rule that decides when an inner square appears. Adding colour with `context.fillStyle` gives quite different results from the same grid.
 
 ## Conclusion
-This post has introduced a basic example of using canvas and JavaScript to create a dynamic grid layout. With a bit of creativity, you can leverage this technique to generate various interactive graphics and enhance your web projects.
+A grid, two loops and one random check are enough to get something that looks different every time you reload.
 
 ## Experiments
-A few snapshot of my experiments using the concepts learned here. Shape, position, lineWidth, random value
+A few snapshots of my experiments with the same ideas, playing with shape, position, line width and random values.
 
 
 
