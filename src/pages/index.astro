@@ -26,7 +26,7 @@ const blogItems = blogPosts
 			url: `/post/${p.id}`,
 			external: false,
 			linkText: "Read post",
-			ariaLabel: `Read ${p.data.title} on the blog`,
+			lang: undefined,
 		};
 	});
 
@@ -44,7 +44,8 @@ const linkedInItems = linkedInPosts
 	url: p.data.url,
 	external: true,
 	linkText: "Read on LinkedIn",
-	ariaLabel: "Read this LinkedIn post, opens in new tab",
+	// LinkedIn posts are written in French (WCAG 3.1.2 Language of Parts).
+	lang: "fr",
 }));
 
 const writing = [...linkedInItems, ...blogItems];
@@ -140,12 +141,16 @@ const writing = [...linkedInItems, ...blogItems];
 									<span class={post.category === "accessibility" ? "tag tag-a11y" : "tag tag-creative"}>{post.tagLabel}</span>
 									<span style="font-size: 12px; color: #888; font-weight: 500; white-space: nowrap;">{post.source} · {post.date}</span>
 								</div>
-								<h3 style="font-size: 17px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.4; color: #f0f0f0;">{post.title}</h3>
-								<p class="card-excerpt" style="font-size: 14px; color: #888; line-height: 1.75; flex: 1;">{post.excerpt}</p>
+								<h3 lang={post.lang} style="font-size: 17px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.4; color: #f0f0f0;">{post.title}</h3>
+								<p lang={post.lang} class="card-excerpt" style="font-size: 14px; color: #888; line-height: 1.75; flex: 1;">{post.excerpt}</p>
 								{post.external ? (
-									<a href={post.url} target="_blank" rel="noopener noreferrer" class="post-link" aria-label={post.ariaLabel}>{post.linkText} →</a>
+									<a href={post.url} target="_blank" rel="noopener noreferrer" class="post-link">
+										{post.linkText}<span class="sr-only">: <span lang={post.lang}>{post.title}</span> (opens in a new tab)</span> <span aria-hidden="true">→</span>
+									</a>
 								) : (
-									<a href={post.url} class="post-link" aria-label={post.ariaLabel}>{post.linkText} →</a>
+									<a href={post.url} class="post-link">
+										{post.linkText}<span class="sr-only">: {post.title}</span> <span aria-hidden="true">→</span>
+									</a>
 								)}
 							</article>
 						))

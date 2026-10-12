@@ -25,7 +25,6 @@ const posts = await Promise.all(
 			title: p.data.title,
 			excerpt: p.data.description ?? "",
 			url: `/post/${p.id}`,
-			ariaLabel: `Read: ${p.data.title}`,
 			featured: i === 0,
 		};
 	})
@@ -61,7 +60,7 @@ const featured = posts[0];
 		{
 			featured && (
 				<div id="featured-wrap" class="page-wrap page-wrap--flush">
-					<a href={featured.url} class="featured-link" aria-label={featured.ariaLabel}>
+					<article class="featured-card">
 						<div class="featured">
 							<div>
 								<div class="featured-meta">
@@ -70,14 +69,14 @@ const featured = posts[0];
 									</span>
 									<span class="meta-text">{featured.readTime} · {featured.date}</span>
 								</div>
-								<h2 class="featured-title">{featured.title}</h2>
+								<h2 class="featured-title"><a href={featured.url} class="featured-anchor">{featured.title}</a></h2>
 							</div>
 							<div class="featured-body">
 								<p class="featured-excerpt">{featured.excerpt}</p>
-								<span class="featured-read">Read →</span>
+								<span aria-hidden="true" class="featured-read">Read →</span>
 							</div>
 						</div>
-					</a>
+					</article>
 				</div>
 			)
 		}
@@ -96,7 +95,7 @@ const featured = posts[0];
 							</div>
 							<h2 class="post-title">{post.title}</h2>
 							<p class="post-excerpt">{post.excerpt}</p>
-							<a href={post.url} class="read-link" aria-label={post.ariaLabel}>Read post →</a>
+							<a href={post.url} class="read-link">Read post<span class="sr-only">: {post.title}</span> <span aria-hidden="true">→</span></a>
 						</article>
 					))
 				}
@@ -157,9 +156,14 @@ const featured = posts[0];
 	.meta-text { font-size: 12px; color: #888; white-space: nowrap; }
 
 	/* Featured */
-	.featured-link { text-decoration: none; color: inherit; display: block; }
-	.featured-link:hover .featured-title { color: #fff; }
-	.featured-link:focus-visible { outline: 2px solid #1860e0; outline-offset: 4px; border-radius: 2px; }
+	/* Whole card is clickable via the title link's ::after, but the link's
+	   accessible name stays the title alone (WCAG 2.4.4 / 2.5.3). */
+	.featured-card { position: relative; display: block; }
+	.featured-card:hover .featured-title { color: #fff; }
+	.featured-card:has(.featured-anchor:focus-visible) { outline: 2px solid #1860e0; outline-offset: 4px; border-radius: 2px; }
+	.featured-anchor { color: inherit; text-decoration: none; }
+	.featured-anchor:focus-visible { outline: none; }
+	.featured-anchor::after { content: ""; position: absolute; inset: 0; }
 	.featured {
 		padding: 3.5rem 0; border-bottom: 1px solid #1e1e1e;
 		display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
