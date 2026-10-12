@@ -63,10 +63,10 @@ const isCurrent = (href: string) => current === href || current === href + "/";
 		}
 	</nav>
 	<div class="mobile-social">
-		<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" style="font-size: 14px; font-weight: 600; color: #f0f0f0; text-decoration: none;">LinkedIn ↗</a>
-		<a href="https://github.com/gmagnenat" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">GitHub</a>
-		<a href="https://x.com/magnenatg" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">X</a>
-		<a href="https://tally.so/r/w5L5RN" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">Contact</a>
+		<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" style="font-size: 14px; font-weight: 600; color: #f0f0f0; text-decoration: none;">LinkedIn<span class="sr-only"> (opens in a new tab)</span> <span aria-hidden="true">↗</span></a>
+		<a href="https://github.com/gmagnenat" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+		<a href="https://x.com/magnenatg" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">X<span class="sr-only"> (opens in a new tab)</span></a>
+		<a href="https://tally.so/r/w5L5RN" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">Contact<span class="sr-only"> (opens in a new tab)</span></a>
 	</div>
 </dialog>
 
@@ -133,7 +133,7 @@ const isCurrent = (href: string) => current === href || current === href + "/";
 		text-decoration: none; padding: 1rem 0; transition: color 0.15s;
 	}
 	.mobile-link:not(:last-child) { border-bottom: 1px solid #1e1e1e; }
-	.mobile-link:hover { color: #555; }
+	.mobile-link:hover { color: #999; }
 	.mobile-social {
 		padding: 1.5rem 0; display: flex; gap: 1.5rem; flex-wrap: wrap;
 		border-top: 1px solid #1e1e1e; flex-shrink: 0;

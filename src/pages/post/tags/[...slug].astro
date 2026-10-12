@@ -55,7 +55,7 @@ const count = posts.length;
 <BaseLayout title={`Posts tagged ${slug} | Gwenaël Magnenat`} description={`All posts tagged ${slug}`}>
 	<main id="main-content" tabindex="-1">
 		<div class="page-wrap">
-			<a href="/posts" class="back-link">← Blog</a>
+			<a href="/posts" class="back-link"><span aria-hidden="true">←</span> Blog</a>
 			<p class="eyebrow">Tag</p>
 			<h1 class="page-title">#{slug}</h1>
 			<p class="page-count">{count} post{count !== 1 ? "s" : ""}</p>

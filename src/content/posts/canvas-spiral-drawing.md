@@ -6,7 +6,7 @@ featured: true
 draft: false
 postimage:
     src: '../../assets/canvas-spiral-drawing/canvas-spiral-drawing.jpg'
-    alt: 'My Image'
+    alt: ''
 postSeoImage: '../../assets/canvas-spiral-drawing/canvas-spiral-drawing.jpg'
 tags: ["code", "javascript", "learning", "canvas"]
 ---

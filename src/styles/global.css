@@ -10,9 +10,12 @@
 }
 
 /* Global focus + main styling for the dark design chrome (SiteNav/SiteFooter). */
+/* Keep focused elements and anchor targets clear of the 64px fixed header (WCAG 2.4.11). */
+html { scroll-padding-top: 5rem; }
 main:focus { outline: none; }
 a:focus-visible { outline: 2px solid #1860e0; outline-offset: 3px; border-radius: 2px; }
 button:focus-visible { outline: 2px solid #1860e0; outline-offset: 3px; }
+.expressive-code pre:focus-visible { outline: 2px solid #1860e0; outline-offset: 2px; }
 
 /* Article prose — dark design palette (post detail pages). */
 .post__content h2, .post__content h3 {
@@ -62,9 +65,16 @@ button:focus-visible { outline: 2px solid #1860e0; outline-offset: 3px; }
   @apply rounded-md px-1.5;
 }
 
+/* Underlined, not colour-only: link vs body text contrast is under 3:1 (WCAG 1.4.1). */
 .post__content a {
   color: #5b8ef5;
-  @apply border-b border-transparent hover:border-current transition-all pb-0.5;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.post__content a:hover {
+  text-decoration-thickness: 2px;
 }
 
 @layer utilities {

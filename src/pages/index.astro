@@ -77,8 +77,8 @@ const writing = [...linkedInItems, ...blogItems];
 					<p class="anim-2" style="font-size: clamp(18px, 2.2vw, 25px); font-weight: 400; line-height: 1.45; color: #bbb; margin-bottom: 0.4rem;">Scanners catch ~30% of accessibility errors.</p>
 					<p class="anim-2" style="font-size: clamp(18px, 2.2vw, 25px); font-weight: 700; line-height: 1.45; color: #fff; margin-bottom: 3rem;">I build for the rest.</p>
 					<div class="anim-3" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
-						<a href="#writing" class="cta-primary">Read my thinking →</a>
-						<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" class="cta-secondary">LinkedIn ↗</a>
+						<a href="#writing" class="cta-primary">Read my thinking <span aria-hidden="true">→</span></a>
+						<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" class="cta-secondary">LinkedIn<span class="sr-only"> (opens in a new tab)</span> <span aria-hidden="true">↗</span></a>
 					</div>
 				</div>
 			</div>
@@ -162,7 +162,7 @@ const writing = [...linkedInItems, ...blogItems];
 						<p style="font-size: 16px; font-weight: 600; color: #f0f0f0; margin-bottom: 0.3rem;">3× a week on LinkedIn</p>
 						<p style="font-size: 14px; color: #888;">Mostly French. Real accessibility problems in real products.</p>
 					</div>
-					<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" class="li-btn">Follow on LinkedIn ↗</a>
+					<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" class="li-btn">Follow on LinkedIn<span class="sr-only"> (opens in a new tab)</span> <span aria-hidden="true">↗</span></a>
 				</div>
 			</div>
 		</section>
@@ -177,13 +177,13 @@ const writing = [...linkedInItems, ...blogItems];
 					<p style="font-size: 16px; color: #888; line-height: 1.8; margin-bottom: 1.25rem;">Based in Lausanne, Switzerland. I work in French and English. I post on LinkedIn three times a week — mostly in French, mostly about real problems in real products.</p>
 					<p style="font-size: 16px; color: #888; line-height: 1.8; margin-bottom: 2.5rem;">I'm also interested in what happens when code is the medium. Spirals, grids, emergent patterns. That side lives on the blog.</p>
 					<div style="display: flex; gap: 2rem; flex-wrap: wrap;">
-						<a href="/about" class="text-link">Full bio →</a>
-						<a href="/cv" class="text-link">CV →</a>
+						<a href="/about" class="text-link">Full bio <span aria-hidden="true">→</span></a>
+						<a href="/cv" class="text-link">CV <span aria-hidden="true">→</span></a>
 					</div>
 				</div>
 				<div style="display: flex; flex-direction: column;">
 					<div style="border: 1px solid #1e1e1e; padding: 1.75rem;">
-						<p style="font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 1.5rem;">Specialities</p>
+						<h3 style="font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 1.5rem;">Specialities</h3>
 						<ul role="list" style="list-style: none; display: flex; flex-direction: column; gap: 0.875rem;">
 							<li style="font-size: 15px; color: #d0d0d0; padding-left: 1rem; border-left: 2px solid #1860e0; line-height: 1.4;">Accessibility audits &amp; specification</li>
 							<li style="font-size: 15px; color: #888; padding-left: 1rem; border-left: 2px solid #242424; line-height: 1.4;">Full-stack development (TypeScript, Node, Astro)</li>
@@ -192,7 +192,7 @@ const writing = [...linkedInItems, ...blogItems];
 						</ul>
 					</div>
 					<div style="border: 1px solid #1e1e1e; border-top: none; padding: 1.75rem;">
-						<p style="font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 1.25rem;">Availability</p>
+						<h3 style="font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #888; margin-bottom: 1.25rem;">Availability</h3>
 						<div style="display: flex; align-items: flex-start; gap: 0.75rem;">
 							<span style="width: 8px; height: 8px; border-radius: 50%; background: #22c55e; flex-shrink: 0; margin-top: 5px;"></span>
 							<p style="font-size: 15px; color: #c0c0c0; line-height: 1.5;">Available for accessibility consulting and development work in Switzerland</p>
@@ -303,12 +303,11 @@ const writing = [...linkedInItems, ...blogItems];
 	);
 
 	// --- Hero canvas ---
+	// Drawn as a single static frame (redrawn on resize only): no continuous
+	// motion, so no pause control is needed (WCAG 2.2.2).
 	const canvas = document.getElementById("hero-canvas") as HTMLCanvasElement | null;
 	if (canvas) {
 		const ctx = canvas.getContext("2d")!;
-		const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-		let animId = 0;
-		let t = 0;
 
 		const resize = () => {
 			const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -347,9 +346,8 @@ const writing = [...linkedInItems, ...blogItems];
 
 			// Two Archimedean spirals
 			const turns = 9;
-			const rotation = prefersReduced ? 0 : t * 0.004;
 			for (let s = 0; s < 2; s++) {
-				const phase = s * Math.PI + rotation;
+				const phase = s * Math.PI;
 				const alpha = s === 0 ? 0.11 : 0.07;
 				ctx.beginPath();
 				for (let i = 0; i <= 700; i++) {
@@ -364,18 +362,12 @@ const writing = [...linkedInItems, ...blogItems];
 				ctx.lineWidth = 1;
 				ctx.stroke();
 			}
-
-			if (!prefersReduced) {
-				t++;
-				animId = requestAnimationFrame(draw);
-			}
 		};
 
-		const onResize = () => {
+		window.addEventListener("resize", () => {
 			resize();
-			if (prefersReduced) draw();
-		};
-		window.addEventListener("resize", onResize);
+			draw();
+		});
 		draw();
 	}
 </script>
