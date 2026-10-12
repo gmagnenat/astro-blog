@@ -139,6 +139,11 @@ const isCurrent = (href: string) => current === href || current === href + "/";
 		border-top: 1px solid #1e1e1e; flex-shrink: 0;
 	}
 
+	/* Windows High Contrast drops backgrounds; keep the bars (and the button) visible. */
+	@media (forced-colors: active) {
+		.hb-bar { forced-color-adjust: none; background: CanvasText; }
+	}
+
 	@media (max-width: 680px) {
 		.hamburger-btn { display: flex; }
 		.desktop-nav { display: none; }

@@ -30,7 +30,7 @@ jobs:
       # Deep gate: axe scan per route + keyboard/focus behaviour axe cannot see.
       # webServer (pnpm preview) serves dist/, so build first.
       - run: pnpm build
-      - run: pnpm exec playwright test a11y keyboard
+      - run: pnpm exec playwright test a11y keyboard contrast
 
       - if: failure()
         uses: actions/upload-artifact@v4
