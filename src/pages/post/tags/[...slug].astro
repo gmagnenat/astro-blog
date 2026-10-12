@@ -40,7 +40,6 @@ const posts = await Promise.all(
 			title: p.data.title,
 			excerpt: p.data.description ?? "",
 			url: `/post/${p.id}`,
-			ariaLabel: `Read: ${p.data.title}`,
 		};
 	})
 );
@@ -56,7 +55,7 @@ const count = posts.length;
 <BaseLayout title={`Posts tagged ${slug} | Gwenaël Magnenat`} description={`All posts tagged ${slug}`}>
 	<main id="main-content" tabindex="-1">
 		<div class="page-wrap">
-			<a href="/posts" class="back-link">← Blog</a>
+			<a href="/posts" class="back-link"><span aria-hidden="true">←</span> Blog</a>
 			<p class="eyebrow">Tag</p>
 			<h1 class="page-title">#{slug}</h1>
 			<p class="page-count">{count} post{count !== 1 ? "s" : ""}</p>
@@ -75,7 +74,7 @@ const count = posts.length;
 							</div>
 							<h2 class="post-title">{post.title}</h2>
 							<p class="post-excerpt">{post.excerpt}</p>
-							<a href={post.url} class="read-link" aria-label={post.ariaLabel}>Read post →</a>
+							<a href={post.url} class="read-link">Read post<span class="sr-only">: {post.title}</span> <span aria-hidden="true">→</span></a>
 						</article>
 					))
 				}

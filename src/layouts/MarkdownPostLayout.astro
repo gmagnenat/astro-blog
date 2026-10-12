@@ -27,7 +27,7 @@ const dateStr = post.data.publishedDate.toLocaleDateString('en-US', {
         <article>
             <!-- HEADER -->
             <div class="post-head">
-                <a href="/posts" class="back-link">← Blog</a>
+                <a href="/posts" class="back-link"><span aria-hidden="true">←</span> Blog</a>
                 <ul class="post-tags" role="list" aria-label="Tags">
                     {post.data.tags.map((tag) => (
                         <li><a href={`/post/tags/${tag}`} class={tag === 'accessibility' ? 'tag tag-accent' : 'tag'}>{tag}</a></li>
@@ -53,12 +53,13 @@ const dateStr = post.data.publishedDate.toLocaleDateString('en-US', {
                     <slot />
                 </div>
 
+                {/* Experiment snapshots are decorative: the post text carries the meaning. */}
                 {postImages.length > 0 && (
                     <div class="post-gallery">
                         {postImages.map((image) => (
                             <Image
                                 src={images[image]()}
-                                alt={post.data.title}
+                                alt=""
                                 width={1080}
                                 height={1080}
                                 class="post-gallery-img"
@@ -68,7 +69,7 @@ const dateStr = post.data.publishedDate.toLocaleDateString('en-US', {
                 )}
 
                 <div class="post-footer">
-                    <a href="/posts" class="back-link">← Back to all writing</a>
+                    <a href="/posts" class="back-link"><span aria-hidden="true">←</span> Back to all writing</a>
                 </div>
             </div>
         </article>

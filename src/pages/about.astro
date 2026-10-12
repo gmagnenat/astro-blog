@@ -57,8 +57,8 @@ const skills = [
 			</section>
 
 			<!-- ON ACCESSIBILITY -->
-			<aside aria-label="A note on accessibility focus" class="a11y-note">
-				<p class="a11y-note-title">On accessibility</p>
+			<aside aria-labelledby="a11y-note-heading" class="a11y-note">
+				<h2 id="a11y-note-heading" class="a11y-note-title">On accessibility</h2>
 				<p class="a11y-note-body">
 					Digital accessibility is a central focus of my work — writing specs developers can
 					act on, auditing products with real assistive technology rather than scanners alone,
@@ -67,8 +67,8 @@ const skills = [
 					this three times a week on LinkedIn and keep a public blog on the topic.
 				</p>
 				<div class="a11y-note-links">
-					<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" class="note-link">LinkedIn writing ↗</a>
-					<a href="/posts" class="note-link">Blog →</a>
+					<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" class="note-link">LinkedIn writing<span class="sr-only"> (opens in a new tab)</span> <span aria-hidden="true">↗</span></a>
+					<a href="/posts" class="note-link">Blog <span aria-hidden="true">→</span></a>
 				</div>
 			</aside>
 
@@ -79,7 +79,7 @@ const skills = [
 					Social links are in the footer. If you prefer a form, there's one below.
 				</p>
 				<a href="https://tally.so/r/w5L5RN" target="_blank" rel="noopener noreferrer" class="contact-btn">
-					Contact me<span class="sr-only"> (opens in a new tab)</span> ↗
+					Contact me<span class="sr-only"> (opens in a new tab)</span> <span aria-hidden="true">↗</span>
 				</a>
 			</section>
 		</div>

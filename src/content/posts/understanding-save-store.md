@@ -6,7 +6,7 @@ featured: true
 draft: false
 postimage:
     src: '../../assets/understanding-save-store/understanding-save-store.jpg'
-    alt: 'My Image'
+    alt: ''
 postSeoImage: '../../assets/understanding-save-store/understanding-save-store.jpg'
 tags: ["code", "javascript", "learning", "canvas"]
 ---

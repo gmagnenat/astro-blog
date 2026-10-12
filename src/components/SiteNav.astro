@@ -6,6 +6,7 @@ const links = [
 	{ href: "/about", label: "About" },
 	{ href: "/cv", label: "CV" },
 ];
+const mobileLinks = [...links, { href: "/posts", label: "Blog" }];
 const isCurrent = (href: string) => current === href || current === href + "/";
 ---
 
@@ -38,36 +39,36 @@ const isCurrent = (href: string) => current === href || current === href + "/";
 			aria-controls="mobile-nav-menu"
 			aria-label="Open navigation"
 		>
-			<div aria-hidden="true" class="hb-bar hb-bar-1"></div>
-			<div aria-hidden="true" class="hb-bar hb-bar-2"></div>
-			<div aria-hidden="true" class="hb-bar hb-bar-3"></div>
+			<span aria-hidden="true" class="hb-bar hb-bar-1"></span>
+			<span aria-hidden="true" class="hb-bar hb-bar-2"></span>
+			<span aria-hidden="true" class="hb-bar hb-bar-3"></span>
 		</button>
 	</nav>
 </header>
 
-<div
-	id="mobile-nav-menu"
-	role="dialog"
-	aria-modal="true"
-	aria-label="Navigation menu"
-	class="mobile-overlay"
->
+<!-- Native modal <dialog>: showModal() gives focus containment, an inert
+     background and Escape-to-close; focus returns to the hamburger on close. -->
+<dialog id="mobile-nav-menu" aria-label="Navigation menu" class="mobile-overlay">
 	<div class="mobile-overlay-top">
 		<a href="/" aria-label="gm — home" class="nav-logo">gm</a>
 		<button id="mobile-close-btn" aria-label="Close navigation" class="mobile-close">✕</button>
 	</div>
 	<nav aria-label="Mobile navigation" class="mobile-nav">
-		<a href="/about" class="mobile-link" style="border-bottom: 1px solid #1e1e1e;">About</a>
-		<a href="/cv" class="mobile-link" style="border-bottom: 1px solid #1e1e1e;">CV</a>
-		<a href="/posts" class="mobile-link">Blog</a>
+		{
+			mobileLinks.map((l) => (
+				<a href={l.href} class="mobile-link" aria-current={isCurrent(l.href) ? "page" : undefined}>
+					{l.label}
+				</a>
+			))
+		}
 	</nav>
 	<div class="mobile-social">
-		<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" style="font-size: 14px; font-weight: 600; color: #f0f0f0; text-decoration: none;">LinkedIn ↗</a>
-		<a href="https://github.com/gmagnenat" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">GitHub</a>
-		<a href="https://x.com/magnenatg" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">X</a>
-		<a href="https://tally.so/r/w5L5RN" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">Contact</a>
+		<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" style="font-size: 14px; font-weight: 600; color: #f0f0f0; text-decoration: none;">LinkedIn<span class="sr-only"> (opens in a new tab)</span> <span aria-hidden="true">↗</span></a>
+		<a href="https://github.com/gmagnenat" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+		<a href="https://x.com/magnenatg" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">X<span class="sr-only"> (opens in a new tab)</span></a>
+		<a href="https://tally.so/r/w5L5RN" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: #888; text-decoration: none;">Contact<span class="sr-only"> (opens in a new tab)</span></a>
 	</div>
-</div>
+</dialog>
 
 <style>
 	.skip-link {
@@ -113,10 +114,11 @@ const isCurrent = (href: string) => current === href || current === href + "/";
 	.hamburger-btn[aria-expanded="true"] .hb-bar-3 { transform: rotate(-45deg) translate(4px, -4px); }
 
 	.mobile-overlay {
-		display: none; position: fixed; inset: 0; z-index: 200;
-		background: #0f0f0f; flex-direction: column; padding: 0 2rem;
+		position: fixed; inset: 0; width: 100%; height: 100%;
+		max-width: none; max-height: none; margin: 0; border: none;
+		background: #0f0f0f; color: #f0f0f0; flex-direction: column; padding: 0 2rem;
 	}
-	.mobile-overlay.is-open { display: flex; }
+	.mobile-overlay[open] { display: flex; }
 	.mobile-overlay-top {
 		height: 64px; display: flex; align-items: center; justify-content: space-between;
 		border-bottom: 1px solid #1e1e1e; flex-shrink: 0;
@@ -130,7 +132,8 @@ const isCurrent = (href: string) => current === href || current === href + "/";
 		font-size: 38px; font-weight: 700; letter-spacing: -0.03em; color: #f0f0f0;
 		text-decoration: none; padding: 1rem 0; transition: color 0.15s;
 	}
-	.mobile-link:hover { color: #555; }
+	.mobile-link:not(:last-child) { border-bottom: 1px solid #1e1e1e; }
+	.mobile-link:hover { color: #999; }
 	.mobile-social {
 		padding: 1.5rem 0; display: flex; gap: 1.5rem; flex-wrap: wrap;
 		border-top: 1px solid #1e1e1e; flex-shrink: 0;
@@ -144,30 +147,30 @@ const isCurrent = (href: string) => current === href || current === href + "/";
 
 <script>
 	const hamburger = document.getElementById("hamburger-btn");
-	const overlay = document.getElementById("mobile-nav-menu");
+	const menu = document.getElementById("mobile-nav-menu") as HTMLDialogElement | null;
 	const closeBtn = document.getElementById("mobile-close-btn");
 
 	function openMenu() {
-		overlay?.classList.add("is-open");
+		if (!menu || menu.open) return;
+		menu.showModal();
 		hamburger?.setAttribute("aria-expanded", "true");
-		hamburger?.setAttribute("aria-label", "Close navigation");
 		document.body.style.overflow = "hidden";
-		overlay?.querySelector("a")?.focus();
 	}
 	function closeMenu() {
-		overlay?.classList.remove("is-open");
-		hamburger?.setAttribute("aria-expanded", "false");
-		hamburger?.setAttribute("aria-label", "Open navigation");
-		document.body.style.overflow = "";
-		hamburger?.focus();
+		if (menu?.open) menu.close();
 	}
 
-	hamburger?.addEventListener("click", () =>
-		overlay?.classList.contains("is-open") ? closeMenu() : openMenu()
-	);
+	hamburger?.addEventListener("click", openMenu);
 	closeBtn?.addEventListener("click", closeMenu);
-	overlay?.querySelectorAll("nav a").forEach((a) => a.addEventListener("click", closeMenu));
-	document.addEventListener("keydown", (e) => {
-		if (e.key === "Escape" && overlay?.classList.contains("is-open")) closeMenu();
+	menu?.querySelectorAll("nav a").forEach((a) => a.addEventListener("click", closeMenu));
+	// Fires for close(), the close button and Escape alike.
+	menu?.addEventListener("close", () => {
+		hamburger?.setAttribute("aria-expanded", "false");
+		document.body.style.overflow = "";
+		hamburger?.focus();
+	});
+	// Hamburger is hidden above 680px; don't leave an orphaned modal open.
+	window.matchMedia("(min-width: 681px)").addEventListener("change", (e) => {
+		if (e.matches) closeMenu();
 	});
 </script>

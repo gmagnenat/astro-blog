@@ -6,7 +6,7 @@ featured: true
 draft: false
 postimage:
     src: '../../assets/firstpost/firstpostimage.jpg'
-    alt: 'My Image'
+    alt: ''
 tags: ["code", "javascript", "learning", "canvas"]
 postSeoImage: '../../assets/firstpost/firstpostimage.jpg'
 ---
