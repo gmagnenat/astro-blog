@@ -1,5 +1,5 @@
 ---
-title: "Independant music professional"
+title: "Independent music professional"
 employer: 'Self employed'
 timeline: '2010 - 2021'
 featured: true

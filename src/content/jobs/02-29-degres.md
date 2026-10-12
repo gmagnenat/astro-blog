@@ -8,7 +8,7 @@ tags: ["html5/css3", "javascript", "php", "wireframing", "wordpress", "web devel
 ---
 Delivered client websites in HTML/CSS, JavaScript, PHP and WordPress, on budget and on schedule.
 
-Established shared methodology and processes for building web projects that scale.
+Wrote the team's shared methodology for building web projects.
 
 Built an estimation system to scope and price new projects accurately before kickoff.
 
