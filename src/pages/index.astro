@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 
 const pageTitle = "Gwenaël Magnenat";
 const pageDescription =
-	"Gwenaël Magnenat — Senior full-stack developer in Lausanne. Accessibility means specs first, real testing, and blocking ship when it's not right.";
+	"Gwenaël Magnenat, senior full-stack developer in Lausanne. I specialise in accessibility: writing the spec before the code, then testing with the assistive technology people actually use.";
 
 // Blog posts wired from the content collection; LinkedIn posts stay hardcoded.
 const catFor = (tags?: string[]) =>
@@ -95,23 +95,23 @@ const writing = [...linkedInItems, ...blogItems];
 				<span aria-hidden="true" style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #808080; padding-top: 0.5rem;">01</span>
 				<div>
 					<h3 style="font-size: clamp(19px, 2.5vw, 33px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.25; color: #f0f0f0; margin-bottom: 1.25rem;">A clear accessibility spec is the biggest development accelerator I know.</h3>
-					<p style="font-size: 16px; color: #888; line-height: 1.8; max-width: 600px;">Not tests, not reviews, not better tooling. The spec. When developers know what's expected before they write a line of code, accessibility isn't a late phase — it's the default output.</p>
+					<p style="font-size: 16px; color: #888; line-height: 1.8; max-width: 600px;">When developers know what's expected before they write a line of code, accessibility gets built in from the start. Tests and reviews still matter, but they find problems after the fact. A good spec stops most of them from happening.</p>
 				</div>
 			</div>
 
 			<div style="display: grid; grid-template-columns: 52px 1fr; gap: 3rem; padding: 3.5rem 0; border-top: 1px solid #1e1e1e; align-items: start;">
 				<span aria-hidden="true" style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #808080; padding-top: 0.5rem;">02</span>
 				<div>
-					<h3 style="font-size: clamp(19px, 2.5vw, 33px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.25; color: #f0f0f0; margin-bottom: 1.25rem;">Automated tools give false confidence. axe, Lighthouse, WAVE — useful, but they see about 30%.</h3>
-					<p style="font-size: 16px; color: #888; line-height: 1.8; max-width: 600px;">The rest requires judgment: navigating with a keyboard, using a real screen reader, understanding why a pattern fails before it ships. Passing a scan is the floor, not the ceiling.</p>
+					<h3 style="font-size: clamp(19px, 2.5vw, 33px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.25; color: #f0f0f0; margin-bottom: 1.25rem;">Automated tools give false confidence. axe, Lighthouse and WAVE are useful, but they only see about 30% of the problems.</h3>
+					<p style="font-size: 16px; color: #888; line-height: 1.8; max-width: 600px;">The rest takes judgment. You tab through the page, you listen to it with a screen reader, and you work out why a pattern fails before it ships. A clean scan tells you very little about whether someone can actually use the page.</p>
 				</div>
 			</div>
 
 			<div style="display: grid; grid-template-columns: 52px 1fr; gap: 3rem; padding: 3.5rem 0; border-top: 1px solid #1e1e1e; border-bottom: 1px solid #1e1e1e; align-items: start;">
 				<span aria-hidden="true" style="font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #808080; padding-top: 0.5rem;">03</span>
 				<div>
-					<h3 style="font-size: clamp(19px, 2.5vw, 33px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.25; color: #f0f0f0; margin-bottom: 1.25rem;">AI reproduces the inaccessibility of the web it learned from. That's not a bug — it's the dataset.</h3>
-					<p style="font-size: 16px; color: #888; line-height: 1.8; max-width: 600px;">Models trained on a web that excludes most disabled users will output more of the same — unless someone specifies otherwise. Spec quality matters even more now.</p>
+					<h3 style="font-size: clamp(19px, 2.5vw, 33px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.25; color: #f0f0f0; margin-bottom: 1.25rem;">AI reproduces the inaccessibility of the web it learned from, because that's what the training data looks like.</h3>
+					<p style="font-size: 16px; color: #888; line-height: 1.8; max-width: 600px;">Most of the web excludes disabled users, and models trained on it produce more of the same unless the spec asks for something else. So writing a good spec matters even more now.</p>
 				</div>
 			</div>
 		</section>
@@ -160,7 +160,7 @@ const writing = [...linkedInItems, ...blogItems];
 				<div style="margin-top: 1px; background: #0f0f0f; border: 1px solid #1e1e1e; border-top: none; padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;">
 					<div>
 						<p style="font-size: 16px; font-weight: 600; color: #f0f0f0; margin-bottom: 0.3rem;">3× a week on LinkedIn</p>
-						<p style="font-size: 14px; color: #888;">Mostly French. Real accessibility problems in real products.</p>
+						<p style="font-size: 14px; color: #888;">Mostly in French. Short posts about accessibility problems I come across in live products.</p>
 					</div>
 					<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" class="li-btn">Follow on LinkedIn<span class="sr-only"> (opens in a new tab)</span> <span aria-hidden="true">↗</span></a>
 				</div>
@@ -173,9 +173,9 @@ const writing = [...linkedInItems, ...blogItems];
 				<div>
 					<h2 id="about-heading" style="font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #888; margin-bottom: 2.5rem;">About</h2>
 					<p style="font-size: 20px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.55; color: #d0d0d0; margin-bottom: 1.75rem;">I've been building web interfaces for over a decade. Most of the last several years have been accessibility work.</p>
-					<p style="font-size: 16px; color: #888; line-height: 1.8; margin-bottom: 1.25rem;">Writing specs developers can actually use. Auditing products with real assistive technology — not just scanners. Pushing back when something almost passes but isn't right.</p>
-					<p style="font-size: 16px; color: #888; line-height: 1.8; margin-bottom: 1.25rem;">Based in Lausanne, Switzerland. I work in French and English. I post on LinkedIn three times a week — mostly in French, mostly about real problems in real products.</p>
-					<p style="font-size: 16px; color: #888; line-height: 1.8; margin-bottom: 2.5rem;">I'm also interested in what happens when code is the medium. Spirals, grids, emergent patterns. That side lives on the blog.</p>
+					<p style="font-size: 16px; color: #888; line-height: 1.8; margin-bottom: 1.25rem;">Day to day, that means writing specs developers can act on and auditing products with the assistive technology people actually use. It also means saying no when something almost passes.</p>
+					<p style="font-size: 16px; color: #888; line-height: 1.8; margin-bottom: 1.25rem;">I'm based in Lausanne and work in French and English. I also post on LinkedIn three times a week, mostly in French.</p>
+					<p style="font-size: 16px; color: #888; line-height: 1.8; margin-bottom: 2.5rem;">Outside of accessibility, I like making images with code, mostly spirals and grids built from a few simple rules. Those experiments end up on the blog.</p>
 					<div style="display: flex; gap: 2rem; flex-wrap: wrap;">
 						<a href="/about" class="text-link">Full bio <span aria-hidden="true">→</span></a>
 						<a href="/cv" class="text-link">CV <span aria-hidden="true">→</span></a>

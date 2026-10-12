@@ -3,7 +3,7 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "Blog";
-const pageDescription = "Blog — Gwenaël Magnenat. Accessibility and creative coding.";
+const pageDescription = "Blog of Gwenaël Magnenat, about accessibility and creative coding.";
 
 const catFor = (tags?: string[]) =>
 	tags?.includes("accessibility") ? "accessibility" : "creative";
@@ -42,8 +42,7 @@ const featured = posts[0];
 					<p class="eyebrow">Blog</p>
 					<h1 class="page-title">Writing</h1>
 					<p class="page-intro">
-						Two things I think about: accessibility — the practice, not the checklist — and
-						what happens when code becomes the medium.
+						I write about two things here: accessibility work, and drawing with code.
 					</p>
 				</div>
 				<div role="group" aria-label="Filter posts by topic" class="filters">
@@ -106,10 +105,10 @@ const featured = posts[0];
 		<div class="cta">
 			<div class="cta-inner">
 				<p class="eyebrow" style="margin-bottom: 1.25rem;">More writing</p>
-				<p class="cta-title">3× a week on LinkedIn — in French</p>
+				<p class="cta-title">3× a week on LinkedIn, in French</p>
 				<p class="cta-body">
-					Shorter takes on real accessibility problems in real products. The kind of thing that
-					doesn't make it into a blog post but that I think about constantly.
+					Shorter posts about accessibility problems I come across. Most are too small for a
+					blog article, but they keep coming up.
 				</p>
 				<a href="https://linkedin.com/in/gmagnenat" target="_blank" rel="noopener noreferrer" class="cta-btn">
 					Follow on LinkedIn<span class="sr-only"> (opens in a new tab)</span> <span aria-hidden="true">↗</span>

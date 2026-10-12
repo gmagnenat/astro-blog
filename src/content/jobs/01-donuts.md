@@ -12,6 +12,6 @@ Built client websites in WordPress using the Oxygen and Bricks builders.
 
 Developed fast internal tools with a Gatsby front-end on a Sanity headless CMS.
 
-Maintained and extended the agency's own site — Nuxt.js and Laravel on Heroku, versioned with Git.
+Maintained and extended the agency's own site, built with Nuxt.js and Laravel on Heroku.
 
 Ran digital projects to tight budgets and deadlines, and mentored the team on skills and shared process.

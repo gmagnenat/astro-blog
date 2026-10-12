@@ -8,7 +8,7 @@ tags: ["responsive web design", "mobile development", "linux servers management"
 ---
 Built web and mobile applications for the institute.
 
-Administered the Linux servers hosting the institute's projects — automating deployments, updates and monitoring with Ansible.
+Administered the Linux servers hosting the institute's projects, and automated their deployments, updates and monitoring with Ansible.
 
 Provided level-2 support and managed releases for a web application with 20,000+ users.
 
