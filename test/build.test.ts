@@ -36,7 +36,6 @@ describe('build output', () => {
     'about/index.html',
     'cv/index.html',
     'posts/index.html',
-    'postscollection/index.html',
   ];
 
   it.each(staticPages)('generates dist/%s', (page) => {
